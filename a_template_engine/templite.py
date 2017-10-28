@@ -61,3 +61,29 @@ class Templite(object):
                 code.add_line("append_result(%s)" %buffered[0])
             elif len(buffered) > 1:
                 code.add_line("extend_result(%s)" % ", ".join(buffered))
+            del buffered[:]
+
+        ops_stack = []
+
+        tokens = re.split(r"(?s)({{.*?}}|{%.*?%}|{#.？#})"， text)
+
+        for token in tokens:
+            if token startswith('{#'):
+                continue
+        elif token.startswith('{{'):
+            expr = self._expr_code(token[2: -2].strip())
+            buffered.append("to_str(%s)" % expr)
+        elif token.startswith('{%'):
+            flush_output()
+            words = token[2:-2].strip().split()
+            if words[0] == 'if':
+                if len(words) != 2:
+                    self._syntax_error("Don't understand if", token)
+                ops_stack.append('if')
+                code.add_line("if %s:" % self._expr_code(words[1]))
+                code.indent()
+            elif words[1] == 'for':
+                if len(words) != 4 or words[2] != 'in':
+                    self._syntax_error("Don't understand for", token)
+                ops_stack.append('for')
+                self._variable(words[1], self.loop_vars)
