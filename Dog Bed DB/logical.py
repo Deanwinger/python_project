@@ -1,3 +1,7 @@
+# logical.py 定义了逻辑层，它是键值操作的抽象接口。
+#       LogicalBase 类提供了逻辑更新（比如 get，set 以及 commit）的抽象接口，它同时负责管理存储对象的锁以及对内部节点的解引用。
+#       ValueRef 是指向数据库中二进制数据对象的Python对象，是对数据库中数据的引用。
+
 
 
 class LogicalBase(object):

@@ -1,3 +1,9 @@
+# binary_tree.py 定义了逻辑接口下具体的的二叉树算法。
+#       BinaryTree 实现二叉树及其基本操作。值得注意的是，我们实现的是一个数据不可变的二叉树，每次数据更新都会返回一棵新树，新树的大部分数据由于同旧树一致所以直接与旧树共享那部分数据。
+#       BinaryNode 实现二叉树中的节点。
+#       BinaryNodeRef 是 ValueRef 的子类，实现对二叉树节点的引用。
+
+
 import pickle
 
 from dbdb.logical import LogicalBase, ValueRef

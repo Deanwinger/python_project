@@ -1,3 +1,5 @@
+# interface.py 定义了DBDB类，它对底层的二叉树结构进行封装，开放词典接口以供键值操作。
+
 from dbdb.physical import Storage
 from dbdb.binary_tree import BinaryTree
 

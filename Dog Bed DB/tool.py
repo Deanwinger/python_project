@@ -1,3 +1,4 @@
+# tool.py 是数据库的命令行工具，我们可以通过命令行（即终端）对数据库进行操作。
 import sys
 import dbdb
 
