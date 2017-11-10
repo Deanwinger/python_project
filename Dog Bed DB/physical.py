@@ -6,6 +6,7 @@ import struct
 import portalocker
 
 class Storage(object):
+    # 文件开头的部分划给了超级块，在这里由它保存整个数据库文件的一些基本信息
     SUPERBLOCK_SIZE = 4096
     INTEGER_FORMAT = "!Q"
     INTEGER_LENGTH = 8
@@ -17,6 +18,7 @@ class Storage(object):
 
     def _ensure_superblock(self):
         self.lock()
+        #f.seek()函数移动文件指针到指定的位置
         self._seek_end()
         end_address = self._f.tell()
         if end_address < self.SUPERBLOCK_SIZE:
@@ -41,8 +43,12 @@ class Storage(object):
         self._f.seek(0, os.SEEK_END)
 
     def _seek_superblock():
+        #移动文件指针到文件开始位置
         self._f.seek(0)
 
+    # 每一个数据块的开头会记录这段数据的大小，随后记录数据块的内容。
+    # 因此写的时候会先写大小，随后写数据，同样读的时候会先读数据大小，
+    # 接着读取相应大小的数据
     def _bytes_to_integer(self, integer_bytes):
         return struct.unpack(self.INTEGER_FORMAT, integer_bytes)[0]
 
@@ -58,6 +64,17 @@ class Storage(object):
 
     def write(self, data):
         self.lock()
+        self._seek_end()
+        object_address = self._f.tell()
+        self._write_integer(len(data))
+        self._f.write(data)
+        return object_address
+
+    def read(self, address):
+        self._f.seek(address)
+        length = self._read_integer()
+        data = self._f.read(length)
+        return data
 
     def commit_root_address(self, root_address):
         self.lock()
@@ -66,3 +83,17 @@ class Storage(object):
         self._write_integer(root_address)
         self._f.flush()
         self.unlock()
+
+    def get_root_address(self):
+        # 定位到超级块的地址（也就是文件开头）
+        self._seek_superblock()
+        root_address = self._read_integer()
+        return root_address
+
+    def close(self):
+        self.unlock()
+        self._f.close()
+
+    @property
+    def closed(self):
+        return self._f.closed
