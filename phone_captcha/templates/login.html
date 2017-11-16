@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+
+  <script type="text/javascript">
+    var cur_count;
+    var count = 60;
+    var interValObj;
+    var phone_number;
+
+    function send_message {
+      phone_number = document.getElementById("phone").value
+      if (phone_number) {
+        cur_count = count;
+
+        document.getElementById("getCode").setAttribute("disabled", "true");
+        document.getElementById("getCode").value = "waiting for" + cur_count + "s";
+
+        interValObj = window.setInterval(set_remain_time, 1000);
+
+        // 发送请求
+        loadXMLDoc();
+      }
+    } else {
+      alert('Please input phone number!');
+    }
+
+    function set_remain_time() {
+      if (cur_count == 0) {
+        window.clearInterval(interValObj)
+
+        document.getElementById("getCode").removeAttribute("disabled");
+        document.getElementById("getCode").value = "waiting for " + cur_count + "s";
+      }
+    }
+
+    function loadXMLDoc() {
+      var xmlhttp = new XMLHttpRequest();
+      xml.open("GET", "login?mobile_phone_number=" + phone_number, true);
+      xmlhttp.send();
+    }
+  </script>
+
+  <style media="screen">
+    #phone {
+      position: relative;
+      top: 10px;
+      left: 50px;
+      width: 210px;
+    }
+
+    #code {
+      position: relative;
+      top: 30px;
+      left: 50px;
+      width: 100px;
+    }
+
+    #getCode {
+      position: relative;
+      top: 30px;
+      left: 50px;
+      width: 100px;
+    }
+
+    #submit {
+      position: relative;
+      top: 50px;
+      left: 50px;
+      width: 210px;
+    }
+
+    #getCode:hover,
+    #submit:hover {
+      cursor: pointer;
+      background-color: #666;
+      color: #FFF;
+    }
+
+    input,
+    button {
+      border: 1px solid #999;
+      height: 40px;
+      color: #666;
+    }
+
+    .h1 {
+      position: relative;
+      top: 10px;
+      left: 130px;
+      color: #666;
+    }
+
+    .box {
+      top: 20%;
+      left: 33%;
+      height: 300px;
+      width: 300px;
+      border: dashed 2px #666;
+      position: absolute;
+    }
+
+    .warning {
+      position: absolute;
+      left: 33%;
+      top: 80%;
+    }
+  </style>
+
+</head>
+
+<body>
+<div class="box">
+    <h1 class="h1">Lab</h1>
+    <form action="#" method="post">
+        <div>
+            <input id="phone" type="text" name="phone" placeholder="phone_number">
+        </div>
+        <div>
+            <input id="code" type="text" name="code" placeholder="Verification Code">
+            <input type="button" id="getCode" value="Get Code" onclick="send_message()">
+        </div>
+        <div>
+            <button type="submit" id="submit">Submit</button>
+        </div>
+    </form>
+</div>
+{% if error_msg %}
+    <p style="color:red" class="warning">{{error_msg}}</p>
+{% else %}
+    <p class="warning"></p>
+{% endif %}
+</body>
+
+</html>
