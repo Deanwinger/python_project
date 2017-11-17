@@ -37,6 +37,10 @@
         document.getElementById("getCode").removeAttribute("disabled");
         document.getElementById("getCode").value = "waiting for " + cur_count + "s";
       }
+      else{
+        cur_count--;
+        document.getElementById("getCode").value = "waiting for "+cur_count+"s";
+      }
     }
 
     function loadXMLDoc() {
