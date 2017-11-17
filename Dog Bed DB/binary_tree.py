@@ -1,5 +1,5 @@
 # binary_tree.py 定义了逻辑接口下具体的的二叉树算法。
-
+# BinaryTree继承自LogicalBase，二叉树的所有操作在这个类中实现。
 
 import pickle
 
@@ -8,6 +8,7 @@ from dbdb.logical import LogicalBase, ValueRef
 
 #BinaryNode 实现二叉树中的节点。
 class BinaryNode(object):
+    # 根据读入的节点与更新节点的参数生成一个新节点并返回
     @classmethod
     def from_node(cls, node, **kwargs):
         length = node.length
@@ -23,6 +24,7 @@ class BinaryNode(object):
             length=length
     )
 
+    # 长度是指该节点及其子节点组成的子树的节点数，在代码中这个值似乎没起到任何作用
     def __init__(self, left_ref, key, value_ref, right_ref, length):
         self.left_ref = left_ref
         self.key = key
