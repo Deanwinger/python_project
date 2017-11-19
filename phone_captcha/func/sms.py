@@ -1,7 +1,7 @@
 import json
 import requests
 
-header = {
+headers = {
     "X-LC-Id": '4cROByWxr8AfwE8KXoHlCnI6-gzGzoHsz',
     "X-LC-Key": 'q3LYtpmW69TNLIM0qkO2mFMD',
     "Content-Type": "application/json",
