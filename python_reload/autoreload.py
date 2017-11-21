@@ -1,6 +1,6 @@
 import os,sys,time,subprocess,threading,signal
 from pprint import pprint
-from imp import reload
+from deamonize import deamonize
 
 # 方案: Python开源的Web框架（Django、Flask等）都有自己的自动加载模块功能（autoreload.py）
 # subprocess模式创建子进程，主进程作为守护进程，子进程中一个线程负责检测文件是否发生变化，
