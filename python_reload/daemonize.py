@@ -2,7 +2,7 @@ import os
 import sys
 
 
-def daemonize(pid_file=None):
+def daemonize():
     # 从父进程fork一个子进程出来
     pid = os.fork()
 
