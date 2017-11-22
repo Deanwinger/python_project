@@ -54,7 +54,7 @@ def run2():
     cmd = "ls -l"
     p1 = subprocess.Popen(cmd, cwd="/home/ubuntu/alan/python_related/python_fundemental", 
                         shell=True, stdout=subprocess.PIPE)
-    p2 = subprocess.Popen("python test.py", cwd="/home/ubuntu/alan/python_related/python_fundemental", 
+    p2 = subprocess.Popen("git pull origin master", cwd="/home/ubuntu/alan/python_related", 
                     shell=True, stdin=p1.stdout, stdout=subprocess.PIPE)
     out = p2.stdout.read()
     print(out.decode('utf-8'))
