@@ -1,6 +1,7 @@
 import os
 import time
 from multiprocessing import Process
+import subprocess
 
 
 def main():
@@ -18,11 +19,9 @@ def run_proc(name):
         print("countdown: " + str(n))
         time.sleep(1)
 
-# os.system()成功则返回0
+# os.system if success return 0
 def run():
-    # os.chdir('/home/ubuntu/src/LS-API')
     os.chdir('/home/ubuntu/alan/python_related')
-    # os.system("git pull origin master")
     s = os.system("git status")
     print("The success return code: ", s)
     e = os.system("got status")
@@ -49,9 +48,24 @@ def run():
 # The failure return code:  32512
 # The current process id 28501
 
+#subproces的使用
+def run2():
+    print("I am father process(%s)..." % os.getpid())
+    cmd = "ls -l"
+    p1 = subprocess.Popen(cmd, cwd="/home/ubuntu/alan/python_related/python_fundemental", 
+                        shell=True, stdout=subprocess.PIPE)
+    p2 = subprocess.Popen("python test.py", cwd="/home/ubuntu/alan/python_related/python_fundemental", 
+                    shell=True, stdin=p1.stdout, stdout=subprocess.PIPE)
+    out = p2.stdout.read()
+    print(out.decode('utf-8'))
+    s1 = p1.wait()
+    s2 = p2.wait()
+    print("============", s1,s2,p1.returncode, p2.returncode, "=============")
+    print("Main process done")
 
 
 
 if __name__ == '__main__':
-    main()
+    # main()
     # run()
+    run2()
