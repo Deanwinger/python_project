@@ -105,16 +105,16 @@ def _is_any_file_changed(mtimes):
     root = "/home/ubuntu/alan/python_related"
     # root = "/home/ubuntu/alan/gitlab/LS-API"
     #执行git pull
-    # process_pull = subprocess.Popen(
-    #         "git pull origin master", 
-    #         cwd=root, 
-    #         shell=True, 
-    #         stdout=subprocess.PIPE, 
-    #         close_fds=True)
-    # out = process_pull.stdout.read()
-    # sys.stdout.write(out.decode('utf-8'))
-    # s1 = process_pull.wait()
-    #遍历
+    process_pull = subprocess.Popen(
+            "git pull origin master", 
+            cwd=root, 
+            shell=True, 
+            stdout=subprocess.PIPE, 
+            close_fds=True)
+    out = process_pull.stdout.read()
+    sys.stdout.write(out.decode('utf-8'))
+    s1 = process_pull.wait()
+    遍历
     for i in os.walk(root):
         for s in i[2]:
             filename = str(i[0]) + '/' + str(s)
