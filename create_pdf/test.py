@@ -5,6 +5,9 @@ from reportlab.lib.units import inch
 PAGE_HEIGHT=defaultPageSize[1]; PAGE_WIDTH=defaultPageSize[0]
 styles = getSampleStyleSheet()
 
+from io import BytesIO
+import base64
+
 
 Title = "Hello world"
 pageinfo = "platypus example"
@@ -27,12 +30,28 @@ def go():
     Story = [Spacer(1,2*inch)]
     style = styles["Normal"]
     for i in range(100):
-        bogustext = ("This is Paragraph number %s. " % i) *20
+        bogustext = ("This is Paragraph number %s. " % i)
         p = Paragraph(bogustext, style)
         Story.append(p)
         Story.append(Spacer(1,0.2*inch))
-    doc.build(Story, onFirstPage=myFirstPage, onLaterPages=myLaterPages)
+    a = doc.build(Story, onFirstPage=myFirstPage, onLaterPages=myLaterPages)
+    if a is None:
+        with open("D:\python-related\create_pdf\phello.pdf") as fp:
+            # pdf_buff = BytesIO()
+            # pdf_buff.write(fp.read().encode('utf-8'))
+            # pdf_buff.seek(0)
+            # buff = base64.b64encode(pdf_buff.read())
+            buff = base64.b64encode(fp.read().encode('utf-8'))
+            print(buff)
+            s = base64.b64decode(buff)
+            print(s)
+
 
 
 if __name__ == '__main__':
     go()    
+
+        # img_buff = BytesIO()
+        # img.save(img_buff, 'gif')
+        # img_buff.seek(0)
+        # buff = base64.b64encode(img_buff.read())
