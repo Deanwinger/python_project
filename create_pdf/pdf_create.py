@@ -1,5 +1,6 @@
 # 自制pdf文件
 # step 1: 使用本地字符库, 地址/usr/share/fonts/truetype/ttf-bitstream-vera/Vera.ttf
+# 目前的策略, 先本地生成, 然后传输, 接着删除本地记录
 
 from reportlab.pdfgen import canvas
 from reportlab.pdfgen.canvas import Canvas  
