@@ -12,7 +12,9 @@ pdfmetrics.registerFont(TTFont('mytype', '/usr/share/fonts/myfont/MSYH.TTF'))
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer,Image,Table,TableStyle
+from io import BytesIO
 import base64
+
 
 def pdf_loan_agreements():
     story = []
@@ -75,44 +77,6 @@ def pdf_loan_agreements():
     # </para>'''
     story.append(Paragraph(text,normalStyle))
 
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    #     <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    #     <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    #     <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-
-   
-
-    # text = '''<para autoLeading="off" fontSize=8><font face="mytype" >程度定义：</font><br/>
-    # <font face="mytype" color=red>1.Blocker：指系统无法执行。</font><br/><font face="mytype" fontsize=7>例如：系统无法启动或退出等</font><br/>
-    # <font face="mytype" color=orange>2.Critical：指系统崩溃或严重资源不足、应用模块无法启动或异常退出、无法测试、造成系统不稳定。</font><br/>
-    # <font face="mytype" fontsize=7>例如：各类崩溃、死机、应用无法启动或退出、按键无响应、整屏花屏、死循环、数据丢失、安装错误等
-    # </font><br/>
-    # <font face="mytype" color=darkblue>3.Major：指影响系统功能或操作，主要功能存在严重缺陷，但不会影响到系统稳定性、性能缺陷</font><br/><font face="mytype" fontsize=7>例如：功能未做、功能实现与需求不一致、功能错误、声音问题、流程不正确、兼容性问题、查询结果不正确、性能不达标等
-    # </font><br/>
-    # <font face="mytype" color=royalblue>4.Minor：指界面显示类问题</font><br/>
-    # <font face="mytype" fontsize=7>例如：界面错误、边界错误、提示信息错误、翻页错误、兼容性问题、界面样式不统一、别字、排列不整齐，字体不符规范、内容、格式、滚动条等等
-    # </font><br/>
-    # <font face="mytype" color=grey>5.Trivial：本状态保留暂时不用</font><br/>
-    # </para>'''
-    # story.append(Paragraph(text,normalStyle))
-
-    # text = '<para autoLeading="off" fontSize=9><br/><br/><br/><b><font face="mytype">五、BUGLIST：</font></b><br/></para>'
-    # story.append(Paragraph(text,normalStyle))
-
     # 表格数据：用法详见reportlab-userguide.pdf中chapter 7 Table
     component_data= [
         ['借款金额', '人民币: 1.00元'],
@@ -141,11 +105,12 @@ def pdf_loan_agreements():
     ]))
     story.append(component_table)
 
+    buff = BytesIO()
     doc = SimpleDocTemplate('/home/ubuntu/alan/python_related/create_pdf/loan_agreements.pdf')
     doc.build(story)
-    with open('/home/ubuntu/alan/python_related/create_pdf/loan_agreements.pdf') as fp:
-        buff = base64.b64encode(fp.read().encode('utf-8'))
-        print(buff)
+    pdf = buff.getvalue()
+    buffer.close()
+    return pdf
 
 
 
