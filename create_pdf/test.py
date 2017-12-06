@@ -36,7 +36,7 @@ def go():
         Story.append(Spacer(1,0.2*inch))
     a = doc.build(Story, onFirstPage=myFirstPage, onLaterPages=myLaterPages)
     if a is None:
-        with open("D:\python-related\create_pdf\phello.pdf") as fp:
+        with open("/home/ubuntu/alan/python_related/create_pdf/phello.pdf") as fp:
             # pdf_buff = BytesIO()
             # pdf_buff.write(fp.read().encode('utf-8'))
             # pdf_buff.seek(0)
@@ -50,8 +50,3 @@ def go():
 
 if __name__ == '__main__':
     go()    
-
-        # img_buff = BytesIO()
-        # img.save(img_buff, 'gif')
-        # img_buff.seek(0)
-        # buff = base64.b64encode(img_buff.read())

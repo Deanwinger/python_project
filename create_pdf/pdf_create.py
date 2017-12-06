@@ -12,7 +12,7 @@ pdfmetrics.registerFont(TTFont('mytype', '/usr/share/fonts/myfont/MSYH.TTF'))
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer,Image,Table,TableStyle
-
+import base64
 
 def pdf_loan_agreements():
     story = []
@@ -143,6 +143,9 @@ def pdf_loan_agreements():
 
     doc = SimpleDocTemplate('/home/ubuntu/alan/python_related/create_pdf/loan_agreements.pdf')
     doc.build(story)
+    with open('/home/ubuntu/alan/python_related/create_pdf/loan_agreements.pdf') as fp:
+        buff = base64.b64encode(fp.read().encode('utf-8'))
+        print(buff)
 
 
 
