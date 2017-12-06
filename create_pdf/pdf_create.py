@@ -109,7 +109,7 @@ def pdf_loan_agreements():
     doc = SimpleDocTemplate('/home/ubuntu/alan/python_related/create_pdf/loan_agreements.pdf')
     doc.build(story)
     pdf = buff.getvalue()
-    buffer.close()
+    buff.close()
     return pdf
 
 
