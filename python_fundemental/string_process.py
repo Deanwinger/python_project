@@ -1,4 +1,7 @@
 import re
+from pprint import pprint
+
+
 # 删除字符串中不需要的字符
 # strip() 方法能用于删除开始或结尾的字符。 
 # lstrip() 和 rstrip() 分别从左和从右执行删除操作。 这些方法默认会去除空白字符
@@ -50,8 +53,33 @@ def update_profile_3():
                 pass
         print(banks)
 
+#处理, 生成dict
+def gene_dict(path):
+    res = []
+    dis = {}
+    with open(path) as fp:
+        rec = fp.readlines()
+        for i in rec:
+            if i == '\n':
+                continue
+            s = i.strip().split("=")
+            if s[0].startswith("#"):
+                continue
+            res.append(s[0].strip())
 
+        for r in res:  
+            key = '%s' % r
+            value = 'self.' + key
+            a = A(value)
+            dis[key] = getattr(a, "s")
+        pprint(dis)
+            
+    
 
+class A:
+    s = None
+    def __setattr__(cls, s, "self"+string):
+        return cls
 
 
 
@@ -66,4 +94,6 @@ def update_profile_3():
 if __name__=="__main__":
     # update_profile_1()
     # update_profile_2()
-    update_profile_3()
+    # update_profile_3()
+    path = '/home/ubuntu/alan/python_related/python_fundemental/test.txt'
+    gene_dict(path)
