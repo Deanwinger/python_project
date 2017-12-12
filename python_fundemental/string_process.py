@@ -53,11 +53,11 @@ def update_profile_3():
                 pass
         print(banks)
 
-#处理, 生成dict
+#处理, 生成returned dict
 def gene_dict(path):
     res = []
-    dis = {}
-    with open(path) as fp:
+    dis = []
+    with open(path, encoding='utf-8') as fp:
         rec = fp.readlines()
         for i in rec:
             if i == '\n':
@@ -67,27 +67,15 @@ def gene_dict(path):
                 continue
             res.append(s[0].strip())
 
+        #构造出如'"uid": self.uid,'
         for r in res:  
-            key = '%s' % r
-            value = 'self.' + key
-            a = A(value)
-            dis[key] = getattr(a, "s")
-        pprint(dis)
+            key = '"' + r + '"'          
+            value = 'self.' + r
+            item =  key + ': ' + value + ','
+            print(item)
             
     
-
-class A:
-    s = None
-    def __setattr__(cls, s, "self"+string):
-        return cls
-
-
-
-
-
-
-
-
+        
 
 
 
@@ -95,5 +83,6 @@ if __name__=="__main__":
     # update_profile_1()
     # update_profile_2()
     # update_profile_3()
-    path = '/home/ubuntu/alan/python_related/python_fundemental/test.txt'
+    path = 'D:\python-related\python_fundemental\\test.txt'
+    # path = '/home/ubuntu/alan/python_related/python_fundemental/test.txt'
     gene_dict(path)
