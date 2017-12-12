@@ -54,7 +54,7 @@ def update_profile_3():
         print(banks)
 
 #处理, 生成returned dict
-def gene_dict(path):
+def gene_pre(path):
     res = []
     dis = []
     with open(path, encoding='utf-8') as fp:
@@ -66,23 +66,44 @@ def gene_dict(path):
             if s[0].startswith("#"):
                 continue
             res.append(s[0].strip())
+        # print(res)    
 
-        #构造出如'"uid": self.uid,'
-        for r in res:  
-            key = '"' + r + '"'          
-            value = 'self.' + r
-            item =  key + ': ' + value + ','
-            print(item)
-            
+        for r in res:
+            print(r+',')
+
+        # for r in res:
+        #     print('self.'+ r + " = " + r )      
+    return res
+
+def gene_dict(path):
+    res = gene_pre(path)
     
-        
+    for r in res:  
+        key = '"' + r + '"'          
+        value = 'self.' + r
+        item =  key + ': ' + value + ','
+        print(item)
+
+def gene_g_params(path):
+    
+    res = gene_pre(path)
+    rec = []
+    for r in res:
+        strs = r+ ' = g.params[' +"'"+ '%s' % r + "'" + ']'
+        rec.append(strs)
+    for i in rec:
+        print(i)
 
 
 
-if __name__=="__main__":
+
+
+if __name__ == "__main__":
     # update_profile_1()
     # update_profile_2()
     # update_profile_3()
-    path = 'D:\python-related\python_fundemental\\test.txt'
-    # path = '/home/ubuntu/alan/python_related/python_fundemental/test.txt'
-    gene_dict(path)
+    # path = 'D:\python-related\python_fundemental\\test.txt'
+    path = '/home/ubuntu/alan/python_related/python_fundemental/test.txt'
+    # gene_pre(path)        # 1---字符串  2---构造self.uid = uid  3---list
+    gene_dict(path)         #构造出如'"uid": self.uid,'
+    # gene_g_params(path)     #构造key = g.params["key"]

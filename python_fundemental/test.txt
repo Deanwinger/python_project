@@ -1,38 +1,15 @@
-    uid = Column(Integer, primary_key=True)
-    title = Column(String)
-    raise_money = Column(Integer, default=0)    # 借款金额 1
-    duration = Column(Integer)                  # 借款期限 1
-    expected_rate = Column(Float)               # 借款利率 1
-    repayment = Column(String)                  # 还款方式 1
-    fee = Column(Float)                         # 技术服务费 1
-
-    #borrower_information
-    name = Column(String)
-    age = Column(Integer)
-    gender = Column(Integer)                        # 男1女0
-    id_num = Column(String)                         # 身份证
-    address = Column(String)                        # 现住址
-    educational_background = Column(String)         # 最高学历
-    matrimony = Column(String)                      # 婚姻状况
-    purpose = Column(String, default=None)          # 借款用途
-    house_property = Column(String, default=None)   # 是否有房产1代表有房产, 有房贷, 2代表有房产, 无房贷, 3代表无房产, 无房贷
-
-    #work_information
-    career = Column(String)                         # 职业
-    industry = Column(String)                       # 行业
-    company = Column(String)                        # 企业名称
-    position = Column(String)                       #岗位职务
-    company_size = Column(String)                   # 公司规模
-    work_seniority = Column(Integer)                # 工作年限
-    annual_income = Column(Integer)                 # 年收入
-    credit = Column(Integer)                        # 信用额度
-    car_property = Column(String, default=None)     # 是否有房产1代表有车, 有车贷, 2代表有车, 无车贷, 3代表无车, 无车贷
-
-
-    time_create = Column(DateTime, default=datetime.now)
-    start_time = Column(DateTime)                   #发标时间
-    end_time = Column(DateTime)                     #结束时间
-    current_inve = Column(Integer, default=0)       #当前已募集
-    participators = Column(Integer, default=0)      #投资总人数
-    stage = Column(Integer, default=0)              #项目阶段, 0售卖中, 1已结束, 默认是0
-    is_valid = Column(Integer, default=1)           #是否显示, 针对delete操作, 默认是1
+    sa_uid = Column(Integer)                            #standard_agreement_uid
+    user_uid = Column(Integer)
+    order_num = Column(CHAR(20))
+    subject = Column(String)                            #记录产品title
+    amount = Column(Integer)
+    client_ip = Column(String)
+    status = Column(Integer, default=0)                 #0未完成, 1成功, 2失效
+    pay_channel = Column(Integer, default=None)         #余额支付3
+    time_create = Column(DateTime)
+    time_pay = Column(DateTime, default=None)           #月
+    cancel_reason = Column(Text, default="")
+    dividend = Column(Integer, default=0)               #1个user可能对应多个买家, 记录总分红
+    user_name = Column(String, default=None)
+    discount_uid = Column(Integer, default=None)        #红包uid
+    discount_money = Column(Integer, default=0)         #红包金额
