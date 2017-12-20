@@ -26,7 +26,8 @@ def myLaterPages(canvas, doc):
     canvas.restoreState()
 
 def go():
-    doc = SimpleDocTemplate("phello.pdf")
+    buff = BytesIO()
+    doc = SimpleDocTemplate(buff)
     Story = [Spacer(1,2*inch)]
     style = styles["Normal"]
     for i in range(100):
@@ -35,16 +36,12 @@ def go():
         Story.append(p)
         Story.append(Spacer(1,0.2*inch))
     a = doc.build(Story, onFirstPage=myFirstPage, onLaterPages=myLaterPages)
-    if a is None:
-        with open("/home/ubuntu/alan/python_related/create_pdf/phello.pdf") as fp:
-            # pdf_buff = BytesIO()
-            # pdf_buff.write(fp.read().encode('utf-8'))
-            # pdf_buff.seek(0)
-            # buff = base64.b64encode(pdf_buff.read())
-            buff = base64.b64encode(fp.read().encode('utf-8'))
-            print(buff)
-            s = base64.b64decode(buff)
-            print(s)
+    pdf = buff.getvalue()
+    buff.close()
+    return pdf
+    
+
+
 
 
 
