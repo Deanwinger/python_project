@@ -6,8 +6,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont  
 pdfmetrics.registerFont(UnicodeCIDFont('STSong-Light'))
 from reportlab.pdfbase.ttfonts import TTFont 
-# pdfmetrics.registerFont(TTFont('mytype', '/usr/share/fonts/myfont/MSYH.TTF'))
-pdfmetrics.registerFont(TTFont('mytype', 'D:\python-related\create_pdf\msyh.ttc'))   
+pdfmetrics.registerFont(TTFont('mytype', '/usr/share/fonts/myfont/MSYH.TTF'))
+# pdfmetrics.registerFont(TTFont('mytype', 'D:\python-related\create_pdf\msyh.ttc'))   
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer,Image,Table,TableStyle
@@ -21,60 +21,33 @@ def pdf_loan_agreements():
     normalStyle = stylesheet['Normal']
 
     # 标题：段落的用法详见reportlab-userguide.pdf中chapter 6 Paragraph
-    rpt_title = '<para autoLeading="off" fontSize=15 align=center><b><font face="mytype">宜人贷借款协议</font></b><br/><br/><br/></para>'
+    rpt_title = '<para autoLeading="off" fontSize=15 align=center><b><font face="mytype">榄盛金融借款协议</font></b><br/><br/><br/></para>'
     story.append(Paragraph(rpt_title,normalStyle))
 
-    sub_title = '<para autoLeading="off" fontSize=10 align=right><font face="mytype">协议编号:B0000108424300008266649</font><br/><br/><br/></para>'
+    sub_title = '<para autoLeading="off" fontSize=10 align=right><font face="mytype">协议编号:---------------</font><br/><br/><br/></para>'
     story.append(Paragraph(sub_title,normalStyle))
 
     scnd_title = '<para autoLeading="off" fontSize=11 align=center><b><font face="mytype">第一部分:借款信息及相关明细</font></b><br/><br/></para>'
     story.append(Paragraph(scnd_title,normalStyle))
 
-    # text = '''<para autoLeading="off">
-    # <font face="mytype" fontsize=7>协议编号:XS201712010101</font><br/>
-    # <font face="mytype" fontsize=7>甲方(出借人): 蔡玲旋, 以下称“甲方”</font><br/>
-    # <font face="mytype" fontsize=7>证件号码: 1234567456789890X</font><br/>
-    # <br></br><br></br>
-    # <font face="mytype" fontsize=7>乙方(借款人): 何桃, 以下称“乙方”</font><br/>
-    # <font face="mytype" fontsize=7>公司名称: 华为公司</font><br/>
-    # <font face="mytype" fontsize=7>法定代表人: 何桃</font><br/>
-    # <br></br><br></br>
-    # <font face="mytype" fontsize=7>丙方:深圳市榄盛咨询服务有限公司(简称“榄盛”、“www.lansheng8.com”),以下称“丙方”。</font><br/>
-    # <br></br><br></br>
-    # <font face="mytype" fontsize=7>甲方、乙方系丙方网站——榄盛金融(www.lansheng8.com)注册会员,甲方、乙方承诺并保证其在丙
-    #     方网站注册的信息是完全真实、准确、合法,用户名、密码系其本人持有和使用。甲方、乙方确认对本协
-    #     议项下所涉一切行为具有完全民事行为能力、意思表示真实。</font><br/>
-    # <br></br><br></br>
-    # <font face="mytype" fontsize=7>丙方系 www.lansheng8.com(以下简称“榄盛金融”)网站的所有人,有该网站的经营管理权,丙方为其
-    #     注册会员提供投融资信息发布、咨询及交易管理等相关居间服务。</font><br/>
-    # <br></br><br></br>
-    # <font face="mytype" fontsize=7>乙方有借款需求,委托丙方网站发布借款筹资信息,并承诺通过丙方平台居间服务所获得的借款用于合法
-    #     的商业用途。</font><br/>
-    # <br></br>
-    #     <font face="mytype" fontsize=7>甲方自愿通过丙方榄盛金融平台向乙方提供借款、成立借贷关系,并保证用以借出的款项具有完全的支配
-    #     能力、是其合法所得。</font><br/>
-    # <br></br>
-    # <font face="mytype" fontsize=7>现各方经协商一致,依据合同法等有关规定达成如下条款:</font><br/>
-    # </para>'''
-    # story.append(Paragraph(text,normalStyle))
-
     # 表格数据：用法详见reportlab-userguide.pdf中chapter 7 Table
     component_data= [
-        ['出借人:详见《宜人贷借款协议》附件', '', '', ''],
+        # ['出借人:详见《宜人贷借款协议》附件', '', '', ''],
         ['借款人', '', '', ''],
         ['姓名(名称)','张秀', '', ''],
         ['证件类型','身份证',  '证件号码', '152301197907151042'],
         ['借款明细', '', '', ''],
         ['借款本金','人民币(大写)壹拾壹万玖仟伍佰元整,人民币(小写)119500.00元', '', ''],
-        ['借款人收款账户','户名:张秀', '账号:6222000609400204402', ''],
-        ['','开户行:中国工商银行', '', ''], 
-        ['借款利率','12.0%/年', '每月利息', '详见《还款事项提醒函》'], 
+        # ['借款人收款账户','户名:张秀', '账号:6222000609400204402', ''],
+        # ['','开户行:中国工商银行', '', ''], 
+        # ['借款利率','12.0%/年', '每月利息', '详见《还款事项提醒函》'], 
+        ['借款利率','12.0%/年', '', ''], 
         ['还款方式', '每月等额本息', '还款期数', '36个月'],
         ['借款用途','日常消费(女,38岁,内蒙古自治区兴安盟)'], 
-        ['月偿还本息数额', '人民币(大写)叁仟玖佰陆拾玖元壹角壹分,人民币(小写)3969.11元'],
-        ['借款人还款账户', '户名:张秀', '账号:6222000609400204402'],
-        ['','开户行:中国工商银行'], 
-        ['注：借款人线上主动还款的，可不填写还款账户信息。', '', '', '']
+        # ['月偿还本息数额', '人民币(大写)叁仟玖佰陆拾玖元壹角壹分,人民币(小写)3969.11元'],
+        # ['借款人还款账户', '户名:张秀', '账号:6222000609400204402'],
+        # ['','开户行:中国工商银行'], 
+        # ['注：借款人线上主动还款的，可不填写还款账户信息。', '', '', '']
     ]
     #创建表格对象，并设定各列宽度
     # component_table = Table(component_data, colWidths=[50,390])
@@ -85,23 +58,15 @@ def pdf_loan_agreements():
     ('FONTSIZE',(0,0),(-1,-1),9),#字体大小
     ('LEADING',(0,0),(-1,-1),9),#设置行距
     ('SPAN',(0,0),(3,0)),#合并第一行前三列
-    ('SPAN',(0,1),(3,1)),#合并第二行前三列
-    ('SPAN',(1,2),(3,2)),#合并第三行前三列
-    ('SPAN',(0,4),(3,4)),#合并第五行前三列
+    ('SPAN',(1,1),(3,1)),#合并第二行前三列
+    ('SPAN',(0,3),(3,3)),#合并第四行前三列
+    ('SPAN',(1,4),(3,4)),#合并第五行前三列
     ('SPAN',(1,5),(3,5)),#合并第六行前三列
-    ('SPAN',(0,6),(0,7)),#合并第七, 八行前三列
-    ('SPAN',(2,6),(3,6)),#合并第七, 行前三列
     ('SPAN',(1,7),(3,7)),#合并第八行前三列
-    ('SPAN',(1,10),(3,10)),#合并第十一行前三列
-    ('SPAN',(1,11),(3,11)),#合并第十二行前三列
-    ('SPAN',(2,12),(3,12)),#合并第十三行前三列
-    ('SPAN',(1,13),(3,13)),#合并第十四行前三列
-    ('SPAN',(0,14),(3,14)),#合并第十四行前三列
-    ('ALIGN',(0,6),(1,6),'LEFT'),#对齐
-    ('VALIGN',(0,6),(0,6),'MIDDLE'),  #对齐
+    ('ALIGN',(0,3),(-1,3),'CENTER'), #第四行单行居中
     ('LINEBEFORE',(0,0),(0,-2),0.1,colors.grey),#设置表格左边线颜色为灰色，线宽为0.1
     ('TEXTCOLOR',(0,1),(-2,-1),colors.black),#设置表格内文字颜色
-    ('GRID',(0,0),(-1,-2),0.5,colors.black),#设置表格框线为黑色，线宽为0.5
+    ('GRID',(0,0),(-1,-1),0.5,colors.black),#设置表格框线为黑色，线宽为0.5
     ]))
     story.append(component_table)
 
@@ -121,17 +86,22 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag3,normalStyle))
 
     parag4 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>1.1 本协议：指本《宜人贷借款协议》第一部分、第二部分及所有附件中的任何条款、明细和信息。</font><br/>
+    <font face="mytype" fontsize=9>1.1 本协议：指本《榄盛金融借款协议》第一部分、第二部分及所有附件中的任何条款、明细和信息。</font><br/>
     </para>'''
     story.append(Paragraph(parag4,normalStyle))
 
+    parag5 = '''<para autoLeading="off" leading=18>
+    <font face="mytype" fontsize=9>1.2 出借人：指本协议附件一中列明的出借人，为符合中华人民共和国法律（不包括香港特别行政区、澳门特别行政区和台湾地区的法律法规，下同）规定的具有完全民事权利能力和民事行为能力，能独立行使本协议项下权利和履行本协议项下义务的自然人、法人及其他组织。出借人为“榄盛金融平台”的实名注册用户，经榄盛金融平台提供的信息中介服务，出借资金给借款人。</font><br/>
+    <br></br></para>'''
+    story.append(Paragraph(parag5,normalStyle))
+
     parag6 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>1.3 借款人：指本协议第一部分中列明的借款人，为符合中华人民共和国法律规定的具有完全民事权利能力和民事行为能力，能独立行使本协议项下权利和履行本协议项下义务的自然人、法人及其他组织。借款人为“宜人贷平台”的实名注册用户，在宜人贷平台上发布需求信息，从出借人处获得资金。</font><br/>
+    <font face="mytype" fontsize=9>1.3 借款人：指本协议第一部分中列明的借款人，为符合中华人民共和国法律规定的具有完全民事权利能力和民事行为能力，能独立行使本协议项下权利和履行本协议项下义务的自然人、法人及其他组织。借款人为“榄盛金融平台”的实名注册用户，在榄盛金融平台上发布需求信息，从出借人处获得资金。</font><br/>
     </para>'''
     story.append(Paragraph(parag6,normalStyle))
 
     parag7 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>1.4 宜人贷平台：指恒诚科技发展（北京）有限公司（以下简称“恒诚公司”）经营的提供网络借贷信息中介服务的互联网平台。</font><br/>
+    <font face="mytype" fontsize=9>1.4 榄盛金融平台：指深圳市榄盛咨询服务 有限公司(以下简称"榄盛公司")经营的提供网络借贷信息中介服务的互联网平台。</font><br/>
     </para>'''
     story.append(Paragraph(parag7,normalStyle))
 
@@ -141,7 +111,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag8,normalStyle))
 
     parag9 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>1.6 资金存管机构：指为网络借贷业务提供资金存管服务的商业银行，亦可称为“存管人”。本协议中特指与恒诚公司签署存管合同（具体名称以实际签署协议为准）、为宜人贷平台的网络借贷业务提供资金存管服务的银行。</font><br/>
+    <font face="mytype" fontsize=9>1.6 资金存管机构：指为网络借贷业务提供资金存管服务的商业银行，亦可称为“存管人”。本协议中特指与榄盛公司签署存管合同（具体名称以实际签署协议为准）、为榄盛金融平台的网络借贷业务提供资金存管服务的银行。</font><br/>
     </para>'''
     story.append(Paragraph(parag9,normalStyle))
 
@@ -171,7 +141,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag14,normalStyle))
 
     parag15 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.1.3 出借人应基于合法目的使用宜人贷平台,不得通过该平台从事任何违法犯罪活动。</font><br/>
+    <font face="mytype" fontsize=9>2.1.3 出借人应基于合法目的使用榄盛金融平台,不得通过该平台从事任何违法犯罪活动。</font><br/>
     </para>'''
     story.append(Paragraph(parag15,normalStyle))
 
@@ -181,7 +151,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag16,normalStyle))
 
     parag17 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.1.5 出借人有权通过宜人贷平台查看出借相关信息及借款人还款情况。</font><br/>
+    <font face="mytype" fontsize=9>2.1.5 出借人有权通过榄盛金融平台查看出借相关信息及借款人还款情况。</font><br/>
     </para>'''
     story.append(Paragraph(parag17,normalStyle))
 
@@ -206,7 +176,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag21,normalStyle))
 
     parag22 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.2.3 出借人委托恒诚公司要求借款人按本协议约定进行还款时，借款人有义务无条件地、及时地按照恒诚公司发出的要求进行还款并向恒诚公司提供协助。</font><br/>
+    <font face="mytype" fontsize=9>2.2.3 出借人委托榄盛公司要求借款人按本协议约定进行还款时，借款人有义务无条件地、及时地按照榄盛公司发出的要求进行还款并向榄盛公司提供协助。</font><br/>
     </para>'''
     story.append(Paragraph(parag22,normalStyle))
 
@@ -216,7 +186,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag23,normalStyle))
 
     parag24 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.2.5 借款人可通过委托划扣和主动支付两种方式进行还款。借款人采用委托划扣方式还款的，借款人委托恒诚公司通过支付机构或（及）资金存管机构每月从本协议第一部分约定的还款账户中准确划扣及支付月偿还本息数额。</font><br/>
+    <font face="mytype" fontsize=9>2.2.5 借款人可通过委托划扣和主动支付两种方式进行还款。借款人采用委托划扣方式还款的，借款人委托榄盛公司通过支付机构或（及）资金存管机构每月从本协议第一部分约定的还款账户中准确划扣及支付月偿还本息数额。</font><br/>
     </para>'''
     story.append(Paragraph(parag24,normalStyle))
 
@@ -226,17 +196,17 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag9,normalStyle))
 
     parag26 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.2.7 借款人主动还款的，借款人委托恒诚公司通过支付机构或（及）资金存管机构处理其还款申请及流程操作。</font><br/>
+    <font face="mytype" fontsize=9>2.2.7 借款人主动还款的，借款人委托榄盛公司通过支付机构或（及）资金存管机构处理其还款申请及流程操作。</font><br/>
     </para>'''
     story.append(Paragraph(parag26,normalStyle))
 
     parag27 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.2.8 借款人保证本协议中约定的收款账户和还款账户为其名下合法有效的银行账户。如借款人需要变更还款账户，应当在还款账户变更后1个工作日内通过恒诚公司办理账户变更手续。因借款人未及时办理变更手续导致借款人未能按时还款的，借款人须按照本协议第5条承担因此而产生的违约责任。</font><br/>
+    <font face="mytype" fontsize=9>2.2.8 借款人保证本协议中约定的收款账户和还款账户为其名下合法有效的银行账户。如借款人需要变更还款账户，应当在还款账户变更后1个工作日内通过榄盛公司办理账户变更手续。因借款人未及时办理变更手续导致借款人未能按时还款的，借款人须按照本协议第5条承担因此而产生的违约责任。</font><br/>
     </para>'''
     story.append(Paragraph(parag27,normalStyle))
 
     parag28 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>2.2.9 借款人签署本协议之日起至借款全部清偿之日止，借款人有义务在下列信息变更之日起三日内通过恒诚公司提供更新后的信息给出借人：</font><br/>
+    <font face="mytype" fontsize=9>2.2.9 借款人签署本协议之日起至借款全部清偿之日止，借款人有义务在下列信息变更之日起三日内通过榄盛公司提供更新后的信息给出借人：</font><br/>
     </para>'''
     story.append(Paragraph(parag28,normalStyle))
 
@@ -261,7 +231,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag32,normalStyle))
 
     parag33 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>依据《宜人贷信息咨询与服务协议》（编号：B0000108424300008266649-1），借款人需向恒诚公司支付信息咨询服务费人民币（大写）叁万肆仟肆佰元整，￥（小写）34400.00元；现借款人和出借人同意和授权恒诚公司通过支付机构或（及）资金存管机构从本协议第一条约定的借款本金中扣除前述信息咨询服务费并将扣除费用后的资金支付至借款人收款账户。</font><br/>
+    <font face="mytype" fontsize=9>依据《榄盛信息咨询与服务协议》（编号：-------------），借款人需向榄盛公司支付信息咨询服务费人民币（大写）叁万肆仟肆佰元整，￥（小写）-----元；现借款人和出借人同意和授权榄盛公司通过支付机构或（及）资金存管机构从本协议第一条约定的借款本金中扣除前述信息咨询服务费并将扣除费用后的资金支付至借款人收款账户。</font><br/>
     </para>'''
     story.append(Paragraph(parag33,normalStyle))
 
@@ -276,12 +246,12 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag35,normalStyle))
 
     parag36 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>4.2 出借人保证，自身为宜人贷平台注册用户并在本协议有效期内保持宜人贷平台注册用户身份； 其提供的资金均为自有资金且来源合法。</font><br/>
+    <font face="mytype" fontsize=9>4.2 出借人保证，自身为榄盛金融平台注册用户并在本协议有效期内保持榄盛金融平台注册用户身份； 其提供的资金均为自有资金且来源合法。</font><br/>
     </para>'''
     story.append(Paragraph(parag36,normalStyle))
 
     parag37 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>4.3 借款人承诺如实向出借人、提供信息（包括但不限于姓名或名称、证件类型、证件号码、学历、联系方式、联系地址、职业 信息、联系人信息等）、在所有网络借贷信息中介机构未偿还借款信息以及借款用途等相关信息。借款人承诺并保证其向出借人、 恒诚公司（宜人贷平台）提供的所有信息均为真实、准确、完整、合法和有效的。</font><br/>
+    <font face="mytype" fontsize=9>4.3 借款人承诺如实向出借人、提供信息（包括但不限于姓名或名称、证件类型、证件号码、学历、联系方式、联系地址、职业 信息、联系人信息等）、在所有网络借贷信息中介机构未偿还借款信息以及借款用途等相关信息。借款人承诺并保证其向出借人、 榄盛公司（榄盛金融平台）提供的所有信息均为真实、准确、完整、合法和有效的。</font><br/>
     </para>'''
     story.append(Paragraph(parag37,normalStyle))
 
@@ -316,14 +286,19 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag43,normalStyle))
 
     parag44 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>4.10 出借人、借款人承诺，不得利用恒诚公司或（及）宜人贷平台进行信用卡套现、洗钱或其他违法犯罪行为，否则应依法承担由此产生的法律责任与后果。</font><br/>
+    <font face="mytype" fontsize=9>4.10 出借人、借款人承诺，不得利用榄盛公司或（及）榄盛金融平台进行信用卡套现、洗钱或其他违法犯罪行为，否则应依法承担由此产生的法律责任与后果。</font><br/>
     </para>'''
     story.append(Paragraph(parag44,normalStyle))
 
     parag45 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>4.11 出借人、借款人应妥善保管自己宜人贷平台的注册用户名和密码，自行承担因注册用户名和密码丟失、泄露或允许他人使用所产生的后果。任何一方通过其用户名和密码登陆的任何操作均视为该方本人的真实意思表示。</font><br/>
+    <font face="mytype" fontsize=9>4.11 出借人、借款人应妥善保管自己榄盛金融平台的注册用户名和密码，自行承担因注册用户名和密码丟失、泄露或允许他人使用所产生的后果。任何一方通过其用户名和密码登陆的任何操作均视为该方本人的真实意思表示。</font><br/>
     </para>'''
     story.append(Paragraph(parag45,normalStyle))
+
+    parag46 = '''<para autoLeading="off" leading=18><br></br>
+    <font face="mytype" fontsize=9>4.12 借款人拟提前还款的，应按照榄盛公司要求的流程办理提前还款手续。借款人须支付当月应还本息及剩余未还本金、全部应还未还本息（如有）、逾期还款违约金(如有)。借款人可通过委托划扣和主动支付两种方式进行提前还款。借款人采用委托划扣方式还款的，借款人委托榄盛公司通过支付机构或（及）资金存管机构从本协议第一部分约定的借款人还款账户中准确划扣提前还款各款项。</font><br/>
+    <br></br></para>'''
+    story.append(Paragraph(parag46,normalStyle))
 
     parag47 = '''<para autoLeading="off" leading=18>
     <font face="mytype" fontsize=9>第5条 违约责任</font><br/>
@@ -336,7 +311,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag48,normalStyle))
 
     parag49 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>5.2 逾期还款违约金为当期应还本息数额及以后各期应还本息总额的0.01%，按日计收。</font><br/>
+    <font face="mytype" fontsize=9>5.2 逾期还款违约金为当期应还本息数额及以后各期应还本息总额的0.0001%，按日计收。</font><br/>
     </para>'''
     story.append(Paragraph(parag49,normalStyle))
 
@@ -376,7 +351,7 @@ def pdf_loan_agreements():
     story.append(Paragraph(parag56,normalStyle))
 
     parag57 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>5.7 借款人同意，出借人可通过恒诚公司将其违约的相关信息依法进行披露。如借款人存在涉嫌欺诈等犯罪行为，出借人有权向相关国家机关报案，以追究其刑事责任。</font><br/>
+    <font face="mytype" fontsize=9>5.7 借款人同意，出借人可通过榄盛公司将其违约的相关信息依法进行披露。如借款人存在涉嫌欺诈等犯罪行为，出借人有权向相关国家机关报案，以追究其刑事责任。</font><br/>
     </para>'''
     story.append(Paragraph(parag57,normalStyle))
 
@@ -389,6 +364,11 @@ def pdf_loan_agreements():
     <font face="mytype" fontsize=9>第6条 关于债权转让</font><br/>
     </para>'''
     story.append(Paragraph(parag59,normalStyle))
+
+    parag60 = '''<para autoLeading="off" leading=18><br></br>
+    <font face="mytype" fontsize=9>6.1出借人有权将本协议项下的债权向他人转让。债权转让后，出借人委托榄盛公司通过包括但不限于电子邮件、特快专递、快递等灵活形式通知借款人。如榄盛金融平台或榄盛公司通过电子邮件方式向借款人发送债权转让通知，则可以将《债权转让通知》发送至借款人下列邮箱 - ，或将《债权转让通知》发送至借款人在榄盛金融平台的收件箱，邮件发出之日视为借款人收到该等通知并生效。借款人应向债权受让人继续履行本协议的后续还款义务。</font><br/>
+    <br></br></para>'''
+    story.append(Paragraph(parag60,normalStyle))
 
     parag61 = '''<para autoLeading="off" leading=18>
     <font face="mytype" fontsize=9>6.2在出借人的债权转让后，借款人需对新债权人继续履行本协议下其对出借人的所有义务，不得以未接到债权转让通知为由拒绝履行还款义务。</font><br/>
@@ -430,14 +410,29 @@ def pdf_loan_agreements():
     </para>'''
     story.append(Paragraph(parag68,normalStyle))
 
+    parag69 = '''<para autoLeading="off" leading=18>
+    <font face="mytype" fontsize=9>8.3 由于借款人签署本协议时榄盛公司作为向出借人和借款人提供借贷撮合的网络借贷信息中介机构，尚未为其撮合出借人，故本协议自借款人签署时成立且一经签署，借款人即不可撤销。出借人通过签署本协议附件的方式对本协议的所有内容进行确认。出借人的详细信息亦在本协议附件，即《榄盛金融借款协议》附件中列明。借款人对此流程和合同签署方式无异议，且借款人承诺对出借人无特殊资质要求，完全认可和接受榄盛公司为其撮合的出借人。借款人不得以本协议未列明出借人具体信息、出借人未签署本协议等为由否认亲自签署本协议、否认本合同内容、拒绝履行本合同中约定的借款人应履行的义务和责任。</font><br/>
+    <br></br></para>'''
+    story.append(Paragraph(parag69,normalStyle))
+
+    parag70 = '''<para autoLeading="off" leading=18><br></br>
+    <font face="mytype" fontsize=9>8.4 本协议自借款本金扣除《榄盛信息咨询与服务协议》中约定的信息咨询服务费后的款项支付到借款人指定收款账户时生效；借款人依照本协议约定履行完毕全部义务时，本协议终止。出借人及借款人双方可通过包括但不限于手写签名或盖章、点击、勾选、电子签名、数据电文等方式签署本协议或（及）本协议附件，出借人及借款人双方均不得以合同签署方式不同为由，否认本协议的法律效力。</font><br/>
+    <br></br></para>'''
+    story.append(Paragraph(parag70,normalStyle))
+
     parag71 = '''<para autoLeading="off" leading=18>
-    <font face="mytype" fontsize=9>借款人： 张秀         签署日期：2017年11月16日</font><br/>
+    <font face="mytype" fontsize=9>借款人： 张秀</font><br/>
     </para>'''
     story.append(Paragraph(parag71,normalStyle))
 
+    parag72 = '''<para autoLeading="off" leading=18>
+    <font face="mytype" fontsize=9>签署日期：2017年11月16日</font><br/>
+    </para>'''
+    story.append(Paragraph(parag72,normalStyle))
 
 
-    doc = SimpleDocTemplate('D:\python-related\create_pdf\sa_loan_agreements.pdf')
+
+    doc = SimpleDocTemplate('sa_loan_agreements.pdf')
     doc.build(story)
     return
 
