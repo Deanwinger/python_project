@@ -74,3 +74,15 @@
     #         if origin == num:
     #             continue
     #         else:
+
+    def get_user_contract(self, suborder_uid):
+        pdf1 = sa_agreements_authorised(suborder_uid)
+        pdf2 = sa_loan_agreements(suborder_uid)
+
+        buff = BytesIO()
+        zfile = zipfile.ZipFile(buff, 'a', zipfile.ZIP_DEFLATED, allowZip64=False)
+        zfile.write(pdf1, "test")
+        zfile.write(pdf2, "test")
+        zfile.close()
+        buff.seek(0)
+        return buff
