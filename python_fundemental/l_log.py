@@ -1,2 +1,2 @@
 #python len函数
-1.len()
+# 1.len()
