@@ -41,13 +41,15 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    s1= 'We Are Happy'
-    s2= ' We Are Happy'
-    s3= ''
-    s4= 'We Are Happy '
+    s1 = 'We Are Happy'
+    s2 = ' We Are Happy'
+    s3 = ''
+    s4 = 'We Are Happy '
+    s5 = '  '
     repl = Solution()
     # print(repl.blank_replace(s))
     print(repl.replace_blank(s1))
     print(repl.replace_blank(s2))
     print(repl.replace_blank(s3))
     print(repl.replace_blank(s4))
+    print(repl.replace_blank(s5))
