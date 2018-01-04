@@ -34,6 +34,13 @@ def find_exact_one(matrix, target):
             r_rec += 1
     return False
 
+
+
+
+
+
+
+
 if __name__ == '__main__':
     array = [
                 [1, 2, 8, 9],
