@@ -8,7 +8,14 @@ def run():
         print("countdown: " + str(n))
         time.sleep(1)
 
+def n_factor(x):
+    amount = 1
+    while x > 1:
+        amount = amount * x
+        x -= 1
+    return amount
 
 if __name__ == "__main__":
-    run()
+    # run()
+    print(n_factor(8))
 
