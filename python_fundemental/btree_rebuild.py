@@ -5,3 +5,34 @@
 '''
 
 #关键在于递归遍历， 关键点就在于找到根节点， 然后对于每个子树，都用找根节点确定左右子树的方式递归的进行下去
+
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def btree_rebuild(pre_list, mid_list):
+    root = Node(pre_list[0])
+    if pre_list == [] and mid_list == []:
+        return Node(pre_list[0])
+    for i in range(len(mid_list)):
+        if pre_list[0] == mid_list[i]:
+            root.left = Node(pre_list[1])
+            root.right = Node(pre_list[i+1])
+
+            l_pre_list = pre_list[1:i+1]
+            l_mid_list = mid_list[:i]
+            left_tree = btree_rebuild(pre_list, mid_list)
+
+            r_pre_list = pre_list[i+1:]
+            r_mid_list = mid_list[i+1:]
+            right_tree = btree_rebuild(pre_list, mid_list)
+
+
+    
+if __name__ == '__main__':
+    pre = [1, 2, 3, 5, 6, 4]
+    tin = [5, 3, 6, 2, 4, 1]
+    print(btree_rebuild(pre, tin))
+
