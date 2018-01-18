@@ -2,7 +2,7 @@
 用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
 '''
 # leetcode 232
-#关键在于在stack2, pop操作时, 当stack2为空时, 需一次性将stac1所有的数据放入stack2
+#关键在于在stack2, pop操作时, 当stack2为空时, 需将stac1所有的数据一次性放入stack2
 
 class queue_by_stack(object):
     def __init__(self):
