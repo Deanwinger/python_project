@@ -7,7 +7,7 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 #leetcode 153
 #特例: [1,0,1,1,1,1], [1,1,1,1,0,1]
 #关键在停止条件, start指针和end指针相邻时, 停止
-#关键点2, start指针对应的值应该是比end对应的大, 否则, 没有旋转
+#关键点2, start指针对应的值应该是比end对应的大, 否则,没有旋转
 
 class Solution(object):
     def findMin(self, nums):
