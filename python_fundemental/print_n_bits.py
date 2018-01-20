@@ -71,7 +71,6 @@ class Solution2(object):
 
     def Increment(self, number, length):
         flag= False #判断是否已经是到最后一个数字
-        # Inc = False #是否进位
 
         for i in range(length-1, -1, -1):
             tem = int(number[i]) + 1
@@ -80,8 +79,6 @@ class Solution2(object):
                     flag = True
                     return flag
                 number[i] = str(0)
-                # Inc = True
-                # if Inc:
                 continue
             else:
                 number[i] = str(tem)
