@@ -11,15 +11,15 @@ class Solution(object):
             return
         j = len(array) - 1
         for i in range(len(array)):
-            if i >= j:
-                return array
-            if not self.is_even(array[i]):
-                print("I am here: %d"%i)
-                continue
-            else:
-                while not self.is_even(array[j]):
+            if self.is_even(array[i]):
+                #偶数， 则开始判断尾部
+                while self.is_even(array[j]):
+                    j -= 1
+                if i >= j:
+                    return array
+                else:
                     array[i], array[j] = array[j], array[i]
-                j -= 1
+                
         return
     
     #大问题
@@ -52,8 +52,10 @@ if __name__=='__main__':
     array1 = [1,2,3,4,5]
     array2 = [1,3,5,7,2,4]
     array3 = [2,4,6,1,3,5]
+    array4 = [-1, 2, -3, 4, -5, -6, 7, 8, 9, 10, -10]
     s = Solution()
     # print(s.find_recursively(array, i=0, j=len(array)-1))
     print(s.reorder_odd_even(array1))
     print(s.reorder_odd_even(array2))
     print(s.reorder_odd_even(array3))
+    print(s.reorder_odd_even(array4))
