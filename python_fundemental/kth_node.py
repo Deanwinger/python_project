@@ -21,17 +21,17 @@ class ListNode:
 
 
 class Solution(object):
+    #有问题， 当只有一个的时候未考虑
     def findKthNode(self, head, k):
         if k <= 0:
             return
         slow = head
-        n=0
-        while k-1 > n:
-            #先走后记录
+        while k > 1 :
             head = head.next
-            n += 1
-            if head.next is None:
-                return
+            k -= 1
+            #走了k-1步， 最多允许走到链尾（k==1, 代表已经走了k-1步）
+            if head.next is None and k != 1:
+                raise Exception("超过最大倒数")
         while head.next is not None:
             head = head.next
             slow = slow.next
@@ -46,4 +46,5 @@ if __name__=='__main__':
     node2.next = node3
 
     S = Solution()
+    # print(S.findKthNode(node1, 1).val)
     print(S.findKthNode(node1, 1).val)
