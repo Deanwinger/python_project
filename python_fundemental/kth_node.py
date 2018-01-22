@@ -19,7 +19,6 @@ class ListNode:
         self.val = x
         self.next = None
 
-
 class Solution(object):
     def findKthNode(self, head, k):
         if k <= 0:
