@@ -1,6 +1,7 @@
 '''
 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
 '''
+#leetcode 题
 
 class ListNode(object):
     def __init__(self, value=None):
@@ -9,26 +10,34 @@ class ListNode(object):
 
 class Solution(object):
     def merge_link_list(self, head1, head2):
-        print(head1.val, '*'*8, head2.val)
-        dummy = head = ListNode()
         if head1 is None:
             return head2
         if head2 is None:
             return head1
         #如果不想额外增加空间, 递归
         if head1.val <= head2.val:
-            print(head1.val)
-            head.next = head1
-            head= head.next
+            head = head1
             head1 = head1.next
             head.next = self.merge_link_list(head1, head2)
         else:
-            print(head2.val)
-            head.next = head2
-            head= head.next
-            head1 = head2.next
+            head = head2
+            head2 = head2.next
             head.next = self.merge_link_list(head1, head2)
-        return dummy
+        return head
+
+    def mergeLinkList(self, l1, l2):
+        #非递归实现
+        dummy = cur = ListNode(0)
+        while l1 and l2:
+            if l1.val < l2.val:
+                cur.next = l1
+                l1 = l1.next
+            else:
+                cur.next = l2
+                l2 = l2.next
+            cur = cur.next
+        cur.next = l1 or l2
+        return dummy.next
 
             
 if __name__ == '__main__':
@@ -45,7 +54,8 @@ if __name__ == '__main__':
     node5.next = node6
 
     S = Solution()
-    a = S.merge_link_list(node1, node4)
+    # a = S.merge_link_list(node1, node4)
+    a = S.mergeLinkList(node1, node4)
     while a:
         print(a.val)
         a = a.next
