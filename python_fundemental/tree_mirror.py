@@ -20,6 +20,17 @@ class Solution(object):
         head.left, head.right = self.invertTree(head.left), self.invertTree(head.right)
         return head
 
+    #递归方法2
+    def invertTree2(self, head):
+        if head is None:
+            return
+        if head.left is None and head.right is None:
+            return head
+        head.left, head.right = head.right, head.left
+        self.invertTree(head.left)
+        self.invertTree(head.right)
+        return head
+
 
 if __name__=='__main__':
     pass
