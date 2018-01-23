@@ -19,9 +19,7 @@ class ListNode:
         self.val = x
         self.next = None
 
-
 class Solution(object):
-    #有问题， 当只有一个的时候未考虑
     def findKthNode(self, head, k):
         if k <= 0:
             return
