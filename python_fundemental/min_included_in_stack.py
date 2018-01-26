@@ -5,6 +5,7 @@
 # leetcode 155. Min Stack
 # 题21
 
+
 class MinStack:
     def __init__(self):
         """
