@@ -1,48 +1,52 @@
 '''
 定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。
 '''
+
+# leetcode 155. Min Stack
 # 题21
-#LeetCode 155. Min Stack
 
 
 class MinStack:
-
     def __init__(self):
         """
         initialize your data structure here.
         """
         self.mylist = []
-        self.mysublist = []
-        
+        self.submylist = []
 
     def push(self, x):
         """
         :type x: int
         :rtype: void
         """
-        if not self.mylist:
-            self.mylist.append(x)
-            self.mysublist.append(x)
+        self.mylist.append(x)
+        if not self.submylist:
+            self.submylist.append(x)
         else:
-            if x <= self.mysublist[-1]:
-                self.mylist.append(x)
-                self.mysublist.append(x)
+            tem = self.submylist[-1]
+            if tem < x:
+                self.submylist.append(tem)
             else:
-                self.mylist.append(x)
-                self.mysublist.append(self.mysublist[-1])
+                self.submylist.append(tem)
+        return
+        
 
     def pop(self):
         """
         :rtype: void
         """
-        a = self.mylist.pop()
-        self.mysublist.pop()
-        return a
-            
+        if not self.mylist:
+            return None
+        self.mylist.pop()
+        self.submylist.pop()
+        
+
     def top(self):
         """
         :rtype: int
         """
+        if not self.mylist:
+            return
         return self.mylist[-1]
         
 
@@ -50,4 +54,7 @@ class MinStack:
         """
         :rtype: int
         """
-        return self.mysublist[-1]
+        if not self.mylist:
+            return
+        return self.submylist[-1]
+        
