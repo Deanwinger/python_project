@@ -3,6 +3,9 @@ import os
 import sys
 import re
 
+def testa():
+    print("*"*20)
+
 def run():
     n=0
     print('Run child process %s ...' % (os.getpid()))
@@ -61,5 +64,5 @@ def index1():
 if __name__ == "__main__":
     # run()
     # print(n_factor(8))
-    index1()
-
+    # index1()
+    pass
