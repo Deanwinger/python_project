@@ -32,6 +32,8 @@ class Solution(object):
 
 
 if __name__ == '__main__':
+    a = [1]
+    b = [2]
     pushV = [1, 2, 3, 4, 5]
     popV = [4, 5, 3, 2, 1]
     popVF = [4, 5, 2, 1, 3]
@@ -40,4 +42,5 @@ if __name__ == '__main__':
     print(S.stack_order(pushV, popV))
     print(S.stack_order(pushV, popVF))
     print(S.stack_order(pushV, ops))
+    print(S.stack_order(a, b))
 
