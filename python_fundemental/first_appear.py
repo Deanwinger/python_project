@@ -4,12 +4,18 @@
 
 class Solution(object):
     def firstAppear(self, array):
-        pass
+        alphabet = {}
+        for i in array:
+            if not alphabet.get(i, None):
+                alphabet[i] = 1
+            else:
+                alphabet[i] += 1
+        for j in array:
+            if alphabet[j] == 1:
+                return j
+        return -1
+
 
 if __name__=='__main__':
-    # array = [5, 7, 6, 9, 11, 10, 8]
-    # array = [7, 4, 6, 5]
-    array = [4, 6, 7, 5]
-    # array3 = [1, 2, 3, 4, 5]
     S = Solution()
-    print(S.firstAppear(array))
+    print(S.firstAppear('abaccdeff'))
