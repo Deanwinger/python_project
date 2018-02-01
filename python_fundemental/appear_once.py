@@ -45,5 +45,6 @@ class Solution:
 
 
 if __name__=='__main__':
-    nums = []
-    singleNumber()
+    nums = [1, 1, 2]
+    s = Solution()
+    print(s.singleNumber(nums))
