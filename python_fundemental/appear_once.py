@@ -15,10 +15,10 @@ class Solution:
         num1 = 0
         num2 = 0
         result = 0
-        for i in array:
+        for i in nums:
             result ^= i
         indexBit = self.FindFirstBitIs1(result)
-        for i in array:
+        for i in nums:
             res = self.divNums(i, indexBit)
             if res:
                 num1 = num1 ^ i
