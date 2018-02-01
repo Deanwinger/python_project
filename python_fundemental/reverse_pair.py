@@ -11,7 +11,23 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        start = 0
+        end = len(nums)-1
+        a = self.recursivelyDivid(nums, start, end)
+        return 
+    
+    def recursivelyDivid(data, start, end):
+        # if start == end:
+        #     return start
+        # mid = (start + end) // 2
+        # self.recursivelyDivid(data, start, mid)
+        # self.recursivelyDivid(data, mid, end)
         pass
+
+
+        
+
+
 
 
 if __name__=='__main__':
