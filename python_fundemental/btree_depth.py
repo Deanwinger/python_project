@@ -7,3 +7,15 @@
 拓展:
 输入一棵二叉树，判断该二叉树是否是平衡二叉树。
 '''
+
+# leetcode 104. Maximum Depth of Binary Tree
+# 题39
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
