@@ -25,5 +25,21 @@ def show(text):
     print(text, end=' ')
     sys.stdout.flush()
 
+def download_many(cc_list):
+    for cc in sorted(cc_list):
+        image = get_flag(cc)
+        show(cc)
+        save_flags(image, cc.lower() + '.gif')
+    return len(cc_list)
+
+def main(download_many):
+    t0 = time.time()
+    count = download_many(POP20_CC)
+    elapsed = time.time() - t0
+    msg = '\n{} flags downloaded in {:.2f}s'
+    print(msg.format(count, elapsed))
+
+if __name__ == '__main__':
+    main(download_many)
 
 
