@@ -1,6 +1,12 @@
+import collections
+from concurrent import futures
+
 import requests
-from flags import save_flags
-from collections import namedtuple
+import tqdm
+
+# 从flags2_common 模块中导入一个函数和一个 Enum
+from flags2_common import main, HTTPStatus
+# from flags2_sequential import download_one
 
 Result = namedtuple('Result', ['status', 'cc'])
 
