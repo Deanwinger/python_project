@@ -61,10 +61,21 @@ if __name__ == '__main__':
                 [66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84],
                 [67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85],
             ]
+    array5 = [
+                [1, 2, 8, 9],
+            ]
+    array6 = [
+                [1,],
+                [2,],
+                [4,],
+                [6,],
+            ]
 
-    print(find_exact_one(array, 5))
-    print(find_exact_one(array, 10))
-    print(find_exact_one(array, 15))
-    print(find_exact_one(array2, 10))
-    print(find_exact_one(array3, 'b'))
-    print(find_exact_one(array4, 81))
+    # print(find_exact_one(array, 5))
+    # print(find_exact_one(array, 10))
+    # print(find_exact_one(array, 15))
+    # print(find_exact_one(array2, 10))
+    # print(find_exact_one(array3, 'b'))
+    # print(find_exact_one(array4, 81))
+    print(find_exact_one(array5, 8))
+    print(find_exact_one(array6, 5))
