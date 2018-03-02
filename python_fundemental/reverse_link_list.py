@@ -12,12 +12,34 @@ class Solution(object):
         if Node.next == None:
             return None
         
-        stack = []
+        stack = Stack()
         head = Node
         while head:
-            stack.insert(0, head.value)
+            stack.push(head)
             head = head.next
-        return stack
+        
+        while stack.stack:
+            print(stack.pop().value)
+        return 
+
+class Stack(object):
+    def __init__(self):
+        self.stack = []
+    
+    def push(self, val):
+        self.stack.append(val)
+    
+    def pop(self):
+        if not self.stack:
+            return
+        else:
+            return self.stack.pop()
+    
+    def top(self):
+        if not self.stack:
+            return
+        else:
+            return self.stack[-1]
 
 if __name__ == '__main__':
     node1 = Node(10)
