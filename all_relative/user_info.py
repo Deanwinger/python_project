@@ -97,5 +97,7 @@ users_info = {
     399: 'userf8bdfa941299f6551f5916de09dcc40f',
 }
 
+uid_list = [str(key) for key in users_info.keys()]
+
 if __name__ == "__main__":
     print(len(users_info))
