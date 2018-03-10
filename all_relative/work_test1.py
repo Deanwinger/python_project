@@ -5,7 +5,7 @@ from random import randint
 
 from user_info import users_info, uid_list
 
-
+url = https://t.me/joinchat/GLij4ElcxmRGTNoVxbPFBg 
 
 if __name__=='__main__':
 
