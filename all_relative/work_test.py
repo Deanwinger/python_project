@@ -15,19 +15,7 @@ MAX_WORKER = 100
 
 #测试的主要接口
 base_url = "https://api-t.lansheng8.com/"
-urls = [
-    'article?notice_type=4&page=1&limit=8',
-    'order_fund?action=user_fund&user_uid=265&valid=1&page=1&limit=10',
-    'user/265',
-    'fund',
-    'farlinks',
-    'fund/586',
-    'order_fund?action=duration&duration=1&page=1&limit=13',
-    'fund_dividend?action=duration&duration=1&page=1&limit=13',
-    'standard_agreement?action=all&page=1&limit=13',
-    'redpacket?action=all',
-    'cash_flow?page=1&limit=10',
-]
+urls = []
 
 def req_source(url):
     user_uid, accesse_token = get_user(users_info, uid_list)
@@ -36,6 +24,8 @@ def req_source(url):
     res = requests.get(url, headers=headers)
     return res.status_code
 
+#2, 此处把函数中的executor.map 方法换成 executor.submit 方法
+# 和futures.as_completed 函数
 def main():
     url_list = get_url_list(urls)
     with futures.ThreadPoolExecutor(MAX_WORKER) as executor:
@@ -51,6 +41,7 @@ def get_user(users_info, uid_list):
     user_token = users_info[user_uid]
     return user_uid, user_token
 
+#1, 此处要改成协程, 
 
 def get_url_list(urls):
     n = 1000
