@@ -58,6 +58,10 @@ data = {
         [1.38, 1.5, 1.32, 1.25, 1.37, 1.48, 1.25, 1.49, 1.46],
 }
 
+def func(n):
+    return n + 10
+        
 
 if __name__ == '__main__':
-    main(data)
+    # main(data)
+    func('Hello')
