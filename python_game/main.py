@@ -127,7 +127,7 @@ def main():
 
     clock=pygame.time.Clock()
     while True:
-        clock.tick(500)
+        clock.tick(700)
         gua.set_background()
         gua.update(ball)
         if paddle.collided(ball):
