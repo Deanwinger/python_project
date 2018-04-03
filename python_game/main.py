@@ -9,13 +9,18 @@ class Paddle(pygame.sprite.Sprite):
     def __init__(self, path, x=200, y=400, speed=.5):
         pygame.sprite.Sprite.__init__(self)
         self.img = self.image_from_path(path)
-        self.x = x
-        self.y = y
+        # image_surface = pygame.surface.Surface([100,20])
+        # image_surface.fill([0,0,0])
+        # self.img = image_surface.convert()
+        self.rect = self.img.get_rect()
+        self.x = self.rect.left =  x
+        self.y = self.rect.top = y
         self.speed = speed
         self.rect = self.img.get_rect()
+        self.width,self.height = self.img.get_size()
 
     def image_from_path(self, path):
-        img = pygame.image.load(path).convert_alpha()
+        img = pygame.image.load(path)
         return img
 
     def move_left(self):
@@ -24,23 +29,28 @@ class Paddle(pygame.sprite.Sprite):
     def move_right(self):
         self.x += self.speed
 
-    # def collide(self, ball):
+    def collided(self, ball):
+        if ball.x > self.x and ball.x < self.x + self.width:
+            if ball.y > self.y and ball.y < self.y + self.height:
+                return True
 
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self, path, x=100, y=300, speedX=0.4, speedY=0.4):
         pygame.sprite.Sprite.__init__(self)
         self.img = self.image_from_path(path)
-        self.x = x
-        self.y = y
+        # image_surface = pygame.surface.Surface([10,10])
+        # image_surface.fill([0,0,0])
+        # self.img = image_surface.convert()
+        self.rect = self.img.get_rect()
+        self.x = self.rect.left =  x
+        self.y = self.rect.top = y
         self.speedX = speedX
         self.speedY = speedY
         self.fired = False
-        self.rect = self.img.get_rect()
-        
 
     def image_from_path(self, path):
-        img = pygame.image.load(path).convert_alpha()
+        img = pygame.image.load(path)
         return img
 
     def move(self):
@@ -85,8 +95,9 @@ class GuaGame(object):
             #eval有个类似的函数exec， 但是返回值always None
             if eval(reg):
                 self.actions[reg]()
-        
+
         ball.move()
+        # print(ball.speedX, "*"*9, ball.speedY)
 
     def get_events(self):
         return self.game.event.get()
@@ -101,26 +112,26 @@ def main():
     gua = GuaGame()
     gua.init_pygame()
 
-    
-
     paddle_path = base_path + "/paddle.png"
     paddle = Paddle(paddle_path)
 
     ball_path = base_path + "/ball.png"
     ball = Ball(ball_path)
-    # ballGroup = gua.game.sprite.Group(ball)
+    ballGroup = pygame.sprite.Group(ball)
 
     gua.register_action('keys[K_ESCAPE]', sys.exit)
     gua.register_action('keys[K_a]', paddle.move_left)
     gua.register_action('keys[K_d]', paddle.move_right)
     gua.register_action('keys[K_f]', ball.fire)
 
-    # clock=pygame.time.Clock()
+    clock=pygame.time.Clock()
     while True:
+        clock.tick(500)
         gua.set_background()
         gua.update(ball)
-        # if gua.game.sprite.spritecollide(paddle, ballGroup,False):
-        #     ball.speedY = - ball.speedY
+        if paddle.collided(ball):
+            ball.speedY = -ball.speedY
+        gua.update(ball)
         gua.draw(paddle)
         gua.draw(ball)
         gua.display_screen()
