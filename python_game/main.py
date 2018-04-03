@@ -33,6 +33,7 @@ class Paddle(pygame.sprite.Sprite):
         if ball.x > self.x and ball.x < self.x + self.width:
             if ball.y > self.y and ball.y < self.y + self.height:
                 return True
+        return False
 
 
 class Ball(pygame.sprite.Sprite):
