@@ -22,5 +22,6 @@ class Block(pygame.sprite.Sprite):
             self.alive = False
 
     def collided(self, ball):
+        # return self.alive and recIntersects(self, ball)
         return self.alive and \
             (recIntersects(self, ball) or recIntersects(ball, self))

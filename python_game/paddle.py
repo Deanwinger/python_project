@@ -35,6 +35,7 @@ class Paddle(pygame.sprite.Sprite):
         self.move(self.x + self.speed)
 
     def collided(self, ball):
+        # return recIntersects(self, ball)
         return recIntersects(self, ball) or recIntersects(ball, self)
 
 

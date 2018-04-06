@@ -61,6 +61,7 @@ def main():
             if block.collided(ball):
                 block.kill()
                 ball.bounce_back()
+                points += 10
         
         gua.update(ball)
         gua.draw(paddle)
