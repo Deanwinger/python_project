@@ -1,29 +1,8 @@
-class Stack(object):
-    def __init__(self):
-        self.stack = []
-    
-    def pop(self):
-        if self.stack:
-            s = self.stack.pop()
-            return s
-        raise Exception("There is no more stuff")
+from Second_data_structure import Stack, Node, TreeNode
 
-    def top(self):
-        if not self.stack:
-            return self.stack[-1]
-        raise Exception("Empty stack")
-
-    def push(self, val):
-        self.stack.append(val)
-    
-    def __repr__(self):
-        return "{}".format(type(self).__name__)
-
-class Node(object):
-    def __init__(self, val=None):
-        self.val = val
-        self.next = None
-
+#题3
+def two_dims_array():
+    pass
 
 #题5
 def print_linked_list_reversely(node):
@@ -42,8 +21,33 @@ def print_linked_list_reversely(node):
     print("Done")
     return
     
+#题6
+def btree_rebuild(pre, tin):
+    print("="*10, pre)
+    print("="*10, tin)
+    if len(pre) != len(tin):
+        raise Exception("错误的参数")
+    
+    if not pre and not tin:
+        return 
+    
+    root = Node(pre[0])
+    i = tin.index(pre[0])
+    root.left = btree_rebuild(pre[1:i+1], tin[:i])
+    root.right = btree_rebuild(pre[i+1:], tin[i+1:])
+    return root
+
+# def btree_revisit(root):
+#     #先序
+
+#     #中序
+
+#     #后序
+    
+
+
 if __name__ == "__main__":
-    l_list_1 = Node()
+    # l_list_1 = Node()
     # l_list_2 = Node(1)
 
     # l_list_3 = Node(10)
@@ -52,6 +56,10 @@ if __name__ == "__main__":
     # l_list_3.next = node2
     # node2.next = node3
 
-    print_linked_list_reversely(l_list_1)
+    # print_linked_list_reversely(l_list_1)
     # print_linked_list_reversely(l_list_2)
     # print_linked_list_reversely(l_list_3)
+
+    pre = [1, 2, 3, 5, 6, 4]
+    tin = [5, 3, 6, 2, 4, 1]
+    print(btree_rebuild(pre, tin))
