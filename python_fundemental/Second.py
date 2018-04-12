@@ -69,6 +69,7 @@ def minmum_in_array(alist):
 
 
 #题9 fibonacci 0, 1, 1, 2, 3, 5
+#待完成， fluent_python 有装饰器实现
 def fibonacci(n):
     if n <= 0:
         raise Exception("错误的参数")
@@ -85,6 +86,42 @@ def fibonacci(n):
         fibTwo = fibN
         i += 1
     return fibN
+
+#题10 二进制中1的个数
+def count_one(m):
+    pass
+
+#题11 数值的整数次方
+def power_of_val():
+    pass
+
+#题12 打印1到最大的n位数， n=5, 即1,2...99999.
+def print_max_ndigit():
+    pass
+
+#题13 再O(1)时间删除链表节点
+def rm_llist_node(head, node):
+    dummy = head
+    #判断是否是尾节点
+    if node.next is None:
+        #只有一个节点
+        if head == node:
+            head.__del__()
+            return
+        else:
+            while head.next:
+                pre = head
+                head = head.next
+            pre.next = None
+            return dummy
+    else:
+        tmp = node.next
+        node.val = node.next.val
+        node.next = node.next.next
+        tmp.__del__()
+    return dummy
+    
+
 
 
 
@@ -107,4 +144,7 @@ if __name__ == "__main__":
     # tin = [5, 3, 6, 2, 4, 1]
     # print(btree_rebuild(pre, tin))
 
-    print(fibonacci(8))
+    # print(fibonacci(8))
+    node1 = Node(10)
+    rm_llist_node(node1, node1)
+    print(node1.val, node1.next)

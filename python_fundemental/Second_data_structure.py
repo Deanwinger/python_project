@@ -30,6 +30,9 @@ class Node(object):
         self.val = val
         self.next = None
 
+    def __del__(self):
+        self.val = None
+        self.next = None
 
 class Queue(object):
     def __init__(self):
