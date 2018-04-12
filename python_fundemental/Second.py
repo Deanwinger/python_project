@@ -144,7 +144,10 @@ if __name__ == "__main__":
     # tin = [5, 3, 6, 2, 4, 1]
     # print(btree_rebuild(pre, tin))
 
-    # print(fibonacci(8))
-    node1 = Node(10)
-    rm_llist_node(node1, node1)
-    print(node1.val, node1.next)
+    print(fibonacci(8))
+
+    # node1 = Node(10)
+    # rm_llist_node(node1, node1)
+    # print(node1.val, node1.next)
+
+    
