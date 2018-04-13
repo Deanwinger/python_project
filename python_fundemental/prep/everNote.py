@@ -34,10 +34,7 @@ def is_palindrome(string):
         return True
     
     if string[0] == string[-1]:
-        if is_palindrome(string[1:-1]):
-            return True
-        else:
-            return False
+        return is_palindrome(string[1:-1])
     else:
         return False
 

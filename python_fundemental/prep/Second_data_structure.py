@@ -73,6 +73,10 @@ class queue_by_stack(object):
 class stack_by_queue(object):
     pass
 
+#在O(1)时间内求min值的栈
+class stack_special_v0(object):
+    pass
+
 if __name__ == '__main__':
     P = queue_by_stack()
     P.push(10)
