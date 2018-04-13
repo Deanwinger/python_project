@@ -101,7 +101,6 @@ def print_max_ndigit():
 
 #题13 再O(1)时间删除链表节点
 def rm_llist_node(head, node):
-    dummy = head
     #判断是否是尾节点
     if node.next is None:
         #只有一个节点
@@ -113,13 +112,13 @@ def rm_llist_node(head, node):
                 pre = head
                 head = head.next
             pre.next = None
-            return dummy
+            return head
     else:
         tmp = node.next
         node.val = node.next.val
         node.next = node.next.next
         tmp.__del__()
-    return dummy
+    return head
     
 
 

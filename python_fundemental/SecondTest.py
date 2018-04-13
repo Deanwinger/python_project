@@ -44,22 +44,26 @@ class MyAlgoTest(unittest.TestCase):
     #     self.assertTrue(two_dims_array(array6, 6))
 
     def test_prob13(self):
+        for i in range(10):
+            llist = self.construct_llist()
+            # self.llist_trave(llist[0])
+            rm_llist_node(llist[0], llist[i])
+            self.llist_trave(llist[0])
+
+    def construct_llist(self):
         rec = [Node(i) for i in range(10, 20)]
         for i in range(10):
             if i == 9:
                 rec[i].next = None
             else:
                 rec[i].next = rec[i+1]
-        # for node in rec:
-        #     head = rm_llist_node(rec[0], node)
-        # # head = rm_llist_node(rec[0], rec[5])
-        #     self.llist_trave(head)
-        #     print("="*30)
+        return rec
 
     def llist_trave(self, root):
         while root:
             print(root.val)
             root = root.next
+        print("="*20)
 
 if __name__ == "__main__":
     unittest.main()
