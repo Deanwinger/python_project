@@ -1,26 +1,25 @@
-class TreeNode(object):
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+from exception import StackUnderflow, QueueUnderflow
 
+#基于list的实现
 class Stack(object):
     def __init__(self):
         self.stack = []
     
     def pop(self):
         if self.stack:
-            s = self.stack.pop()
-            return s
+            return self.stack.pop()
         raise Exception("There is no more stuff")
 
     def top(self):
-        if not self.stack:
+        if self.stack:
             return self.stack[-1]
         raise Exception("Empty stack")
 
     def push(self, val):
         self.stack.append(val)
+    
+    def is_empty(self):
+        return not self.stack
     
     def __repr__(self):
         return "{}".format(type(self).__name__)
@@ -76,6 +75,45 @@ class stack_by_queue(object):
 #在O(1)时间内求min值的栈
 class stack_special_v0(object):
     pass
+
+class SQueue(object):
+    def __init__(self, init_len=8):
+        self._len = init_len  # length of mem-block
+        self._elems = [0]*init_len
+        self._head = 0  # index of head element
+        self._num = 0   # number of elements
+        
+    def is_empty(self):
+        return self._num == 0
+    
+    def peek(self):
+        if self._num == 0:
+            raise QueueUnderflow
+        return self._elems[self._head]
+
+    def dequeue(self):
+        if self._num == 0:
+            raise QueueUnderflow
+        e = self._elems[self._head]
+        self._head = (self._head+1) % self._len
+        self._num -= 1
+        return e
+    
+    def enqueue(self, elem):
+        if self._num == self._len:
+            self.__extend()
+        self._elems[(self._head+self._num) % self._len] = elem
+        self._num += 1
+        
+    def __extend(self):
+        old_len = self._len
+        self._len *= 2
+        new_elems = [0]*self._len
+        for i in range(old_len):
+            new_elems[i] = self._elems[(self._head + i) % old_len]
+        self._elems, self._head = new_elems, 0
+
+
 
 if __name__ == '__main__':
     P = queue_by_stack()
