@@ -1,7 +1,5 @@
 from Second_data_structure import Stack, Node, TreeNode
 
-#待完成， java数据结构的API
-
 #题3
 def two_dims_array(alist, target):
     if not alist:
