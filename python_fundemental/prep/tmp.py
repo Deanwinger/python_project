@@ -7,6 +7,31 @@
 class QueueUnderflow(ValueError):
     pass
 
+class StackUnderflow(ValueError):
+    pass
+
+
+class SStack(): 
+    def __init__(self):
+        self._elems = []
+
+    def is_empty(self):
+        return not self._elems
+
+    def top(self):
+        if not self._elems:
+            raise StackUnderflow
+        return self._elems[-1]
+
+    def push(self, elem):
+        self._elems.append(elem)
+
+    def pop(self):
+        if not self._elems:
+            raise StackUnderflow
+        return self._elems.pop()
+
+
 class SQueue(object):
     def __init__(self, init_len=8):
         self._len = init_len  # length of mem-block
@@ -74,7 +99,22 @@ def levelorder(t, proc):
         q.enqueue(t.right)
         proc(t.value, end=" ")
 
+#二叉树的先序遍历 --非递归实现
+def pre_order_nonrec(root, proc):
+    s = SStack()
+    while root is not None or not s.is_empty():
+        while root is not None:
+            proc(root.value)
+            s.push(root.right)
+            root = root.left
+        root = s.pop()
+
+#二叉树的中序遍历 -- 非递归实现
+def in_order_nonrec(root, proc):
+    pass
+    
+
 
 if __name__ == "__main__":
     root = BinTNode(1, BinTNode(2, BinTNode(3), BinTNode(4)), BinTNode(5))
-    levelorder(root, print)
+    # levelorder(root, print)
