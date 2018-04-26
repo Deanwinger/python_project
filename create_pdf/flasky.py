@@ -175,6 +175,7 @@ class MyPrint:
             self.pagesize = letter
         self.width, self.height = self.pagesize
 
+    # 用户增加页眉和页脚
     @staticmethod
     def _header_footer(canvas, doc):
         # Save the state of our canvas so we can draw on it
@@ -402,7 +403,3 @@ class NumberedCanvas(canvas.Canvas):
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
-
-
-
-{"data": [{"uid": 42, "country_code": "86", "phone": "13993156662", "first_name": "德耀", "last_name": "牟", "email": "heismu@163.com", "inviter_uid": 0, "role": 2, "create_time": 1524643193, "client_manager": "1", "is_real": 1, "num_gtd": 0, "invitation_code": "yHQJlimP", "num_msg": 0}, {"uid": 40, "country_code": "84", "phone": "18565681307", "first_name": "lautest", "last_name": "vincetest", "email": "928738705555511@qq.com", "inviter_uid": 0, "role": 2, "create_time": 1524570695, "client_manager": "111111", "is_real": 1, "num_gtd": 600000, "invitation_code": "yFc96BzQ", "num_msg": 1}], "total": 3}
