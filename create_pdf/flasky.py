@@ -236,8 +236,28 @@ class MyPrint:
         styles = getSampleStyleSheet()
         normalStyle = styles['Normal']
 
-        title = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype">私募认购合同</font></b><br/><br/><br/></para>'
-        story.append(Paragraph(title,normalStyle))
+        spec1 = '''<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><br/><br/><br/>
+        <font face="mytype" fontsize=12><img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/yemei.jpeg" width="270" height="65" valign="top"/></font><br/>
+        <br></br><br/><br/><br/><br/><br/><br/><br/></para>'''
+        story.append(Paragraph(spec1,normalStyle))
+
+        title1 = '''<para autoLeading="off" fontSize=28 align=center><br/><br/><br/><b><font face="mytype">GTDOLLAR数字资产ICO项目</font></b>
+        <br/><br/><br/></para>'''
+        story.append(Paragraph(title1,normalStyle))
+
+        title2 = '''<para autoLeading="off" fontSize=48 align=center><br/><br/><br/><b><font face="mytype">私募认购合同</font></b>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
+        story.append(Paragraph(title2,normalStyle))
+
+        # title3 = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype">合同编号:<u>%s</u></font></b><br/><br/><br/></para>'%'20180427001'
+        # story.append(Paragraph(title3,normalStyle))
+
+        # title4 = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype"><u>%d</u>年<u>%d</u>月<u>%d</u>日</font></b><br/><br/><br/></para>' % (2018, 04, 27)
+        # story.append(Paragraph(title4,normalStyle))
+
+        title4 = '''<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype"><u>%d</u>年<u>%d</u>月<u>%d</u>日</font>
+        </b><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
+        story.append(Paragraph(title4,normalStyle))
 
         parag6 = '''<para autoLeading="off" leading=12 leftIndent=30>
         <font face="mytype" fontsize=12>第一条 总则</font><br/>
@@ -354,7 +374,7 @@ class MyPrint:
 
         parag3 = '''<para autoLeading="off" leading=18 leftIndent=30>
         <font face="mytype" fontsize=14>发售人： <u>%s</u> （盖章）   <img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/blank.jpeg" width="90 " height="0" valign="bottom"/>      认购人:  _______%s_______ （盖章）</font><br/>
-        <br></br></para>'''% ('    alan    ', 'chen')
+        <br></br></para>'''% ('    GT集团    ', 'chen')
         story.append(Paragraph(parag3, normalStyle))
 
         parag4 = '''<para autoLeading="off" leading=18 leftIndent=130><br></br>
