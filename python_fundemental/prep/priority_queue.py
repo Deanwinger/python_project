@@ -36,5 +36,37 @@ class PrioQue(object):
 
 
 class PrioQueue(object):
-    def __init__(self):
+    def __init__(self, elist=[]):
+        self._elems = list(elist)
+        if elist:
+            self.buildheap()
+    
+    def is_empty(self):
+        return not self._elems
+    
+    def peek(self):
+        if self.is_empty():
+            raise PriorityQueueError("in peek")
+        return self._elems[0]
+
+    def enqueue(self, e):
         pass
+
+    def dequeue(self):
+        pass
+
+    def siftdown(self, e, begin, end):
+        elems, i, j = self._elems, begin, begin*2+1
+        while j < end:
+            if j+1 < end and elems[j+1] < elems[j]:
+                j += 1
+            if e < elems[j]:
+                break
+            elems[i] = elems[j]
+            i, j = j, 2*j+1
+        elems[i] = e
+
+    def buildheap(self):
+        end = len(self._elems)
+        for i in range(end, -1, -1):
+            self.siftdown(self._elems[i], i, end)
