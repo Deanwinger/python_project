@@ -52,6 +52,13 @@ class PrioQueue(object):
     def enqueue(self, e):
         pass
 
+    def siftup(self, e, last):
+        elems, i, j = self._elems, last, (last-1)//2
+        while i > 0 and e < elems[j]:
+            elems[i] = elems[j]
+            i, j = j, (j-1)//2
+        elems[i] = e
+
     def dequeue(self):
         pass
 
