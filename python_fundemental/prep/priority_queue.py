@@ -75,5 +75,33 @@ class PrioQueue(object):
 
     def buildheap(self):
         end = len(self._elems)
-        for i in range(end, -1, -1):
+        for i in range(end//2, -1, -1):
             self.siftdown(self._elems[i], i, end)
+
+def heap_sort(elems):
+    def siftdown(elems, e, begin, end):
+        i, j = begin, begin*2+1
+        while j < end:  # invariant: j == 2*i+1
+            if j+1 < end and elems[j+1] < elems[j]:
+                j += 1  # elems[j] <= its brother
+            if e < elems[j]:     # e is the smallest of the three
+                break
+            elems[i] = elems[j]  # elems[j] is the smallest, move it up
+            i, j = j, 2*j+1
+        elems[i] = e
+        
+    end = len(elems)
+    for i in range(end//2, -1, -1):
+        siftdown(elems, elems[i], i, end)
+    for i in range((end-1), 0, -1):
+        e = elems[i]
+        elems[i] = elems[0]
+        siftdown(elems, e, 0, i)
+
+if __name__ == '__main__':
+    alist = [1,6,2,7,4,3,5]
+    # heap_sort(alist)
+    # print(alist) #[7, 6, 5, 4, 3, 2, 1]
+    p = PrioQueue(alist)
+    p.buildheap()
+    print(p._elems)
