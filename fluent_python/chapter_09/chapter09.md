@@ -35,10 +35,22 @@ str()
 >>> brl = 1/2.43 # BRL到USD的货币兑换比价
 >>> brl
 0.4115226337448559
->>> format(brl, '0.4f') # ➊
+>>> format(brl, '0.4f')
 '0.4115'
 >>> '1 BRL = {rate:0.2f} USD'.format(rate=brl)
 '1 BRL = 0.41 USD'
 ~~~
+2. 如果类没有定义 `__format__` 方法,从 object 继承的方法会返回str(my_object), 然而,如果传入格式说明符,`object.__format__` 方法会抛出TypeError
+
+## 9.6 可散列的Vector2d
+1. 可散列
+  - 为了把 Vector2d 实例变成可散列的,必须使用 `__hash__` 方法，还需要 `__eq__` 方法, 为此,我们要把vector.x 和 vector.y 分量设为只读特性
+
+
+
+
+
+
+
 
 ######P395 to be finished
