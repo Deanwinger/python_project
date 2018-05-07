@@ -236,28 +236,47 @@ class MyPrint:
         styles = getSampleStyleSheet()
         normalStyle = styles['Normal']
 
-        spec1 = '''<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><br/><br/><br/>
-        <font face="mytype" fontsize=12><img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/yemei.jpeg" width="270" height="65" valign="top"/></font><br/>
-        <br></br><br/><br/><br/><br/><br/><br/><br/></para>'''
-        story.append(Paragraph(spec1,normalStyle))
+        # spec1 = '''<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><br/><br/><br/>
+        # <font face="mytype" fontsize=12><img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/yemei.jpeg" width="270" height="65" valign="top"/></font><br/>
+        # <br></br><br/><br/><br/><br/><br/><br/><br/></para>'''
+        # story.append(Paragraph(spec1,normalStyle))
 
-        title1 = '''<para autoLeading="off" fontSize=28 align=center><br/><br/><br/><b><font face="mytype">GTDOLLAR数字资产ICO项目</font></b>
-        <br/><br/><br/></para>'''
-        story.append(Paragraph(title1,normalStyle))
+        # title1 = '''<para autoLeading="off" fontSize=28 align=center><br/><br/><br/><b><font face="mytype">GTDOLLAR数字资产ICO项目</font></b>
+        # <br/><br/><br/></para>'''
+        # story.append(Paragraph(title1,normalStyle))
 
-        title2 = '''<para autoLeading="off" fontSize=48 align=center><br/><br/><br/><b><font face="mytype">私募认购合同</font></b>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
-        story.append(Paragraph(title2,normalStyle))
+        # title2 = '''<para autoLeading="off" fontSize=48 align=center><br/><br/><br/><b><font face="mytype">私募认购合同</font></b>
+        # <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
+        # story.append(Paragraph(title2,normalStyle))
 
-        # title3 = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype">合同编号:<u>%s</u></font></b><br/><br/><br/></para>'%'20180427001'
-        # story.append(Paragraph(title3,normalStyle))
+        # # title3 = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype">合同编号:<u>%s</u></font></b><br/><br/><br/></para>'%'20180427001'
+        # # story.append(Paragraph(title3,normalStyle))
 
-        # title4 = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype"><u>%d</u>年<u>%d</u>月<u>%d</u>日</font></b><br/><br/><br/></para>' % (2018, 04, 27)
+        # # title4 = '<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype"><u>%d</u>年<u>%d</u>月<u>%d</u>日</font></b><br/><br/><br/></para>' % (2018, 04, 27)
+        # # story.append(Paragraph(title4,normalStyle))
+
+        # title4 = '''<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype"><u>%d</u>年<u>%d</u>月<u>%d</u>日</font>
+        # </b><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
         # story.append(Paragraph(title4,normalStyle))
 
-        title4 = '''<para autoLeading="off" fontSize=18 align=center><br/><br/><br/><b><font face="mytype"><u>%d</u>年<u>%d</u>月<u>%d</u>日</font>
-        </b><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
-        story.append(Paragraph(title4,normalStyle))
+        title = '''<para autoLeading="off" fontSize=28 align=center><br/><br/><br/><b><font face="mytype">认 购 合 同</font></b>
+        <br/><br/><br/><br/><br/><br/><br/></para>'''
+        story.append(Paragraph(title,normalStyle))
+
+        spec1 = '''<para autoLeading="off" fontSize=12 leftIndent=30><br/><br/><br/>
+        <font face="mytype" fontsize=14>发售人：<img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/blank.jpeg" width="50" height="0" valign="bottom"/>%s</font></para>'''%'GT集团'
+        story.append(Paragraph(spec1,normalStyle))
+
+        # 用于下划线
+        subline = '''<para autoLeading="off" fontSize=12 leftIndent=85>
+        <font face="mytype" fontsize=14><img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/black.png" width="170" height="0.5" valign="top"/></font><br/>
+        <br></br><br/></para>'''
+        story.append(Paragraph(subline,normalStyle))
+
+        spec2 = '''<para autoLeading="off" fontSize=12 leftIndent=30><br/><br/><br/><br/>
+        <font face="mytype" fontsize=14>认购人： <img src="/home/alanchen/work/LS2018/GT-Dollar-API/app/material/black.png" width="170" height="0.5" valign="bottom"/></font><br/>
+        <br></br><br/><br/><br/><br/><br/><br/><br/></para>'''
+        story.append(Paragraph(spec2,normalStyle))
 
         parag6 = '''<para autoLeading="off" leading=12 leftIndent=30>
         <font face="mytype" fontsize=12>第一条 总则</font><br/>
@@ -295,73 +314,94 @@ class MyPrint:
         story.append(Paragraph(parag13,normalStyle))
 
         parag14 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>1.项目运作流程：</font></para>'''
+        <font face="mytype" fontsize=12>本项目利用区块链总发行量为：<u>30亿枚</u>；</font><br/><br/><br/><br/><br/><br/><br/><br/><br/></para>'''
         story.append(Paragraph(parag14,normalStyle))
-        
-        parag15 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>2.本项目利用区块链总发行量为：30 亿枚，本次募集每枚单价为：1 美金，总额为：30 亿美金;</font></para>'''
-        story.append(Paragraph(parag15,normalStyle))
 
-        parag16 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>3.本项目 ICO 上市原始股发售价格：2美金/枚，GTC 市值60亿美金；</font></para>'''
-        story.append(Paragraph(parag16,normalStyle))
+        # parag14 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>1.项目运作流程：</font></para>'''
+        # story.append(Paragraph(parag14,normalStyle))
         
-        parag17 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>4.本项目 ICO 上市挂牌价格：4 美金/枚，GTC 市值 120 亿美金。</font><br/>
-        <br></br></para>'''
-        story.append(Paragraph(parag17,normalStyle))
+        # parag15 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>2.本项目利用区块链总发行量为：30 亿枚，本次募集每枚单价为：1 美金，总额为：30 亿美金;</font></para>'''
+        # story.append(Paragraph(parag15,normalStyle))
+
+        # parag16 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>3.本项目 ICO 上市原始股发售价格：2美金/枚，GTC 市值60亿美金；</font></para>'''
+        # story.append(Paragraph(parag16,normalStyle))
+        
+        # parag17 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>4.本项目 ICO 上市挂牌价格：4 美金/枚，GTC 市值 120 亿美金。</font><br/>
+        # <br></br></para>'''
+        # story.append(Paragraph(parag17,normalStyle))
 
         parag18 = '''<para autoLeading="off" leading=25 leftIndent=30 rightIndent=50>
         <font face="mytype" fontsize=12>第四条 认购人权利与义务 </font></para>'''
         story.append(Paragraph(parag18,normalStyle))
 
+        # parag19 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>1.认购人依据自身能力，根据本合同第三条第 2 点之规定，对本项目 资产进行认购：</font></para>'''
+        # story.append(Paragraph(parag19,normalStyle))
+
         parag19 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>1.认购人依据自身能力，根据本合同第三条第 2 点之规定，对本项目 资产进行认购：</font></para>'''
+        <font face="mytype" fontsize=12>1.认购人依据自身能力，对本项目资产进行认购：</font></para>'''
         story.append(Paragraph(parag19,normalStyle))
         
         parag20 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>认购人                  ，认购		            枚（认购资产总额	                 万美金）；</font></para>'''
+        <font face="mytype" fontsize=12>认购人                  ，认购		            枚, 每枚认购单价为：     ,（认购资产总额	                 万美金）；</font></para>'''
         story.append(Paragraph(parag20,normalStyle))
 
         parag21 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>2.认购时间：	    年	    月		日。认购人须于以上认购时间之前, 100%支付其认购金(即：                 万美金)，即视为完成本轮资产认购，认购人享受1:2的配额期权；</font></para>'''
+        <font face="mytype" fontsize=12>2.认购时间：	    年	    月		日。认购人须于以上认购时间之前, 全额支付其认购金(即：                 万美金)；</font></para>'''
         story.append(Paragraph(parag21,normalStyle))
         
         parag22 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
         <font face="mytype" fontsize=12>3.认购人的全部资本分为等额数字资产币。认购人以数字资产币形式出现，数字资产币是 GTDOLLAR 签发的数字资产币。数字货币采取区块链记名方式，认购人所持有的数字资产币即为其区块链凭证。</font></para>'''
         story.append(Paragraph(parag22,normalStyle))
 
+        # parag23 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>4.认购人可对认购总额的（包括配额部分）的货币资产进行流通销售。原始股挂牌上市七个工作日前，认购人须支付其配额期权部分的全部认购金，未能及时支付的该部分配额资产，项目将予以收回。</font></para>'''
+        # story.append(Paragraph(parag23,normalStyle))
+
         parag23 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>4.认购人可对认购总额的（包括配额部分）的货币资产进行流通销售。原始股挂牌上市七个工作日前，认购人须支付其配额期权部分的全部认购金，未能及时支付的该部分配额资产，项目将予以收回。</font></para>'''
+        <font face="mytype" fontsize=12>4.如本项目未能成功上市ICO交易所，本项目将全额退回各认购人已支付的认购金额款项。</font></para>'''
         story.append(Paragraph(parag23,normalStyle))
         
-        parag24 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>5.原始股发售完成 15 个工作日后, 如本项目未能成功上市ICO交易所，本项目将全额退回各认购人已支付的认购金额款项。</font><br/>
-        <br></br><br/><br></br><br></br><br></br><br></br></para>'''
-        story.append(Paragraph(parag24,normalStyle))
+        # parag24 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        # <font face="mytype" fontsize=12>5.原始股发售完成 15 个工作日后, 如本项目未能成功上市ICO交易所，本项目将全额退回各认购人已支付的认购金额款项。</font><br/>
+        # <br></br><br/><br></br><br></br><br></br><br></br></para>'''
+        # story.append(Paragraph(parag24,normalStyle))
 
         parag25 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>6.上市锁定期：为维持本项目上市期间经营管理及价格的稳定性，确保资产价格上升，保障资产所有人利益最大化，ICO挂牌上市之日起6个月内视为上市锁定期。期间，
+        <font face="mytype" fontsize=12>5.上市锁定期：为维持本项目上市期间经营管理及价格的稳定性，确保资产价格上升，保障资产所有人利益最大化，ICO挂牌上市之日起6个月内视为上市锁定期。期间，
         认购人手中剩余货币资产均不得流通交易；上市锁定期满后，方可自由交易其剩余的所有货币资产。</font><br/>
         <br></br></para>'''
         story.append(Paragraph(parag25,normalStyle))
 
         parag26 = '''<para autoLeading="off" leading=25 leftIndent=30 rightIndent=50>
-        <font face="mytype" fontsize=12>第五条 附则  </font></para>'''
+        <font face="mytype" fontsize=12>第五条 双方承诺  </font></para>'''
         story.append(Paragraph(parag26,normalStyle))
 
         parag27 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>1.认购人应将认购的款项汇至指定银行账户。汇款时间以款项收到日期为准。汇款账户：</font></para>'''
+        <font face="mytype" fontsize=12>1.在签订此合同时，双方均已获悉认购股权行为所带来的风险和损益。</font></para>'''
         story.append(Paragraph(parag27,normalStyle))
 
         parag28 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>2.由于不可抗力因素，致使本合同无法履行的，经双方一致同意后，可以终止本合同。</font></para>'''
+        <font face="mytype" fontsize=12>2.双方遵守本合同的条件和要求，认购人需积极配合完成本项目的运营活动。</font></para>'''
         story.append(Paragraph(parag28,normalStyle))
 
-        parag29 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
-        <font face="mytype" fontsize=12>3.本合同一式_贰_份，签约人各执一份，于	   年	    月	  日在  地签订，并自签订后生效。</font><br/>
-        <br></br></para>'''
+        parag29 = '''<para autoLeading="off" leading=25 leftIndent=30 rightIndent=50>
+        <font face="mytype" fontsize=12>第六条 附则  </font></para>'''
         story.append(Paragraph(parag29,normalStyle))
+
+        parag30 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        <font face="mytype" fontsize=12>1.由于不可抗力因素，致使本合同无法履行的，经双方一致同意后，可以终止本合同。</font><br/>
+        <br></br></para>'''
+        story.append(Paragraph(parag30,normalStyle))
+
+        parag31 = '''<para autoLeading="off" leading=18 leftIndent=50 rightIndent=50>
+        <font face="mytype" fontsize=12>2.本合同一式<u>贰</u>份，签约人各执一份，于	   年	    月	  日在  地签订，并自签订后生效。</font><br/>
+        <br></br></para>'''
+        story.append(Paragraph(parag31,normalStyle))
         ########################################################################################
         parag1 = '''<para autoLeading="off" leading=18 leftIndent=130>
         <font face="mytype" fontsize=2></font></para>'''
