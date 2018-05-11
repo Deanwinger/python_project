@@ -65,3 +65,54 @@ def make_averager():
 闭包是一种函数,它会保留定义函数时存在的自由变量的绑定,这样调用函数时,虽然定义作用域不可用了,但是仍能使用那些绑定。
 
 ## 7.6 nonlocal声明
+- 作用是把local variable 标记为free variable
+
+## 7.7 实现一个简单的装饰器
+- 作用是把local variable 标记为free variable
+- functools.wraps 装饰器把相关的属性从 func 复制到 clocked 中
+~~~
+import time
+import functools
+
+def clock(func):
+    @functools.wraps(func)
+    def clocked(*args, **kwargs):
+        t0 = time.time()
+        result = func(*args, **kwargs)
+        elapsed = time.time() - t0
+        name = func.__name__
+        arg_lst = []
+        if args:
+            arg_lst.append(', '.join(repr(arg) for arg in args))
+        if kwargs:
+            pairs = ['%s=%r' % (k, w) for k, w in sorted(kwargs.items())]
+        arg_lst.append(', '.join(pairs))
+        arg_str = ', '.join(arg_lst)
+        print('[%0.8fs] %s(%s) -> %r ' % (elapsed, name, arg_str, result))
+        return result
+    return clocked
+~~~
+
+## 7.8 标准库中的装饰器
+1. 使用functools.lru_cache做备忘
+- LRU 三个字母是“Least Recently Used”的缩写,表明缓存不会无限制增长,一段时间不用的缓存条目会被扔掉。
+
+## 7.9 叠放装饰器
+~~~
+@d1
+@d2
+def f():
+    print('f')
+
+等同于:
+
+def f():
+    print('f')
+
+f = d1(d2(f))
+~~~
+
+## 7.10 参数化装饰器
+
+
+###### to be finished
