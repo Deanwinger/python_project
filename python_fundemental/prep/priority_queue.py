@@ -36,6 +36,7 @@ class PrioQue(object):
 
 
 class PrioQueue(object):
+    """数字越小， 优先级越高"""
     def __init__(self, elist=[]):
         self._elems = list(elist)
         if elist:
@@ -50,7 +51,8 @@ class PrioQueue(object):
         return self._elems[0]
 
     def enqueue(self, e):
-        pass
+        self._elems.append(None)
+        self.siftup(e, len(self._elems)-1)
 
     def siftup(self, e, last):
         elems, i, j = self._elems, last, (last-1)//2
@@ -60,7 +62,14 @@ class PrioQueue(object):
         elems[i] = e
 
     def dequeue(self):
-        pass
+        if self.is_empty():
+            raise PrioQueueError("in dequeue")
+        elems = self._elems
+        e0 = elems[0]
+        e = elems.pop()
+        if len(elems) > 0:
+            self.siftdown(e, 0, len(elems))
+        return e0
 
     def siftdown(self, e, begin, end):
         elems, i, j = self._elems, begin, begin*2+1
@@ -94,7 +103,7 @@ def heap_sort(elems):
     for i in range(end//2, -1, -1):
         siftdown(elems, elems[i], i, end)
     for i in range((end-1), 0, -1):
-        e = elems[i]
+        e = elems[i] 
         elems[i] = elems[0]
         siftdown(elems, e, 0, i)
 
