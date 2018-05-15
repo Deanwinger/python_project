@@ -1,6 +1,8 @@
+from functools import reduce
+
+
 #题1, 把随机序列排序并去重，[1, 3, 4, 2, 3, 4] 
 #  转化为 [1, 2, 3, 4]，算出时间以及空间复杂度。
-
 class Solution(object):
     #方法1：Python内置方法
     def unique_and_sort_v0(self, alist):
@@ -21,11 +23,24 @@ class Solution(object):
 
 #题2,version0, 用一行python写出1+2+3+…+10**8 ;
 def get_sum():
-    sum(range(10**8))
+    return sum(range(10**8))
 
-#题2, version1, map, reduce 实现
+#题2 匿名函数对1~1000求和， version1, map, reduce 实现
+def get_sum_v1(alist):
+    return reduce(lambda x,y: x+y, alist) if alist else None
 
-#题2, version2, 生成器 yield 实现
+#题2, version2, 生成器 yield 实现(实现的很奇怪， 很丑)
+def get_sum_v2(alist):
+    sums = 0
+    def wrapper(alist):
+        n = len(alist)
+        while n > 0:
+            n -= 1
+            yield alist[n]
+    ret = wrapper(alist)
+    for i in ret:
+        sums += i
+    return sums
 
 #题3, 用递归的方式判断字符串是否为回文；
 def is_palindrome(string):
@@ -38,8 +53,37 @@ def is_palindrome(string):
     else:
         return False
 
+#题3, 就地检测；
+def is_palindrome_v1(string):
+    start = 0
+    end = len(string)-1
+    def wrapper(string, start, end):
+        # print(string)
+        if start >= end:
+            return True
+        
+        if string[start] == string[end] and start < end:
+            start += 1
+            end -= 1
+            return wrapper(string, start, end)
+        else:
+            return False
+    return wrapper(string, start, end)
+
+
 #题4. 如何遍历一个内部未知的文件夹（两种树的优先遍历方式）
 def travel_tree(node):
+    pass
+
+
+# 题5 求两个数组的差集（例如s1={"a","b","c","d","e"}, s2={"a","e","c"}, 结果应该为{"b","d"}）
+def get_single_one(s1, s2):
+    s1 = list(s1)
+    s2 = list(s2)
+    return [r for r in s1 if r not in s2] + [r for r in s2 if r not in s1]
+
+# 经典解法   
+def get_single_one_v1(s1, s2):
     pass
 
 
@@ -50,5 +94,11 @@ if __name__ == "__main__":
     a = '123454321'
     b = 'abcba'
     c = '5'
+    d = 'abcd'
     # print(is_palindrome(a))
-    print(is_palindrome(c))
+    # print(is_palindrome(c))
+    # get_sum_v2([1,2,3])
+    print(is_palindrome_v1(a))
+    print(is_palindrome_v1(b))
+    print(is_palindrome_v1(c))
+    print(is_palindrome_v1(d))
