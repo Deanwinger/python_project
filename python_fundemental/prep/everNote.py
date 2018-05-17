@@ -125,6 +125,13 @@ def the_parenthese_combination_v1(left, right, ret_buf):
     if right > 0:
         the_parenthese_combination_v1(left, right - 1, ret_buf + ")")
 
+# 题7 一个字符串表示IP地址，检测是否合法
+# leetcode 468
+
+
+# 题8  n个病人的看病时间，尽量平均的分给m个医生，求每个医生分的时间是多少；
+# ZOJ-3334 Body Check
+
 
 if __name__ == "__main__":
     # alist = [1, 3, 4, 2, 3, 4]
