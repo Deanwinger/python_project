@@ -74,16 +74,14 @@ def decorate_body_params(params_except=None, params_option=None):
             raise ExceptionResponse(401, "参数非法")
         try:
             for key, val in params_except.items():
-                # res = data[key].strip()
-                if not type_check(res, val):
+                if not type_check(data[key], val):
                     raise ExceptionResponse(401, "错误的参数类型")
-                g.params[key] = res
+                g.params[key] = data[key] if not isinstance(data[key], str) else data[key].strip()
         except KeyError:
             raise ExceptionResponse(401, "参数非法")
         return wrapped(*args, **kwargs)
 
     return decorated_function
 
-
-def type_check(obj, types):
-    return isinstance(obj, types)
+def type_check(obj, target_type):
+    return isinstance(obj, target_type)
