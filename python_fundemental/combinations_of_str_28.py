@@ -34,7 +34,7 @@ class Solution(object):
 
 
 if __name__ == '__main__':
-    ss = 'acbd'
+    ss = 'aabd'
     S = Solution()
     print(S.str_permutations(ss))
     # print(S.Permutation(ss))
