@@ -127,11 +127,109 @@ def the_parenthese_combination_v1(left, right, ret_buf):
 
 # 题7 一个字符串表示IP地址，检测是否合法
 # leetcode 468
+# Pv4 地址由十进制数和点来表示，每个地址包含4个十进制数，其范围为 0 - 255， 用(".")分割。比如，172.16.254.1；同时，IPv4 地址内的数不会以 0 开头。比如，地址 172.16.254.01 是不合法的。
+# IPv6 地址由8组16进制的数字来表示，每组表示 16 比特。这些组数字通过 (":")分割。比如,  2001:0db8:85a3:0000:0000:8a2e:0370:7334 是一个有效的地址。而且，我们可以加入一些以 0 开头的数字，字母可以使用大写，也可以是小写。所以， 2001:db8:85a3:0:0:8A2E:0370:7334 也是一个有效的 IPv6 address地址 (即，忽略 0 开头，忽略大小写)
+class Solution:
+    def validIPAddress(self, IP):
+        """
+        :type IP: str
+        :rtype: str
+        """
+        def IP4(s):
+            if s.count('.')!=3:
+                return False
+            items = s.split('.')
+            for item in items:
+                if not item4(item):
+                    return False
+            return True
+        def IP6(s):
+            if s.count(':')!=7:
+                return False
+            items = s.split(':')
+            for item in items:
+                if not item6(item):
+                    return False
+            return True
+        
+        def item4(item):
+            if not item:
+                return False
+            if item[0]=='0' and item!='0':
+                return False
+            for c in item:
+                if (not c>='0') or (not c<='9'):
+                    return False
+            return 0<=int(item)<=255
+            
+        def item6(item):
+            if not item or len(item)>4:
+                return False
+            item = item.lower()
+            for c in item:
+                if (not c>='0' or not c<='9') and (not c>='a' or not c<='f'):
+                    return False
+            return True
+            
+        
+        if IP.find('.')!=-1:
+            return 'IPv4' if IP4(IP) else 'Neither'
+        elif IP.find(':')!=-1:
+            return 'IPv6' if IP6(IP) else 'Neither'
+        return 'Neither'
 
 
 # 题8  n个病人的看病时间，尽量平均的分给m个医生，求每个医生分的时间是多少；
 # ZOJ-3334 Body Check
 
+
+# 题9 一个列表A=[A1，A2，…,An]，要求把列表中所有的组合情况打印出来
+# 适合醒瞌睡
+# 两种情况， 1、没有重复的， 2、有重复的
+def combination(alist):
+    if not alist:
+        return []
+    
+    if len(alist) == 1:
+        return list(alist)
+
+    rec = []
+    for i in range(len(alist)):
+        # print(alist[i]
+        # rec.append(list(alist[i]))
+        temp = combination(alist[:i] + alist[i+1:])
+        rec.append(list(alist[i]) + temp)
+    print(rec)
+    return rec    
+    
+
+# 题10， 字符串的排列, 写的稀糟的
+def permutation(strings):
+    """固定第一个，然后递归"""
+    n = len(strings)
+    if n <= 1:
+        return strings
+
+    rec = []
+    for i in range(n):
+        # print("*"*10,i)
+        s = ''.join(strings[:i]) + ''.join(strings[i+1:])
+        # print(s)
+        # print("="*20, s, "="*20, strings[i])
+        temp = strings[i] + permutation(s)
+        rec.append(temp)
+        print(rec)
+        # print(temp)
+    return temp
+
+
+[
+    ['a'], 
+    ['a', ['b'], ['b', 'c'], ['c'], ['c', 'b']], 
+    ['b'], 
+    ['b', ['a'], ['a', 'c'], ['c'], ['c', 'a']], 
+    ['c'], 
+    ['c', ['a'], ['a', 'b'], ['b'], ['b', 'a']]]
 
 if __name__ == "__main__":
     # alist = [1, 3, 4, 2, 3, 4]
@@ -149,4 +247,8 @@ if __name__ == "__main__":
     # print(is_palindrome_v1(c))
     # print(is_palindrome_v1(d))
     # print(the_parenthese_combination(3))
-    the_parenthese_combination_v1(4, 4, "")
+    # the_parenthese_combination_v1(4, 4, "")
+    strings = 'abc'
+    alist = ['a', 'b', 'c']
+    # permutation(strings)
+    combination(alist)
