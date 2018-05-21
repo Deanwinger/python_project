@@ -145,9 +145,12 @@ class LCList:
     def printall(self):
         if self.is_empty():
             return
-        p = self._rear.next
         while True:
             print(p.elem)
             if p is self._rear:
                 break
             p = p.next
+
+# 双链表类
+
+# 循环双链表类
