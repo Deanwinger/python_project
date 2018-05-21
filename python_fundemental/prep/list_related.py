@@ -1,7 +1,7 @@
 # 数据结构与算法分析 第三章 线性表
 
 # 自定义错误
-class LinkedListUnderFlow(ValueError):
+class LinkedListUnderflow(ValueError):
     pass
 
 # 定义节点
@@ -108,5 +108,46 @@ class LList1(LList):
         self._rear.next = LNode(elem)
         self._rear = self._rear.next
 
+# 循环单链表类
+class LCList:
+    def __init__(self):
+        self._rear = None
 
+    def is_empty(self):
+        return self._rear is None
     
+    def prepend(self, elem):
+        p = LNode(elem)
+        if self._rear is None:
+            p.next = p
+            self._rear = p
+        else:
+            p.next = self._rear.next
+            self._rear.next = p
+        return
+
+    def append(self, elem):
+        self.prepend(elem)
+        self._rear = self._rear.next
+    
+    # pop out head element
+    def pop(self):
+        if self._rear is None:
+            raise LinkedListUnderflow("empty link")
+
+        p = self._rear.next     
+        if self._rear is p:
+            self._rear = None
+        else:        
+            self._rear = self._rear.next.next
+        return p.elem
+
+    def printall(self):
+        if self.is_empty():
+            return
+        p = self._rear.next
+        while True:
+            print(p.elem)
+            if p is self._rear:
+                break
+            p = p.next
