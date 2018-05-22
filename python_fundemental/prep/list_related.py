@@ -145,6 +145,7 @@ class LCList:
     def printall(self):
         if self.is_empty():
             return
+        p = self._rear.next
         while True:
             print(p.elem)
             if p is self._rear:
