@@ -18,7 +18,7 @@ class DLNode(LNode):
 
 # 3.3 链接表
 
-# 1 单链表
+# 1. 单链表
 class LList:
     def __init__(self):
         self._head = None
@@ -73,9 +73,8 @@ class LList:
             p = p.next
         print('')
         
-
-
-# 带尾结点引用的单链表类, 初始化，涉及到表头， 表尾的都需要修改
+# 实用版
+# 2. 带尾结点引用的单链表类, 初始化，涉及到表头， 表尾的都需要修改
 class LList1(LList):
     def __init__(self):
         super().__init__()
@@ -114,8 +113,8 @@ class LList1(LList):
         self._rear.next = LNode(elem)
         self._rear = self._rear.next
 
-# 循环单链表类
-class LCList:
+# 3. 循环单链表类
+class CLList:
     def __init__(self):
         self._rear = None
 
@@ -124,6 +123,7 @@ class LCList:
     
     def prepend(self, elem):
         p = LNode(elem)
+        # 只有一个时， next指针指向自己
         if self._rear is None:
             p.next = p
             self._rear = p
@@ -145,7 +145,7 @@ class LCList:
         if self._rear is p:
             self._rear = None
         else:        
-            self._rear = self._rear.next.next
+            self._rear.next = p.next
         return p.elem
 
     def printall(self):
@@ -158,7 +158,7 @@ class LCList:
                 break
             p = p.next
 
-# 双链表类, 首尾指针
+# 4. 双链表类, 首尾指针
 class DLList(LList1):
     def __init__(self):
         super().__init__()
@@ -202,4 +202,59 @@ class DLList(LList1):
             self._rear.next = None
         return e
 
-# 循环双链表类
+# 5. 循环双链表类
+class CDLList(CLList):
+    def __init__(self):
+        super().__init__()
+
+    def prepend(self, elem):
+        if self._rear is None:
+            p = DLNode(elem, None, None)
+            self._rear = p
+        elif self._rear.next is None: # 只有一个节点
+            p = DLNode(elem, prev=self._rear, next=self._rear)
+            self._rear.prev = p
+            self._rear.next = p
+        else:
+            p = DLNode(elem, prev=self._rear, next=self._rear.next)
+            self._rear.next.prev = p
+            self._rear.next = p
+
+    # 同CLList
+    def append(self, elem):
+        self.prepend(elem)
+        self._rear = self._rear.next
+    
+    # pop out head element
+    def pop(self):
+        if self._rear is None:
+            raise LinkedListUnderflow("empty circular_double_link_list")
+
+        p = self._rear.next
+        if self._rear is p:
+            # 只有一个元素，弹出自身
+            self._rear = None
+        if p.next is self._rear:
+            # 只有两个元素
+            self._rear.prev = None
+            self._rear.next = None
+        else:
+            p.next.prev = self._rear
+            self._rear.next = p.next
+        return p.elem
+
+    # to be finished
+    def pop_last(self):
+        pass
+
+    def printall(self):
+        if self.is_empty():
+            return
+        p = self._rear.next
+        while True:
+            print(p.elem)
+            if p is self._rear:
+                break
+            p = p.next
+
+## 所有的接口都待测试
