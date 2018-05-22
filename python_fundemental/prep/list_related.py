@@ -4,11 +4,17 @@
 class LinkedListUnderflow(ValueError):
     pass
 
-# 定义节点
+# 定义单链表节点
 class LNode:
     def __init__(self, elem, next=None):
         self.elem = elem
         self.next = next
+
+# 双链表节点
+class DLNode(LNode):
+    def __init__(self, elem, prev=None, next=None):
+        super().__init__(elem, next)
+        self.prev = prev
 
 # 3.3 链接表
 
@@ -152,6 +158,48 @@ class LCList:
                 break
             p = p.next
 
-# 双链表类
+# 双链表类, 首尾指针
+class DLList(LList1):
+    def __init__(self):
+        super().__init__()
+    
+    def prepend(self, elem):
+        p = DLNode(elem, prev=None, next=self._head)
+        if self._head is None:
+            self._rear = p
+        else:
+            p.next.prev = p
+        self._head = p
+
+    def append(self, elem):
+        p = DLNode(elem, prev=self._rear, next=None)
+        if self._head is None:
+            self._head = p
+        else:
+            self._rear.next = p
+        self._rear = p
+
+    # 弹出首个节点
+    def pop(self):
+        if self._head is None:
+            raise LinkedListUnderflow("empty DLList")
+        e = self._head.elem
+        self._head = self._head.next
+        if self._head is None:
+            self._rear = self._head
+        else:
+            self._head.prev = None
+        return e
+
+    def pop_last(self):
+        if self._head is None:
+            raise LinkedListUnderflow("empty DLList")
+        e = self._rear.elem
+        self._rear = self._rear.prev
+        if self._rear is None:
+            self._head = self._rear
+        else:
+            self._rear.next = None
+        return e
 
 # 循环双链表类
