@@ -7,3 +7,6 @@ class StackUnderflow(ValueError):
 class QueueUnderflow(ValueError):
     pass
 
+# 链表下溢
+class LinkedListUnderflow(ValueError):
+    pass

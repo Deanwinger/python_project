@@ -1,8 +1,5 @@
 # 数据结构与算法分析 第三章 线性表
-
-# 自定义错误
-class LinkedListUnderflow(ValueError):
-    pass
+from exce
 
 # 定义单链表节点
 class LNode:
@@ -225,36 +222,64 @@ class CDLList(CLList):
         self.prepend(elem)
         self._rear = self._rear.next
     
-    # pop out head element
+    # pop out head element 错误版， 一个元素的时候prev 和 next都需要指向自己， 
+    # def pop(self):
+    #     if self._rear is None:
+    #         raise LinkedListUnderflow("empty circular_double_link_list")
+
+    #     p = self._rear.next
+    #     if self._rear is p:
+    #         # 只有一个元素，弹出自身
+    #         self._rear = None
+    #     if p.next is self._rear:
+    #         # 只有两个元素
+    #         self._rear.prev = None
+    #         self._rear.next = None
+    #     else:
+    #         p.next.prev = self._rear
+    #         self._rear.next = p.next
+    #     return p.elem
+
     def pop(self):
         if self._rear is None:
             raise LinkedListUnderflow("empty circular_double_link_list")
-
         p = self._rear.next
-        if self._rear is p:
-            # 只有一个元素，弹出自身
+        if self._rear is p: #只有一个元素时
             self._rear = None
-        if p.next is self._rear:
-            # 只有两个元素
-            self._rear.prev = None
-            self._rear.next = None
         else:
             p.next.prev = self._rear
             self._rear.next = p.next
         return p.elem
 
-    # to be finished
-    def pop_last(self):
-        pass
 
-    def printall(self):
-        if self.is_empty():
-            return
-        p = self._rear.next
-        while True:
-            print(p.elem)
-            if p is self._rear:
-                break
-            p = p.next
+    # pop out last element 错误版， 一个元素的时候prev 和 next都需要指向自己，
+    # def pop_last(self):
+    #     if self._rear is None:
+    #         raise LinkedListUnderflow("empty circular_double_link_list")
+    #     p = self._rear.prev
+    #     if self._rear is p: #只有一个元素
+    #         self._rear = None
+    #     elif p.next is self._rear: 
+    #         self._rear = self._rear.prev
+    #         self._rear.next = None
+    #         self._rear.prev = None
+    #     else:
+    #         self._rear.pre.next = self._rear.next
+    #         self._rear.next.prev = self._rear.prev
+    #         self._rear = self._rear.prev
+
+    def pop_last(self):
+        if self._rear is None:
+            raise LinkedListUnderflow("empty circular_double_link_list")
+
+        e = self._rear.elem
+        p = self._rear.prev
+        if self._rear is p: # 只有一个元素
+            self._rear = None
+        else:
+            self._rear.next.prev = p
+            p.next = self._rear.next
+            self._rear = p
+        return e
 
 ## 所有的接口都待测试
