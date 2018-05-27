@@ -10,3 +10,7 @@ class QueueUnderflow(ValueError):
 # 链表下溢
 class LinkedListUnderflow(ValueError):
     pass
+
+# 
+class BinTreeNodeError(ValueError):
+    pass

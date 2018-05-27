@@ -1,12 +1,16 @@
 """
  1.二叉树的遍历（深度， 广度遍历）
- 2.堆排序
+
  3.AVL Tree
  4.Red Black Tree
 """
 
+# 一、二叉树的list实现， to be finished
 
-rec = []
+
+
+# 二、二叉树的类实现
+
 #树节点
 class BinTNode(object):
     def __init__(self, value, left=None, right=None):
@@ -14,20 +18,39 @@ class BinTNode(object):
         self.left = left
         self.right = right
 
-#树的深度遍历
-# def high_rank(root):
-#     rec = []
-#     def pre_order(root):
-#         if not root:
-#             return
-#         # print(root.value)
-#         rec.append(root.value)
-#         pre_order(root.left)
-#         pre_order(root.right)
-#         return 
-#     pre_order(root)
-#     print(rec)
 
+class BinTree:
+    def __init__(self):
+        self._root = None
+
+    def is_empty(self):
+        return self._root is None
+    
+    def set_root(self, rootNode):
+        self._root = rootNode
+
+    def set_left(self, leftchild):
+        self._root.left = leftchild
+
+    def set_right(self, rightchild):
+        self._root.right = rightchild
+    
+    def root(self):
+        return self._root
+
+    def leftchild(self):
+        return self._root.left
+
+    def rightchild(self):
+        return self._root.right
+
+    def preorder_elements(self):
+        # to be finished
+        pass
+
+
+
+rec = []
 #树的先序遍历 --递归实现
 def pre_order(root, rec):
     if not root:
@@ -100,6 +123,9 @@ def levelorder(t, proc):
         q.enqueue(t.left)
         q.enqueue(t.right)
         proc(t.value, end=" ")
+
+
+
 
 if __name__== "__main__":
     t1 = BinTNode(1, BinTNode(2, BinTNode(3), BinTNode(4)), BinTNode(5))
