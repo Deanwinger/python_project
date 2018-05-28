@@ -4,11 +4,10 @@
  3.AVL Tree
  4.Red Black Tree
 """
+from stack_related import SStack
+
 
 # 一、二叉树的list实现， to be finished
-
-
-
 # 二、二叉树的类实现
 
 #树节点
@@ -46,9 +45,13 @@ class BinTree:
 
     def preorder_elements(self):
         # to be finished
-        pass
-
-
+        t, s = self._root, SStack()
+        while t or not s.is_empty():
+            while t:
+                s.push(t.right)
+                yield t.value
+                t = t.left
+            t = s.pop() 
 
 rec = []
 #树的先序遍历 --递归实现
@@ -88,7 +91,7 @@ def pre_order_nonrec(root, proc):
         root = s.pop()
 
 #二叉树的中序遍历 --非递归实现
-def in_order_nonrec(root, proc):
+def in_order_nonrec(t, proc):
     s = SStack()
     while t or not s.is_empty():
         while t:
