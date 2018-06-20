@@ -238,7 +238,17 @@ def permutation(strings):
 # 单向链表长度未知，如何判断其中是否有环；
 # 141. Linked List Cycle
 def has_circle(Node):
-    pass
+    if head is None or head.next is None:
+        return False
+    
+    slow = fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+        if slow == fast:
+            return True
+    return False
 
 
 
