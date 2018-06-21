@@ -237,7 +237,7 @@ def permutation(strings):
 # 题12
 # 单向链表长度未知，如何判断其中是否有环；
 # 141. Linked List Cycle
-def has_circle(Node):
+def has_circle(head):
     if head is None or head.next is None:
         return False
     
@@ -260,14 +260,15 @@ def has_circle(Node):
 # leetcode 142. Linked List Cycle II
 
 # 题14
-# 判断两个链表是否相交
+# 求环的长度，fast和low第一次相遇后，再继续，第二次相遇时，fast正好多走了一个环的长度
 
 # 题15
-# 单链表逆置
+# 判断两个链表是否相交
 
 # =====================================================================================================
 
 # 题目16
+# 单链表逆置
 
 # 题目17
 
