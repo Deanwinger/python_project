@@ -27,6 +27,24 @@ class Solution(object):
                 return head
         return head
 
+    # ac 通过
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return
+        p = head.next
+        head.next = None
+        while p:
+            temp = p.next
+            p.next = head
+            head = p
+            p = temp
+        return head
+
+
 
 if __name__=='__main__':
     node1 = ListNode(1)

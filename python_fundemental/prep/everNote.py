@@ -271,6 +271,7 @@ def has_circle(head):
 # 单链表逆置
 
 # 题目17
+# B树和B+树的区别（Python 数据结构与算法P312）
 
 # 题目18
 
