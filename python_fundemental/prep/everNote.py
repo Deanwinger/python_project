@@ -257,6 +257,7 @@ def has_circle(head):
 
 # 题13
 # 接上题，找到环的入口点
+# 由于fast移动步长为2，low移动步长为1，则在low进入环后继续绕环遍历一周之前fast必然能与low重合（且必然是第一次重合）
 # leetcode 142. Linked List Cycle II
 
 # 题14
