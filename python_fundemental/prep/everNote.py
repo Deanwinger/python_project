@@ -269,7 +269,22 @@ def has_circle(head):
 # =====================================================================================================
 
 # 题目16
+# leetcode 206
 # 单链表逆置
+
+def reverseList(self, head):
+    if not head or head.next is None:
+        return head
+    
+    fast = head.next
+    head.next = None
+    while fast:
+        temp = fast.next
+        fast.next = head
+        head = fast
+        fast = temp
+    return head
+
 
 # 题目17
 # B树和B+树的区别（Python 数据结构与算法P312）
