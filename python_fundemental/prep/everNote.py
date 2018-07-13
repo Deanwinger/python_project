@@ -298,6 +298,26 @@ def reverseList(self, head):
 # 题目21
 # =====================================================================================================
 
+# Memofibo
+
+# fibonacci 使用dict
+
+chart = {}
+
+def memofibo(n):
+    # Quiz
+    if n <= 2:
+        return 1
+        
+    if not chart.get(n-1, None):
+        chart[n-1] = memofibo(n-1)
+    
+    if not chart.get(n-2, None):
+        chart[n-2] = memofibo(n-2)
+    return chart[n-1] + chart[n-2]
+
+
+
 
 if __name__ == "__main__":
     # alist = [1, 3, 4, 2, 3, 4]
