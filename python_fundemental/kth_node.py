@@ -20,6 +20,7 @@ class ListNode:
         self.next = None
 
 class Solution(object):
+    # 输入一个链表，输出该链表中倒数第k个结点。
     def findKthNode(self, head, k):
         if k <= 0:
             return
@@ -35,14 +36,40 @@ class Solution(object):
             slow = slow.next
         return slow
 
+    # Remove Nth Node From End of List
+    def removeNthFromEnd(self, head, n):
+        """
+        Corner Case：
+        1. 只有一个输入时
+        2. 如果删除的节点是head节点
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        if head is None:
+            return
+        
+        dummy = fast = head
+        while fast:
+            # 此处用于防止传入的n参数大于链表长度
+            if fast.next is None and n != 1:
+                raise Exception("错误的参数")
+                
+            if n == 1:
+                break
+                
+            fast = fast.next
+            n -= 1  
+             
+        while fast.next:      
+            temp = head
+            fast = fast.next
+            head = head.next
+            if fast.next is None:
+                temp.next = head.next
+        return dummy if dummy is not head else dummy.next
+        
+
 
 if __name__=='__main__':
-    node1 = ListNode(10)
-    node2 = ListNode(11)
-    node3 = ListNode(13)
-    node1.next = node2
-    node2.next = node3
-
-    S = Solution()
-    # print(S.findKthNode(node1, 1).val)
-    print(S.findKthNode(node1, 1).val)
+    pass
