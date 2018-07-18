@@ -44,6 +44,16 @@ class Solution(object):
             p = temp
         return head
 
+    # leetcode 92 to be finished
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        pass
+
 
 
 if __name__=='__main__':
