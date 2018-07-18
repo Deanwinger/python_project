@@ -16,6 +16,7 @@ class TreeNode(object):
         return  False if self.val is None else True
 
 class Solution(object):
+    # 解法一
     def find_subtree(self, s, t):
         """
         :type s: TreeNode
@@ -42,6 +43,36 @@ class Solution(object):
         return self.s_includes_t(s.left, t.left,) and \
                 self.s_includes_t(s.right, t.right)
 
+    
+    # 解2
+    def isSubtree(self, s, t):
+        """
+        :type s: TreeNode
+        :type t: TreeNode
+        :rtype: bool
+        """
+        result = False
+        
+        if s.val == t.val:
+            result = self.is_included(s, t)
+        if not result:
+            result = self.isSubtree(s.left, t)
+        if not result:
+            result = self.isSubtree(s.right, t)
+        return result
+
+    def is_included(self, s, t):
+        # 中止条件
+        if t is None:
+            return True
+
+        if s is None:
+            return False
+
+        if s.val != t.val:
+            return False
+
+        return self.is_included(s.left, t.left) and self.is_included(s.right, t.right)
 
 
 
