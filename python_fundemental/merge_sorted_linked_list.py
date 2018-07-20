@@ -27,7 +27,7 @@ class Solution(object):
         return head
 
     def mergeLinkList(self, l1, l2):
-        #非递归实现
+        #非递归实现, 非常cool
         dummy = cur = ListNode(0)
         while l1 and l2:
             if l1.val < l2.val:
