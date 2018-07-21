@@ -7,7 +7,7 @@
 '''
 
 #题23
-# leetcode 102, 103, 107类似
+# leetcode 102, 103, 107类似, 未解决
 
 class TreeNode:
     def __init__(self, x=None):
@@ -33,6 +33,20 @@ class Solution(object):
             myqueue.pop(0)
         return result
 
+    def levelOrder(self, root):
+        """诀窍在每次将队列的Node弹出来时， 在将左右节点推入队列"""
+        queue = []
+        queue.append(root)
+        while queue:
+            node = queue.pop(0)
+            print(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return 
+
+
 
 
             
@@ -53,6 +67,9 @@ if __name__ == '__main__':
     pNode3.right = pNode7
 
     S = Solution()
-    print(S.PrintFromTopToBottom(pNode1))
+    # print(S.PrintFromTopToBottom(pNode1))
+    print(S.levelOrder(pNode1))
 
-    
+    #          8
+    #     6        10
+    #  5    7    9    11
