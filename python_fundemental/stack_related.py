@@ -25,8 +25,26 @@ class Solution(object):
         else:
             return False
 
-
-
+class StackSquence(object):
+    """
+    思路： array1先压栈，碰到与array2第一个数字相同的时候开始pop， 
+    当stack顶上元素与array2首元素相同时，持续pop， 否则继续压入元素， 
+    知道stack顶上元素与array2的首元素相同
+    """
+    def stack_sequence(self, array1, array2):
+        if not array1 and not array2:
+            return True
+        
+        stack = []
+        for elem in array1:
+            stack.append(elem)
+            while len(stack) != 0 and stack[-1] == array2[0]:
+                stack.pop()
+                array2.pop(0)
+        if len(stack) == len(array2) == 0:
+            return True
+        return False
+            
 
         
 
@@ -39,8 +57,13 @@ if __name__ == '__main__':
     popVF = [4, 5, 2, 1, 3]
     ops = [1,2,3,4,5]
     S = Solution()
+    # S = StackSquence()
     print(S.stack_order(pushV, popV))
     print(S.stack_order(pushV, popVF))
     print(S.stack_order(pushV, ops))
     print(S.stack_order(a, b))
 
+    # print(S.stack_sequence(pushV, popV))
+    # print(S.stack_sequence(pushV, popVF))
+    # print(S.stack_sequence(pushV, ops))
+    # print(S.stack_sequence(a, b))
