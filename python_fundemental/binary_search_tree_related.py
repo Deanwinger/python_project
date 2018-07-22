@@ -10,7 +10,8 @@
 
 class Solution(object):
     def VerifySquenceOfBST(self, array):
-        #这个终止判断条件有点奇怪
+        """此方法是通过每次得到一颗子树， 遍历slice（子树），比较与root的大小"""
+        #   这个终止判断条件有点奇怪
         if not array or len(array)==1:
             return True
 
@@ -30,11 +31,57 @@ class Solution(object):
         right = self.VerifySquenceOfBST(array[i:end-1])
         return left & right
 
+    def is_bstree(self, array):
+        """
+        此方法是： 每次得到一个根节点， 然后比较root 的左子节点和右子节点， 
+        如果出现违规就return False"""
+        if array == [] or len(array)==1:
+            return True
+
+        root = array[-1]
+
+        i = 0
+        while array[i] < root:
+            i += 1
+        
+        left_tree = array[:i]
+        right_tree = array[i:-1]
+
+        if left_tree:
+            if root < left_tree[-1]:
+                return False
+
+        if right_tree:
+            if root > right_tree[-1]:
+                return False
+
+        # 左子树
+        left = self.is_bstree(left_tree)
+
+        # 右子树
+        right = self.is_bstree(right_tree)
+
+        return left and right
+
+
 if __name__=='__main__':
-    # array = [5, 7, 6, 9, 11, 10, 8]
-    # array = [7, 4, 6, 5]
-    array = [4, 6, 7, 5]
-    # array3 = [1, 2, 3, 4, 5]
+    array1 = [5, 7, 6, 9, 11, 10, 8]
+    array2 = [7, 4, 6, 5]
+    array3 = [4, 6, 7, 5]
+    array4 = [1, 2, 3, 4, 5]
     S = Solution()
-    print(S.VerifySquenceOfBST(array))
+    print(S.VerifySquenceOfBST(array1))
+    print(S.is_bstree(array1))
+    print("="*30)
+
+    print(S.VerifySquenceOfBST(array2))
+    print(S.is_bstree(array2))
+    print("="*30)
+
+    print(S.VerifySquenceOfBST(array3))
+    print(S.is_bstree(array3))
+    print("="*30)
+
+    print(S.VerifySquenceOfBST(array4))
+    print(S.is_bstree(array4))
         
