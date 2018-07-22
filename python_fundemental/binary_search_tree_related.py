@@ -9,6 +9,7 @@
 #LeetCode 类似题98， 145
 
 class Solution(object):
+    # 解法1
     def VerifySquenceOfBST(self, array):
         """此方法是通过每次得到一颗子树， 遍历slice（子树），比较与root的大小"""
         #   这个终止判断条件有点奇怪
@@ -31,6 +32,7 @@ class Solution(object):
         right = self.VerifySquenceOfBST(array[i:end-1])
         return left & right
 
+    # 解法2， by self
     def is_bstree(self, array):
         """
         此方法是： 每次得到一个根节点， 然后比较root 的左子节点和右子节点， 
