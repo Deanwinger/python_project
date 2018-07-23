@@ -13,6 +13,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
+# 这个题目值得反复回味
 class Solution:
     """二叉树的先序遍历相关"""
     def pathSum(self, root, sum):
