@@ -14,6 +14,7 @@ class TreeNode:
         self.right = None
 
 class Solution:
+    """二叉树的先序遍历相关"""
     def pathSum(self, root, sum):
         """
         :type root: TreeNode
