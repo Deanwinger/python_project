@@ -20,9 +20,25 @@ class Solution:
         :type sum: int
         :rtype: List[List[int]]
         """
-        if root.left is None and root.right is None:
-            #叶子节点
-            if 
+        if root is None:
+            return []
+        
+        sum -= root.val
+        stack = []
+
+        if sum == 0 and root.left is None and root.right is None:
+            return [[root.val]]
+        
+        leftStack = self.pathSum(root.left, sum)
+        for i in leftStack:
+            i.insert(0, root.val)
+            stack.append(i)
+            
+        rightStack = self.pathSum(root.right, sum)
+        for i in rightStack:
+            i.insert(0, root.val)
+            stack.append(i)
+        return stack
 
 
 if __name__=='__main__':
