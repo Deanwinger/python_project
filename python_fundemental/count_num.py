@@ -52,6 +52,7 @@ class Solution:
 
     def searchRange(self, data, k):
         """
+        二分法的应用
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
