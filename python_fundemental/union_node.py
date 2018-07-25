@@ -14,6 +14,7 @@ class ListNode:
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         """
+        思路，先遍历， 判断哪家长， 长的先走几步
         :type head1, head1: ListNode
         :rtype: ListNode
         """
