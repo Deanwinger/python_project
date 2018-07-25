@@ -7,7 +7,7 @@
 """
 
 # 题28
-
+# 此处还有立方体问题， 八皇后问题 to be finished
 
 
 # leetcode 46. Permutations
