@@ -28,7 +28,7 @@ class Solution:
             return 0
         return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
-# 题目2 leetcode 110. Balanced Binary Tree
+# 拓展 leetcode 110. Balanced Binary Tree
 '''
 输入一棵二叉树，判断该二叉树是否是平衡二叉树。
 '''
@@ -61,3 +61,7 @@ class Solution:
         right = self.maxDepth(root.right)
         return max(left + 1, right + 1)
 
+
+    def is_balanced(self, root):
+        """解法2： 使用后序遍历来实现"""
+        pass
