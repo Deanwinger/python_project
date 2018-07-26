@@ -1,5 +1,6 @@
 # leetcode 460. LFU Cache
 
+# 题52
 
 class LFUCache:
 
