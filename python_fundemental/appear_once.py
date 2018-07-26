@@ -9,6 +9,7 @@
 class Solution:
     def singleNumber(self, nums):
         """
+        主要用到了位技巧
         :type nums: List[int]
         :rtype: int
         """
