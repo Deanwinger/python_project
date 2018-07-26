@@ -8,7 +8,7 @@
 # leetcode 263. Ugly Number
 
 class Solution:
-    def isUgly(self, num):
+    def is_ugly(self, num):
         """
         :type num: int
         :rtype: bool
