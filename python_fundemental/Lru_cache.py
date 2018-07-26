@@ -1,5 +1,7 @@
 # leetcode 146. LRU Cache
 
+# 题51
+
 class LRUCache:
 
     def __init__(self, capacity):
