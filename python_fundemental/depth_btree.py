@@ -23,6 +23,10 @@ class Solution:
         right = self.maxDepth(root.right)
         return max(left + 1, right + 1)
 
+    def max_depth(self, root):
+        if root is None:
+            return 0
+        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 # 题目2 leetcode 110. Balanced Binary Tree
 '''
