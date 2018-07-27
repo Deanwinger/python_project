@@ -6,56 +6,27 @@
 # leetcode 105
 #关键在于递归遍历， 关键点就在于找到根节点， 然后对于每个子树，都用找根节点确定左右子树的方式递归的进行下去
 
+# 题 6
+
 class Node(object):
     def __init__(self, value):
         self.value = value
         self.left = None
         self.right = None
 
-# bug版
-# def btree_rebuild(pre_list, mid_list):
-#     if (not pre_list) or (not mid_list):
-#         return None
+class Solution:
+    def reConstructBinaryTree(self, pre, tin):
+        if not pre and not tin:
+            return None
 
-#     root = Node(pre_list[0])
-#     if len(pre_list) == 1:
-#         return 
-#     for i in range(len(mid_list)):
-#         if root == mid_list[0]:
-#             #只有右子树
-#             root.right = Node(pre_list[i+1])
-#             btree_rebuild(pre_list[1:], mid_list[1:])
-#         elif root == mid_list[len(pre_list)-1]:
-#             #只有左子树
-#             root.left = Node(pre_list[1])
-#             btree_rebuild(pre_list[1:], mid_list[:len(pre_list)-1])
-#         else:
-#             #左右都有
-#             root.left = Node(pre_list[1])
-#             root.right = Node(pre_list[i+1])
+        if set(pre) != set(tin):
+            return None
 
-#             l_pre_list = pre_list[1:i+1]
-#             l_mid_list = mid_list[:i]
-#             left_tree = btree_rebuild(pre_list, mid_list)
-
-#             r_pre_list = pre_list[i+1:]
-#             r_mid_list = mid_list[i+1:]
-#             right_tree = btree_rebuild(pre_list, mid_list)
-    
-#     return pre_list[0]
-
-def reConstructBinaryTree(pre, tin):
-    if not pre and not tin:
-        return None
-
-    if set(pre) != set(tin):
-        return None
-
-    root = Node(pre[0])
-    i = tin.index(pre[0])
-    root.left = reConstructBinaryTree(pre[1:i+1], tin[:i])
-    root.right = reConstructBinaryTree(pre[i+1:], tin[i+1:])
-    return root
+        root = Node(pre[0])
+        i = tin.index(pre[0])
+        root.left = reConstructBinaryTree(pre[1:i+1], tin[:i])
+        root.right = reConstructBinaryTree(pre[i+1:], tin[i+1:])
+        return root
         
 
     
