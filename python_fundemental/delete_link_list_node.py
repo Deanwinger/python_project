@@ -3,7 +3,7 @@
 '''
 #题13
 
-#；leetcode 237 本题的简略版， 不虚考链表最后一个节点问题
+#leetcode 237 简化版
 
 class ListNode:
     def __init__(self, x=None):
