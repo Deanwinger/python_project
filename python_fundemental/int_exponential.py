@@ -17,7 +17,7 @@
 优化代码速度
 '''
 #leetcode 题50
-#题11
+#题11, 非常精妙的解法
 
 class Solution(object):
     def Power(self, base, exponential):
@@ -34,7 +34,7 @@ class Solution(object):
         if exponential == -1:
             return 1/base
         
-        result = self.Power(base, exponential>>1)
+        result = self.Power(base, exponential>>1) # 右移代表除2
         result *= result
         if exponential%2 == 1:
             result *= base 
