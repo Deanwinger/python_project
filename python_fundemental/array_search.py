@@ -13,6 +13,8 @@
 以右上角第一个数（良好的性质， 比下小， 比左大）为参考
 '''
 
+# 题3 leetcode 74. Search a 2D Matrix
+
 def find_exact_one(matrix, target):
     #情形一：matrix=[]
     if not matrix:
