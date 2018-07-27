@@ -4,6 +4,7 @@
 '''
 
 # 题12
+
 #此方法最多只能打印到996， 超过即会报 RecursionError: maximum recursion depth exceeded in comparison
 def numbersByRecursion(n,largest,result):
     def recursion(num,largest,result):
@@ -61,7 +62,8 @@ class Solution(object):
                 print('%c' % number[i], end='')
         print('')
 
-#自己的程序
+# 反复研究
+# 自己的程序
 class Solution2(object):
     def printNBits(self, n):
         number = ['0']*n
