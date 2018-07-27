@@ -5,6 +5,8 @@ n<=39
 #fibonacci 数列: 1,1,2,3,5,8,13,21......
 from datetime import datetime
 
+# 题9
+
 #此方法, 计算fibonacci(40) 需24.902843952178955秒
 def fibonacci(n):
     if n <= 0:
@@ -14,6 +16,7 @@ def fibonacci(n):
     return fibonacci(n-1) + fibonacci(n-2)
 
 def fibonacci_by_rec(n):
+    """青蛙跳同理"""
     if n <= 2:
         return 1
     temp = [1, 1]
