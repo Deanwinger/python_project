@@ -4,6 +4,9 @@
 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。
 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 '''
+
+# 题8
+
 #leetcode 153
 #特例: [1,0,1,1,1,1], [1,1,1,1,0,1]
 #关键在停止条件, start指针和end指针相邻时, 停止
@@ -11,12 +14,15 @@ NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
 
 class Solution(object):
     def findMin(self, nums):
-        if len(nums) == 0:
-            return 0
+        if not nums:
+            return 
+        # part 1    
         start = 0
         end = len(nums)-1
         if nums[start] < nums[end]:  #关键点2, 表示是顺序
             return nums[0]
+
+        # part 2
         while end-start != 1:
             mid = (start+end) // 2
             if nums[start] == nums[end] == nums[mid]:
@@ -27,6 +33,7 @@ class Solution(object):
                 end = mid
         return nums[end]
 
+    # part 3
     def minInOrder(self, nums):
         min = nums[0]
         for i in nums:
