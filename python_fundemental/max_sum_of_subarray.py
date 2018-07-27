@@ -6,7 +6,7 @@
 
 
 #leetcode 53. Maximum Subarray
-#题31 教训
+#题31 
 
 
 class Solution(object):
@@ -27,6 +27,31 @@ class Solution(object):
         return nGreatestSum
     
 
+
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        有思路之后很简单
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return
+        
+        max_sum = nums[0]
+        cur_sum = 0
+        length = len(nums)
+        i = 0
+        while i < length:
+            cur_sum += nums[i]
+            
+            if cur_sum > max_sum:
+                max_sum = cur_sum
+            
+            if cur_sum < 0:
+                cur_sum = 0
+            i += 1
+        return max_sum
 
 if __name__=='__main__':
     array = [-2,1,-3,4,-1,2,1,-5,4]
