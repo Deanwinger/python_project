@@ -9,7 +9,23 @@
 
 #### **2. 可变与不可变类型**
 
-- 
+- 可变: 
+    - list, dict, 如果要进一步, bytearray,memoryview, array.array, collection.deque(待了解)
+    ~~~
+        dict 的变种(Fluent Python 3.5):
+            (1). collections.OrderedDict: 这个类型在添加键的时候会保持顺序
+
+            (2). collections.ChainMap: 该类型可以容纳数个不同的映射对象,然后在进行键查找操作的时候,
+                 这些对象会被当作一个整体被逐个查找,直到键被找到为止。
+
+            (3). collections.Counter: 这个映射类型会给键准备一个整数计数器。每次更新一个键的时候
+                 都会增加这个计数器。所以这个类型可以用来给可散列表对象计数.
+
+            (4). colllections.UserDict: 这个类其实就是把标准 dict 用纯 Python 又实现了一遍, UserDict 是让用户继承写子类的
+    ~~~
+
+- 不可变:
+    - tuple, str, bytes
 
 #### **3. Python是如何进行内存管理的**
 
@@ -52,23 +68,110 @@
     3，对于Python对象，如整数，浮点数和List，都有其独立的私有内存池，对象间不共享他们的内存池。也就是说如果你分配又释放了大量的整数，用于缓存这些整数的内存就不能再分配给浮点数。
 ~~~
 
-#### **4. range()函数**
+#### **4. 可迭代对象, 迭代器, 生成器**
 
-- iterator
+`Fluent Python 第14章: 可迭代的对象, 迭代器和生成器`
 
-#### **5. 以装饰器的方式实现单例模式,使用装饰器的单例和使用其他方法的单例，在后续使用中，有何区别**
+- 迭代是数据处理的基石
 
-#### **6. 以装饰器的方式实现单例模式**
+>1. 可迭代对象
+- 使用 iter 内置函数可以获取迭代器的对象。如果对象实现了能返回迭代器的 __iter__ 方法,那么对象就是可迭代的。序列都可以迭代;实现了 __getitem__ 方法,而且其参数是从零开始的索引,这种对象也可以迭代。
+~~~
+序列可以迭代的原因:
+    iter函数,解释器需要迭代对象 x 时,会自动调用 iter(x), 内置的 iter 函数有以下作用:
+        (1) 检查对象是否实现了 __iter__ 方法,如果实现了就调用它,获取一个迭代器。
+        (2) 如果没有实现 __iter__ 方法,但是实现了 __getitem__ 方法,Python 会创建一个迭代器,
+            尝试按顺序(从索引 0 开始)获取元素。
+        (3) 如果尝试失败,Python 抛出 TypeError 异常,会提示“C object is not iterable”(C 对象不可迭代),
+            其中 C 是目标对象所属的类。
+~~~
+
+>2. 迭代器
+- 可迭代的对象和迭代器之间的关系:Python 从可迭代对象中获取迭代器。
+
+- 迭代器:实现了无参数的 __next__ 方法,返回序列中的下一个元素;如果没有元素了,那么抛出 StopIteration 异常。Python 中的迭代器还实现了 __iter__ 方法,因此迭代器也可以迭代。
+~~~
+    标准的迭代器接口有两个方法。
+        __next__
+        返回下一个可用的元素,如果没有元素了,抛出 StopIteration异常;
+
+        __iter__
+        返回 self,以便在应该使用可迭代对象的地方使用迭代器,例如在 for 循环中;
+~~~
+
+>3. 生成器
+- Python有两种不同的方式提供生成器:
+~~~
+    1. 生成器表达式
+    2. 生成器函数: 使用 yield 关键字的函数或方法; 调用生成器函数返回的是生成器对象; 跟普通函数不同的是，生成器只能用于迭代操作;
+
+    - 根据我的经验,选择使用哪种句法:如果生成器表达式要分成多行写,我倾向于定义生成器函数,以便提高可读性。此外,生成器函数有名称,因此可以重用。
+~~~
+- 语法解释
+~~~
+    (1). 语法上和函数类似：生成器函数和常规函数几乎是一样的。它们都是使用def语句进行定义，差别在于，
+         生成器使用yield语句返回一个值，而常规函数使用return语句返回一个值
+    (2). 自动实现迭代器协议：对于生成器，Python会自动实现迭代器协议，以便应用到迭代背景中（如for循环）。
+         由于生成器自动实现了迭代器协议，所以，我们可以调用它的next方法，在没有值可以返回的时候，生成器自动产生StopIteration异常状态
+    (3). 挂起：生成器使用yield语句返回一个值。yield语句挂起该生成器函数的状态，保留足够的信息，
+         以便之后从它离开的地方继续执行
+~~~
+#### **5. 介绍下装饰器**
+`Fluent Python 第七章`
+
+#### **6. 以装饰器的方式实现单例模式,使用装饰器的单例和使用其他方法的单例，在后续使用中，有何区别**
 
 #### **7. 写一个简单的python socket编程**
+~~~
+# 首先，创建一个基于IPv4和TCP协议的Socket：
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# 监听端口,小于1024的端口号必须要有管理员权限才能绑定：
+s.bind(('127.0.0.1', 9999))
+
+#紧接着，调用listen()方法开始监听端口，传入的参数指定等待连接的最大数量：
+s.listen(5)
+print('Waiting for connection...')
+
+#接下来，服务器程序通过一个永久循环来接受来自客户端的连接，accept()会等待并返回一个客户端的连接:
+while True:
+    # 接受一个新连接:
+    sock, addr = s.accept()
+    # 创建新线程来处理TCP连接:
+    t = threading.Thread(target=tcplink, args=(sock, addr))
+    t.start()
+
+# 每个连接都必须创建新线程（或进程）来处理，否则，单线程在处理连接的过程中，无法接受其他客户端的连接：
+def tcplink(sock, addr):
+    print('Accept new connection from %s:%s...' % addr)
+    sock.send(b'Welcome!')
+    while True:
+        data = sock.recv(1024)
+        time.sleep(1)
+        if not data or data.decode('utf-8') == 'exit':
+            break
+        sock.send(('Hello, %s!' % data.decode('utf-8')).encode('utf-8'))
+    sock.close()
+    print('Connection from %s:%s closed.' % addr)
+
+~~~
 
 #### **8. 浅拷贝与深拷贝**
+`Fluent Python第八章`
 
-#### **9. 列表推导list comprehension和生成器的优劣**
+#### **9. 列表推导和生成器的优劣**
 
-#### **10. 介绍下装饰器**
+- 列表推导式一次性产生全部需要的值;
+- 生成式是惰性求值, 而且只遍历一遍;
+
+#### **10. **
+
 
 #### **11. 介绍下协程，为何比线程还快**
+- 协程就是一种用户态内的上下文切换技术
+- 协程使用生成器函数定义:定义体中有 yield 关键字
+- to be finished
 
 #### **12. 强类型/弱类型和静态类型/动态类型**
 
@@ -76,98 +179,231 @@
 
 #### **14. python最常见的解释器**
 
-#### **15. python中map、filter的使用**
+#### **15. python中map, filter, reduce的使用**
+
+- 在 Python 3 中,map 和 filter 都是内置函数, 返回生成器(一种迭代器),但是由于引入了列表推导和生成器表达式,它们变得没那么重要了。列表推导或生成器表达式具有 map 和 filter 两个函数的功能
+~~~
+    map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。
+
+    和map()类似，filter()也接收一个函数和一个序列。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
+~~~
+
+- reduce
+~~~
+    1. 在 Python 2 中,reduce 是内置函数,但是在 Python 3 中放到functools 模块里了,reduce() 函数的第一个参数是接受两个参数的函数,第二个参数是一个可迭代的对象。假如有个接受两个参数的 fn 函数和一个 lst 列表。调用reduce(fn, lst) 时,fn 会应用到第一对元素上,即 fn(lst[0], lst[1]),生成第一个结果 r1。然后,fn 会应用到 r1 和下一个元素上,即 fn(r1, lst[2]),生成第二个结果 r2。接着,调用 fn(r2,lst[3]),生成 r3......直到最后一个元素,返回最后得到的结果 rN
+
+    2. 使用reduce函数时最好提供第三个参数,reduce(function, iterable, initializer),这样能避免这个异常:TypeError: reduce() of empty sequence with no initial value(这个错误消息很棒,说明了问题,还提供
+    了解决方法)。如果序列为空,initializer 是返回的结果;否则,在归约中使用它作为第一个参数,因此应该使用恒等值。
+    比如,对 +、| 和 ^ 来说, initializer 应该是 0;而对 * 和 & 来说,应该是 1。
+~~~
 
 #### **16. 知道GIL的限制以及与多线程的关系**
+`廖雪峰`
+`Fluent Python 17.2 阻塞型I/O和GIL`
+`Fluent Python 17.5.3 线程和多进程的替代方案`
 
 #### **17. python中dict的底层实现，以及与OrderDict的关系, dict和UserDict的关系，为什么有UserDict的存在**
+`Fluent Python 3.9--dict和set的背后`
 
 #### **18. python多继承的查找规则（MRO）**
+`Fluent Python 第12章--继承的优缺点`
 
 #### **19. property的含义以及其描述器实现**
+`Fluent Python 19.2`
 
 #### **20. __slots__的含义以及使用场景**
+`to be finished`
+- 默认情况下,Python 在各个实例中名为 __dict__ 的字典里存储实例属性。如 3.9.3 节所述,为了使用底层的散列表提升访问速度,字典会消耗大量内存。如果要处理数百万个属性不多的实例,通过 __slots__类属性,能节省大量内存,方法是让解释器在元组中存储实例属性,而不用字典。
+
+~~~
+    tips:
+        1. 继承自超类的 __slots__ 属性没有效果。Python 只会使用各个类中定义的 __slots__ 属性;
+~~~
 
 #### **21. 如何定义和使用元类，了解其使用场景**
+`http://blog.jobbole.com/21351/`
 
 #### **22. python中type和object之间的关系**
 
 #### **23. python中的打包方式（setup.py）**
+`Python高级编程 第五章--编写一个包`
 
 #### **24. PEP8常见的范式,至少列举5个**
+- Style Guide for Python Code
+~~~
+    一 代码编排
+        1 缩进。4个空格的缩进（编辑器都可以完成此功能），不使用Tap，更不能混合使用Tap和空格。
+        2 每行最大长度79，换行可以使用反斜杠，最好使用圆括号。换行点要在操作符的后边敲回车。
+        3 类和top-level函数定义之间空两行；类中的方法定义之间空一行；函数内逻辑无关段落之间空一行；其他地方尽量不要再空行。
+
+    二 文档编排
+        1 模块内容的顺序：模块说明和docstring—import—globals&constants—其他定义。其中import部分，又按标准、三方和自己编写顺序依次排放，之间空一行。
+        2 不要在一句import中多个库，比如import os, sys不推荐。
+        3 如果采用from XX import XX引用库，可以省略‘module.’，都是可能出现命名冲突，这时就要采用import XX。
+
+    三 空格的使用
+        总体原则，避免不必要的空格。
+        1 各种右括号前不要加空格。
+        2 逗号、冒号、分号前不要加空格。
+        3 函数的左括号前不要加空格。如Func(1)。
+        4 序列的左括号前不要加空格。如list[2]。
+        5 操作符左右各加一个空格，不要为了对齐增加空格。
+        6 函数默认参数使用的赋值符左右省略空格。
+        7 不要将多句语句写在同一行，尽管使用‘；’允许。
+        8 if/for/while语句中，即使执行语句只有一句，也必须另起一行。
+
+    四 注释
+        总体原则，错误的注释不如没有注释。所以当一段代码发生变化时，第一件事就是要修改注释！
+        注释必须使用英文，最好是完整的句子，首字母大写，句后要有结束符，结束符后跟两个空格，开始下一句。如果是短语，可以省略结束符。
+        1 块注释，在一段代码前增加的注释。在‘#’后加一空格。段落之间以只有‘#’的行间隔。比如：
+        # Description : Module config.
+        # 
+        # Input : None
+        #
+        # Output : None
+        2 行注释，在一句代码后加注释。比如：x = x + 1	# Increment x
+        但是这种方式尽量少使用。
+        3 避免无谓的注释。
+
+    五 文档描述
+        1 为所有的共有模块、函数、类、方法写docstrings；非共有的没有必要，但是可以写注释（在def的下一行）。
+        2 如果docstring要换行，参考如下例子,详见PEP 257
+        """Return a foobang
+
+        Optional plotz says to frobnicate the bizbaz first.
+
+        """
+
+    六 命名规范
+        总体原则，新编代码必须按下面命名风格进行，现有库的编码尽量保持风格。
+        1 尽量单独使用小写字母‘l’，大写字母‘O’等容易混淆的字母。
+        2 模块命名尽量短小，使用全部小写的方式，可以使用下划线。
+        3 包命名尽量短小，使用全部小写的方式，不可以使用下划线。
+        4 类的命名使用CapWords的方式，模块内部使用的类采用_CapWords的方式。
+        5 异常命名使用CapWords+Error后缀的方式。
+        6 全局变量尽量只在模块内有效，类似C语言中的static。实现方法有两种，一是__all__机制;二是前缀一个下划线。
+        7 函数命名使用全部小写的方式，可以使用下划线。
+        8 常量命名使用全部大写的方式，可以使用下划线。
+        9 类的属性（方法和变量）命名使用全部小写的方式，可以使用下划线。
+        9 类的属性有3种作用域public、non-public和subclass API，可以理解成C++中的public、private、protected，non-public属性前，前缀一条下划线。
+        11 类的属性若与关键字名字冲突，后缀一下划线，尽量不要使用缩略等其他方式。
+        12 为避免与子类属性命名冲突，在类的一些属性前，前缀两条下划线。比如：类Foo中声明__a,访问时，只能通过Foo._Foo__a，避免歧义。如果子类也叫Foo，那就无能为力了。
+        13 类的方法第一个参数必须是self，而静态方法第一个参数必须是cls。
+~~~
 
 #### **25. 鸭子类型（duck typing）的含义与其在python中的表现形式**
+`Fluent Python 10.3 协议和鸭子类型`
 
-#### **26. asyncio的使用方式和使用场景**
+#### **26. **
 
 #### **27. WSGI协议是什么**
 
 #### **28. 如何利用collections，itertools，operator等模块来高效地操作容器对象。**
+`问题太大, pass`
 
 #### **29. python中序列化的常用库和接口（json，pickle）**
+`廖雪峰 + Python 参考手册`
 
 #### **30. StringIO和BytesIO的用途。**
+`廖雪峰`
 
 #### **31. 单下划线开头、双下划线开头和双下划线包围的变量分别代表着什么含义**
+`Fluent Python 9.7 Python的私有属性和“受保护的”属性`
 
 #### **32. __init__和__new__方法在class和type中分别的作用是什么**
 
 #### **33. 类变量和实例变量的区别**
 
 #### **34. __dict__在类中的含义，以及类属性和方法与__dict__的关系**
+`Fluent Python 5.6 函数内省`
 
-#### **35. python中生成器的实现以及其使用场景**
+#### **35. **
 
 #### **36. python中抽象类的实现方式，以及其抽象基类模块，如何用python类实现一个抽象容器类型。**
+`Fluent Python 第 11 章`
 
 #### **37. classmethod和staticmethod的区别**
+`Fluent Python 9.4 classmethod与staticmethod`
 
 #### **38. 装饰器中添加functools.wraps的含义与作用**
 
 #### **39. __getattr__和__getattribute__的作用以及其顺序关系**
+`Fluent Python 10.5--动态存取属性, 第19章--动态属性和特性, 19.6.3--处理属性的特殊方法`
+- __getattr__
+- 
+~~~
+    __getattr__(self, name)
+    仅当获取指定的属性失败,搜索过 obj、Class 和超类之后调用。表达式 obj.no_such_attr、getattr(obj, 'no_such_attr') 和hasattr(obj, 'no_such_attr') 可能会触发Class.__getattr__(obj, 'no_such_attr') 方法,但是,仅当在obj、Class 和超类中找不到指定的属性时才会触发。
+
+    __getattribute__(self, name)
+    尝试获取指定的属性时总会调用这个方法,不过,寻找的属性是特殊属性或特殊方法时除外。点号与 getattr 和 hasattr 内置函数会触发这个方法。调用 __getattribute__ 方法且抛出 AttributeError异常时,才会调用 __getattr__ 方法。为了在获取 obj 实例的属性时不导致无限递归,__getattribute__ 方法的实现要使用
+    super().__getattribute__(obj, name)。
+~~~
 
 #### **40. python中性能测量的方式，如cProfile，tracemalloc**
 
 #### **41. python中自省的使用方式，知道inspect库的常见用法**
+`Fluent Python 5.8 获取关于参数的信息`
 
 #### **42. sys.settrace和sys.setprofile在python中的用途和使用方式**
 
 #### **43. python中的模块定义，以及导入模块的各种姿势**
+`Python 参考手册`
 
-#### **44. global和local关键字在python中的含义和其使用场景**
+#### **44. global和local关键字在python中的含义和其使用场景**\
+`Fluent Python 7.4 变量作用域规则`
 
 #### **45. for-else，try-else的含义和用途**
+`Python参考手册`
 
 #### **46. .pyc文件的含义，清楚python代码大概的执行过程**
 
 #### **47. python中格式化字符串的方式以及其常见格式语法**
+`印象笔记的收藏`
 
 #### **48. python中常见的魔术方法和其使用方式**
+`Fluent Python 第一章 1.2`
 
 #### **49. 描述符**
+`Fluent Python 第二十章`
 
 #### **50. python递归的最大层数**
+- python最大递归层数为1000层,通过setrecursionlimit函数来设置最大递归数, 以通过getrecursionlimit函数获取当前的递归层数
 
 #### **51. *arg和**kwarg作用**
 
 #### **52. 参数的延迟绑定**
 
 #### **53. 正则的贪婪匹配**
+`廖雪峰`
 
 #### **54. 你对闭包的理解**
+`Fluent Python 7.5 闭包`
+- 简单来讲，一个闭包就是一个函数， 只不过在函数内部带上了一个额外的变量环境。闭包关键特点就是它会记住自己被定义时的环境。
 
 #### **55. os和sys模块的作用**
+`Python 参考手册`
 
 #### **56. 如何判断是函数还是方法**
 
-#### **57. GIL锁**
+#### **57. **
 #### **58. Python中如何使用线程池和进程池**
+`Python 参考手册`
 #### **59. threadlocal的作用**
+`廖雪峰 + Python参考手册`
 #### **60. 简述 asynio模块的作用和应用场景**
+`Fluent Python第 18 章 使用 asyncio 包处理并发`
 #### **61. 33简述 gevent模块的作用和应用场景**
 #### **62. twisted框架的使用和应用**
-#### **. **
-#### **. **
+#### **63. range()函数**
+- python2：range 数字列表
+    xrange 可迭代对象
+- python3 ：可选迭代对象
+
+#### **64. 函数的内省**
+`Fluent Python 5.6`
+
+
 #### **. **
 #### **. **
 #### **. **
