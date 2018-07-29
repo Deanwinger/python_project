@@ -40,6 +40,19 @@ class Solution(object):
         return -1
 
 
+# 拓展 leetcode 136. Single Number
+# Given a non-empty array of integers, 
+# every element appears twice except for one. Find that single one.
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        res = 0
+        for num in nums:
+            res ^= num
+        return res
 
 
 if __name__=='__main__':
