@@ -43,9 +43,9 @@ class Solution:
         
 
 
-
+# 果然自己写的pq没有heapq快
 # 自己构造基于（大顶）堆的优先队列
-# 也可使用自带模块heapq
+# 也可使用Python自带模块heapq
 class BPrioQueue:
     """ Implementing priority queues using heaps
     """
