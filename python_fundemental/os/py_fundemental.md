@@ -169,9 +169,69 @@ def tcplink(sock, addr):
 
 
 #### **11. 介绍下协程，为何比线程还快**
+`Fluent Python 第16章`
 - 协程就是一种用户态内的上下文切换技术
 - 协程使用生成器函数定义:定义体中有 yield 关键字
 - to be finished
+
+- 从句法上看,协程与生成器类似,都是定义体中包含 yield 关键字的函数。可是,在协程中,yield 通常出现在表达式的右边(例
+如,datum = yield),可以产出值,也可以不产出——如果 yield关键字后面没有表达式,那么生成器产出 None。协程可能会从调用方
+接收数据,不过调用方把数据提供给协程使用的是 .send(datum) 方法,通常,调用方会把值推送给协程。
+
+>16.1 生成器如何进化成协程
+~~~
+    生成器的调用方可以使用 .send(...) 方法发送数据,发送的数据会成为生成器函数中 yield 表达式的值。因此,生成器可以作为协程使用。协程是指一个过程,这个过程与调用方协作,产出由调用方提供的值。
+~~~
+
+>16.2 用作协程的生成器的基本行为
+~~~
+    协程可以身处四个状态中的一个。当前状态可以使用inspect.getgeneratorstate(...) 函数确定,该函数会返回下述字
+    符串中的一个: 
+
+    'GEN_CREATED' -- 等待开始执行。
+    
+    'GEN_RUNNING' -- 解释器正在执行, 只有在多线程应用中才能看到这个状态。
+
+    'GEN_SUSPENDED' -- 在 yield 表达式处暂停。
+    
+    'GEN_CLOSED' -- 执行结束。
+~~~
+
+>16.3 示例:使用协程计算移动平均值
+~~~
+    def averager():
+        total = 0.0
+        count = 0
+        average = None
+
+        while True:
+            term = yield average
+            total += term
+            count += 1
+            average = total / count
+~~~
+
+>16.4 预激协程的装饰器
+~~~
+    from functools import wraps
+
+    def coroutine(func):
+        """装饰器:向前执行到第一个`yield`表达式,预激`func`"""
+        @wraps(func)
+        def primer(*args,**kwargs):
+            gen = func(*args,**kwargs) 
+            next(gen) 
+            return gen
+        return primer
+~~~
+
+>16.5 终止协程和异常处理
+>16.6 让协程返回值
+~~~
+    生成器对象会抛出 StopIteration 异常。异常对象的 value 属性保存着返回的值。
+
+    return 表达式的值会偷偷传给调用方,赋值给 StopIteration异常的一个属性。这样做有点不合常理,但是能保留生成器对象的常规行为——耗尽时抛出 StopIteration 异常。
+~~~
 
 #### **12. 强类型/弱类型和静态类型/动态类型**
 
