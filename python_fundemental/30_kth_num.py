@@ -107,9 +107,110 @@ class BPrioQueue:
     def __repr__(self):
         return "PrioQueue<{}>".format(self._elems)
 
+
+# 类似题 leetcode 230. Kth Smallest Element in a BST -- 此题用中序遍历就好
+from queue import Queue
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def kthSmallest(self, root, k):
+        """
+        解法1: 树的中序
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        q = Queue(0)
+        self.inorder(root, q)
+        while k>1:
+            q.get()
+            k -= 1
+        return q.get()
+        
+    # 遍历用递归完成, 效率很低
+    def inorder(self, root, q):
+        if root is None:
+            return
+        self.inorder(root.left, q)
+        q.put(root.val)
+        self.inorder(root.right, q)
+        return
+
+    def kthSmallest_v2(self, root, k):
+        """
+        解法2: 树的中序, 非递归
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        rec = self.inorder_nonrec(root)
+        return rec[k-1]
+    
+    def inorder_nonrec(self, t):
+        rec = []
+        s = SStack()
+        while t or not s.is_empty():
+            while t:
+                s.push(t)
+                t = t.left
+            t = s.pop()
+            rec.append(t.val)
+            t = t.right
+        return rec
+              
+        
+# 基于顺序表的实现
+class SStack:
+    def __init__(self):
+        self._elems = []
+    
+    def is_empty(self):
+        return not self._elems
+
+    def top(self):
+        if not self._elems:
+            raise StackUnderflow("empty SStack")
+        return self._elems[-1]
+    
+    def push(self, elem):
+        self._elems.append(elem)
+
+    # 弹出最后一个元素
+    def pop(self):
+        if not self._elems:
+            raise StackUnderflow("empty SStack")
+        return self._elems.pop()
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     print("Test class PrioQueue:")
     pq = PrioQueue([1, 2, 3])
     for i in range(12):
         pq.enqueue(randint(0, 30))
     print(pq)
+
+
+
+
