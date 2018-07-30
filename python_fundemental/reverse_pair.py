@@ -3,14 +3,17 @@
 输入一个数组,求出这个数组中的逆序对的总数P。
 '''
 
-# 题36
+# 题36 
+# 类似题 leetcode 629. K个逆序对数组
 # leetcode 315. Count of Smaller Numbers After Self
 class Solution(object):
     def InversePairs(self, data):
-        length = len(data)
-        if data is None or length <= 0:
+        if not data:
             return 0
-        copy = list(data)
+        length = len(data)
+        copy = [0]*length
+        for i in range(length):
+            copy[i] = data[i]
         count = self.InversePairsCore(data, copy, 0, length-1)
         return count
     
@@ -20,37 +23,7 @@ class Solution(object):
             return 0
         
         length = (end - start) // 2
-        left = self.InversePairsCore(copy, data, start, start+length)
-        right = self.InversePairsCore(copy, data, start+length+1, end)
-
-        # i初始化为前半段最后一个数字的下标
-        i = start + length
-        # j初始化为后半段最后一个数字的下标
-        j = end
-
-        indexCopy = end
-        count = 0
-        while i >= start and j >= start+length+1:
-            if data[i] > data[j]:
-                copy[indexCopy] = data[i]
-                indexCopy -= 1
-                i -= 1
-                count += j - start - length
-            else:
-                copy[indexCopy] = data[j]
-                indexCopy -= 1
-                j -= 1
-
-        while i >= start:
-            copy[indexCopy] = data[i]
-            indexCopy -= 1
-            i -= 1
-        while j >= start+length+1:
-            copy[indexCopy] = data[j]
-            indexCopy -= 1
-            j -= 1
-        return left + right + count
-
+        left = self.InversePairsCore(copy, data, start)
 
         
 
