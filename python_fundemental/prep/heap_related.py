@@ -23,38 +23,23 @@ class PrioQueueError(ValueError):
 
 # 基于（小顶）堆的优先序列
 class PrioQueue:
-    def __init__(self, elist=None):
+    """ Implementing priority queues using heaps
+    """
+    def __init__(self, elist=[]):
         self._elems = list(elist)
         if elist:
             self.buildheap()
-    
-    def buildheap(self):
-        end = len(self._elems)
-        for i in range(end//2, -1, -1):
-            self.siftdown(self._elems[i], i, end)
-
-    def siftdown(self, e, begin, end):
-        elems, i, j = self._elems, begin, begin*2+1
-        while j < end:
-            if j+1 < end and elems[j+1] < elems[j]:
-                j += 1
-            if e < elems[j]:
-                break
-            elems[i] = elems[j]
-            i, j = j, 2*j+1
-        elems[i] = e
-        return
 
     def is_empty(self):
         return not self._elems
 
     def peek(self):
         if self.is_empty():
-            raise PrioQueueError("empty PrioQueue")
+            raise PrioQueueError("in peek")
         return self._elems[0]
-
+    
     def enqueue(self, e):
-        self._elems.append(None)
+        self._elems.append(None)  # add a dummy element
         self.siftup(e, len(self._elems)-1)
 
     def siftup(self, e, last):
@@ -63,7 +48,50 @@ class PrioQueue:
             elems[i] = elems[j]
             i, j = j, (j-1)//2
         elems[i] = e
-        return
 
+    def dequeue(self):
+        if self.is_empty():
+            raise PrioQueueError("in dequeue")
+        elems = self._elems
+        e0 = elems[0]
+        e = elems.pop()
+        if len(elems) > 0:
+            self.siftdown(e, 0, len(elems))
+        return e0
 
-# 待测试
+    def siftdown(self, e, begin, end):
+        elems, i, j = self._elems, begin, begin*2+1
+        while j < end:    # invariant: j == 2*i+1
+            if j+1 < end and elems[j+1] < elems[j]:
+                j += 1    # elems[j] <= its brother
+            if e < elems[j]:     # e is the smallest of the three
+                break
+            elems[i] = elems[j]  # elems[j] is the smallest, move it up
+            i, j = j, 2*j+1
+        elems[i] = e
+
+    def buildheap(self):
+        end = len(self._elems)
+        for i in range(end//2, -1, -1):
+            self.siftdown(self._elems[i], i, end)
+
+# 堆排序
+def heap_sort(elems):
+    def siftdown(elems, e, begin, end):
+        i, j = begin, begin*2+1
+        while j < end:  # invariant: j == 2*i+1
+            if j+1 < end and elems[j+1] < elems[j]:
+                j += 1  # elems[j] <= its brother
+            if e < elems[j]:     # e is the smallest of the three
+                break
+            elems[i] = elems[j]  # elems[j] is the smallest, move it up
+            i, j = j, 2*j+1
+        elems[i] = e
+        
+    end = len(elems)
+    for i in range(end//2, -1, -1):
+        siftdown(elems, elems[i], i, end)
+    for i in range((end-1), 0, -1):
+        e = elems[i]
+        elems[i] = elems[0]
+        siftdown(elems, e, 0, i)
