@@ -53,6 +53,34 @@ class Solution(object):
             i += 1
         return max_sum
 
+
+# 类似题leetcode 674. Longest Continuous Increasing Subsequence
+class Solution:
+    def findLengthOfLCIS(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+        
+        length = len(nums)
+        rec = 1
+        max_rec = 1
+        cur = nums[0]
+        for i in range(1, length):
+            if nums[i] > cur:
+                rec +=1
+            else:
+                rec = 1
+            
+            if rec > max_rec:
+                max_rec = rec
+            cur = nums[i]
+        return max_rec
+
+
+
 if __name__=='__main__':
     array = [-2,1,-3,4,-1,2,1,-5,4]
     # array = [1, 2, 3, 2, 2, 2, 5, 4, 2]
