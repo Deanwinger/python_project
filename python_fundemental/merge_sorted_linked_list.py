@@ -2,6 +2,7 @@
 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
 '''
 #leetcode 题21
+# 拓展 leetcode 23. Merge k Sorted Lists
 # 题17
 
 class ListNode(object):
@@ -39,6 +40,9 @@ class Solution(object):
             cur = cur.next
         cur.next = l1 or l2
         return dummy.next
+
+
+
 
             
 if __name__ == '__main__':
