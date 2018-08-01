@@ -508,7 +508,7 @@ def tcplink(sock, addr):
 #### **67. 线程安全是什么意思？新线程什么情况下会影响原有线程？**
 #### **68. Python里面match()和search()的区别？**
 - re模块中match(pattern,string[,flags]),检查string的开头是否与pattern匹配。re模块中research(pattern,string[,flags]),在string搜索pattern的第一个匹配值
-#### **. **
+#### **69. 59.不能被继承的类**
 #### **. **
 #### **. **
 #### **. **
