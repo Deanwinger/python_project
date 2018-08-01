@@ -4,7 +4,6 @@
 '''
 
 # leetcode 题426， 可惜不能在线测
-# leetcode 题114, 二叉树, 单链表
 # LintCode 题378
 # 题27
 
