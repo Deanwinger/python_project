@@ -1,0 +1,1 @@
+# leetcode 829. Consecutive Numbers Sum
