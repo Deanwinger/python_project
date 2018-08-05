@@ -13,7 +13,9 @@ class ListNode:
 
 class Solution(object):
     def reverse_link_list(self, head):
-        #同为206的解
+        """
+            参考
+        """
         if not head:
             return 
         fast = head.next
@@ -28,8 +30,10 @@ class Solution(object):
         return head
 
     # ac 通过
-    def reverseList(self, head):
+    def reverse_link_list_v1(self, head):
         """
+        1. 同为206的解        
+        2. 解法1: 原地修改
         :type head: ListNode
         :rtype: ListNode
         """
@@ -43,6 +47,28 @@ class Solution(object):
             head = p
             p = temp
         return head
+
+    def reverseList(self, head):
+        """
+        1. 同为206的解        
+        2. 解法2: 利用stack
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        stack = []
+        while head:
+            stack.append(head)
+            head = head.next
+        
+        if stack:
+            dummy = head = stack.pop()
+            while stack:
+                head.next = stack.pop()
+                head = head.next
+            head.next = None
+            return dummy
+        else:
+            return
 
     # leetcode 92 to be finished
     def reverseBetween(self, head, m, n):
