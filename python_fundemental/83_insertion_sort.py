@@ -21,7 +21,7 @@ if __name__ == "__main__":
     n = 10
     while n:
         rec = []
-        for i in range(35):
+        for i in range(10000):
             rec.append(randint(0, 10000))
         res = list(rec)
             
