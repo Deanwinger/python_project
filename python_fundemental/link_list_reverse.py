@@ -48,7 +48,7 @@ class Solution(object):
             p = temp
         return head
 
-    def reverseList(self, head):
+    def reverse_link_list_v2(self, head):
         """
         1. 同为206的解        
         2. 解法2: 利用stack
@@ -69,6 +69,22 @@ class Solution(object):
             return dummy
         else:
             return
+
+    def reverse_link_list_v3(self, head):
+        """
+        1. 同为206的解        
+        2. 解法2: 递归解法
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        return self._reverse(head)
+
+    def _reverse(self, node, prev=None):
+        if not node:
+            return prev
+        n = node.next
+        node.next = prev
+        return self._reverse(n, node)
 
     # leetcode 92 to be finished
     def reverseBetween(self, head, m, n):
