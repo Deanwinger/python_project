@@ -69,6 +69,33 @@ class Solution(object):
                 temp.next = head.next
         return dummy if dummy is not head else dummy.next
         
+# 8.5号重做, 感觉这版更易懂, 删除用的是将下一个节点的信息直接拷过来, 特殊情况, 就只有空和一个节点的时候
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        if head is None or head.next is None:
+            return []
+        
+        dummy = fast = ahead = head
+        while n>1:
+            fast = fast.next
+            n -= 1
+        
+        while fast.next is not None:
+            ahead = head
+            fast = fast.next
+            head = head.next
+        
+        if head.next: 
+            head.val = head.next.val
+            head.next = head.next.next
+        else:
+            ahead.next = None
+        return dummy
 
 
 if __name__=='__main__':
