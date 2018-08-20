@@ -16,12 +16,10 @@ class Solution:
     def permute(self, nums):
         """
         leetcode 46 题题解
+        8.20 重做, 请好好反思
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        if not nums:
-            return []
-        
         if len(nums) == 1:
             return [nums]
         
@@ -49,29 +47,6 @@ class Solution:
         return res
     
 
-class Solution:
-    def permute(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        rec = []
-        self.permutation(nums, rec)
-        return rec
-
-    def permutation(self,  nums, rec):
-        if not nums or len(nums) == 1:
-            return nums
-        
-        n = len(nums)
-        for i in range(n):
-            r = [nums[i]]
-            print("r is: ", r)
-            print("c is: ", nums[:i]+nums[i+1:])
-            print("="*20)
-            s = r + self.permutation(nums[:i]+nums[i+1:], rec)
-            rec.append(s)
-        return 
 
 if __name__ == "__main__":
     nums = [1,2,3]
