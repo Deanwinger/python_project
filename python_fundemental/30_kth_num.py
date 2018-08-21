@@ -24,7 +24,7 @@ class Solution:
 
     def k_smallest(self, nums, k):
         """
-        解法2，使用 堆
+        解法2，使用 堆, 用堆就好了, 为什么要用优先队列
         :type: nums: [list]
         :rtype: [list]
         """
