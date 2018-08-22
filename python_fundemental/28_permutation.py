@@ -6,7 +6,7 @@
 输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
 """
 
-# 题28
+# 题28 此题考虑是否可以用yeild来处理
 # 此处还有立方体问题， 八皇后问题 to be finished
 
 
@@ -46,9 +46,30 @@ class Solution:
             res.append(r)
         return res
     
+    def t_permute(self, nums):
+        """
+        leetcode 46 题， 改为输出str
+        8.20 重做, 请好好反思
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if len(nums) == 1:
+            return str(nums[0])
+        
+        n = len(nums)
+        rec = []
+        for i in range(n):
+            res = self.t_permute(nums[:i] + nums[i+1:])
+            for r in res:
+                a = str(nums[i]) + r
+                rec.append(a)
+        return rec
 
 
 if __name__ == "__main__":
-    nums = [1,2,3]
+    # nums = [1,2]
+    nums = [1,2,3,4,5,6,7,8,9,0]
     s = Solution()
-    print(s.permute(nums))
+    a = s.t_permute(nums)
+    print("total_len： ", len(a))
+    print("total_set_len： ", len(set(a)))
