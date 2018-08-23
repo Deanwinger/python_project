@@ -29,7 +29,7 @@ class Solution:
         return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
 # 拓展 leetcode 110. Balanced Binary Tree
-# 此题可以用后序遍历的方法解决,  to be finished
+# 此题可以用后序遍历的方法解决,  to be finished, 这种只需要出现一个异常就返回的递归要好好体会;
 '''
 输入一棵二叉树，判断该二叉树是否是平衡二叉树。
 '''
@@ -45,7 +45,7 @@ class Solution:
         left = self.maxDepth(root.left)
         right = self.maxDepth(root.right)
         if abs(left-right) > 1:
-            return False
+            return False    
         return self.isBalanced(root.left) and self.isBalanced(root.right)
     
     def maxDepth(self, root):
