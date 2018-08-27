@@ -16,13 +16,14 @@ class Solution(object):
         if not head:
             return True
         
+        # 此处是找中点, 很重要
         head1 = head2 = head
         while head2.next and head2.next.next:
-            head1 = head1.next
+            head1 = head1.next 
             head2 = head2.next.next
 
         p = head1.next # 反转之后第一个节点
-        head1.next = None
+        head1.next = None # head1 表示中点, 中点之后的反转
         while p:
             temp = p.next
             p.next = head1
