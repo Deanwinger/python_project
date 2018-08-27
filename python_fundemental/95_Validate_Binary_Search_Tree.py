@@ -7,6 +7,7 @@
 #         self.left = None
 #         self.right = None
 
+# 8.274 重做, 基本功不是很扎实啊, 很简单的遍历
 class Solution:
     def isValidBST(self, root):
         """
