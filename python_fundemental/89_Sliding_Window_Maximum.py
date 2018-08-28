@@ -3,7 +3,7 @@
 # 本题的关键在于利用双端队列, collections.deque
 from collections import deque
 
-# 关键是保证最大的都在头部
+# 关键是保证最大的都在头部, 此题值得好好体会
 class Solution(object):
     def maxSlidingWindow(self, nums, k):
         """
