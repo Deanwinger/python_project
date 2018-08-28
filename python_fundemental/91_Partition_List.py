@@ -85,6 +85,32 @@ class Solution(object):
             sml.next = d1.next
         return d3.next
 
+# 8.28 重写, 非常elegant, 关键是head1.next = None, 杜绝了之前发生的错误
+class Solution:
+    def partition(self, head, x):
+        """
+        :type head: ListNode
+        :type x: int
+        :rtype: ListNode
+        """
+        dum1 = head1 = ListNode(0)
+        dum2 = head2 = ListNode(0)
+        while head:
+            if head.val < x:
+                head1.next = head
+                head = head.next
+                head1 = head1.next
+                head1.next = None
+            else:
+                head2.next = head
+                head = head.next
+                head2 = head2.next
+                head2.next = None
+        
+        head1.next = dum2.next
+        return dum1.next
+
+
 if __name__ == "__main__":
     alist = [1,4,3,2,5,2,6]
     x = 3
