@@ -1,4 +1,11 @@
 # 冒泡排序
+"""
+冒泡排序算法的原理如下：
+    1. 比较相邻的元素。如果第一个比第二个大，就交换他们两个。
+    2. 对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。
+    3. 针对所有的元素重复以上的步骤，除了最后一个。
+    4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
+"""
 
 from random import randint
 import time 
@@ -6,7 +13,7 @@ import time
 
 def bubble_sort(alist):
     length = len(alist)
-    for i in range(length):
+    for i in range(length): # 这一行代码的含义是, 每次只能保证最大的那一个移到后面去
         found = False
         for j in range(1, length-i):
             if alist[j] < alist[j-1]:
