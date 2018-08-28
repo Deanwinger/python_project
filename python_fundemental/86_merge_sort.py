@@ -33,7 +33,7 @@ def merge(left, right):
     return rec
 
 
-# 8.28 参考普林斯顿算法课程, 不管是快排, 还是merge sort, 都比python自带的慢一个数量级
+# 8.28 参考普林斯顿算法课程, 不管是快排, 还是此merge sort, 都比python自带的慢一个数量级
 def merge(array, aux, lo, mid, hi):
     # 首先复制, 产生一个相同的辅助列表aux, 两指针在这个辅助列表上
     k = lo
