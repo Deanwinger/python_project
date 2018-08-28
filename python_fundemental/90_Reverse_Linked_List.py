@@ -50,3 +50,46 @@ class Solution(object):
             pre.next = head
             tail.next = p
             return  dummy
+
+# 8.28 重做, 当m == n 时, 返回原链表, 好好体会m, n
+class Solu:
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        if m == n:
+            return head
+        if m == 1:
+            dummy = head
+            node = head.next
+            head.next = None
+            while n > 1:
+                tem = node.next
+                node.next = head
+                head = node
+                node = tem
+                n -= 1
+            dummy.next = node
+            return head
+        else:
+            dummy = head
+            while m > 1:
+                slow = head
+                head = head.next
+                m -= 1
+                n -= 1
+            tail = head
+            node = head.next
+            head.next = None
+            while n > 1:
+                tem = node.next
+                node.next = head
+                head = node
+                node = tem
+                n -= 1
+            slow.next = head
+            tail.next = node
+            return dummy
