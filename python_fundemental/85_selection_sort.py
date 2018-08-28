@@ -1,6 +1,15 @@
+"""
+简单选择排序的基本思想：给定数组：int[] arr={里面n个数据}；第1趟排序，
+在待排序数据arr[1]~arr[n]中选出最小的数据，将它与arrr[1]交换；第2趟，
+在待排序数据arr[2]~arr[n]中选出最小的数据，将它与r[2]交换；以此类推，
+第i趟在待排序数据arr[i]~arr[n]中选出最小的数据，将它与r[i]交换，直到全部排序完成。
+"""
+
+
 # 选择排序
 from random import randint
 import time
+
 
 def select_sort(alist):
     length = len(alist)
