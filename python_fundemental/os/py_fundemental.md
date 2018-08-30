@@ -1,11 +1,14 @@
 # Python Fundation
 
 ## Questions
-- 参考 `https://zhuanlan.zhihu.com/p/39914177`
+- 参考1 
+- 参考2 `https://github.com/taizilongxu/interview_python#1-python%E7%9A%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92`
+- 参考3 `https://zhuanlan.zhihu.com/auxten`
+- 参考4 `https://zhuanlan.zhihu.com/p/21856569`
 
 #### **1. 手写：正则邮箱地址**
 
-- to be finished
+- ^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$
 
 #### **2. 可变与不可变类型**
 
@@ -28,11 +31,11 @@
     - tuple, str, bytes
 
 #### **3. Python是如何进行内存管理的**
-
+`http://www.cnblogs.com/CBDoctor/p/3781078.html` -- 此文章非常值得一读
 - 从三个方面来说,一对象的引用计数机制,二垃圾回收机制,三内存池机制
-~~~
-一、对象的引用计数机制
+>1. 对象的引用计数机制
 
+~~~
     python内部使用引用计数，来保持追踪内存中的对象，所有对象都有引用计数。
 
     引用计数增加的情况：
@@ -52,7 +55,7 @@
     多数情况下，引用计数比你猜测得要大得多。对于不可变数据（如数字和字符串），解释器会在程序的不同部分共享内存，以便节约内存。
 
 二、垃圾回收
-
+`参考第88题`
     1，当一个对象的引用计数归零时，它将被垃圾收集机制处理掉。
 
     2，当两个对象a和b相互引用时，del语句可以减少a和b的引用计数，并销毁用于引用底层对象的名称。然而由于每个对象都包含一个对其他对象的应用，因此引用计数不会归零，对象也不会销毁。（从而导致内存泄露）。为解决这一问题，解释器会定期执行一个循环检测器，搜索不可访问对象的循环并删除它们。
@@ -118,11 +121,69 @@
 ~~~
 #### **5. 介绍下装饰器**
 `Fluent Python 第七章`
+`https://www.zhihu.com/question/25950466`
+`https://stackoverflow.com/questions/739654/how-to-make-a-chain-of-function-decorators`
+>1. 装饰器的一大特性是,能把被装饰的函数替换成其他函数。第二个特性是,装饰器在加载模块时立即执行
+>2. 多数装饰器会修改被装饰的函数。通常,它们会定义一个内部函数,然后将其返回,替换被装饰的函数。使用内部函数的代码几乎都要靠闭包才能正确运作。
+>3. 为了理解闭包,我们要退后一步,先了解 Python中的变量作用域--LEGB,同时`参考54题`
+~~~
+    import time
+    def clock(func):
+        def clocked(*args):
+            t0 = time.time()
+            result = func(*args)
+            elapsed = time.time() - t0
+            print("Total running time is: ", elapsed)
+            return result
+        return clocked
+
+    @clock
+    def factorial(n):
+        return 1 if n < 2 else n*factorial(n-1)
+
+    等价于
+    def factorial(n):
+        return 1 if n < 2 else n*factorial(n-1)
+
+    factorial = clock(factorial)
+
+    clock 装饰器有几个缺点:不支持关键字参数,而且遮盖了被装饰函数的 __name__ 和 __doc__ 属性
+
+    改进后的 clock 装饰器
+
+    import time
+    import functools
+    
+    def clock(func):
+        @functools.wraps(func)
+        def clocked(*args, **kwargs):
+            t0 = time.time()
+            result = func(*args, **kwargs)
+            elapsed = time.time() - t0
+            print("Total running time is: ", elapsed)
+            return result
+        return clocked
+~~~
+
+- 叠放的装饰器
+~~~
+    @d1
+    @d2
+    def f():
+        print('f')
+
+    等同于:
+
+    def f():
+        print('f')
+
+    f = d1(d2(f))
+~~~
 
 #### **6. 以装饰器的方式实现单例模式,使用装饰器的单例和使用其他方法的单例，在后续使用中，有何区别**
 `http://python-web-guide.readthedocs.io/zh/latest/design/design.html#id1`
 - 上面总结的很好了
-- 有何区别呢? to be finished
+- 参考singleton.py, 上面有总结
 
 #### **7. 写一个简单的python socket编程**
 ~~~
@@ -188,17 +249,26 @@ def tcplink(sock, addr):
 
 #### **11. 介绍下协程，为何比线程还快**
 `Fluent Python 第16章`
-- 协程就是一种用户态内的上下文切换技术
-- 协程使用生成器函数定义:定义体中有 yield 关键字
-- to be finished
+`https://zhuanlan.zhihu.com/p/25228075`
+- 协程就是你可以暂停执行的函数， 协程就是一种用户态内的上下文切换技术, 它是比是线程（thread）更细量级的用户态线程，特点是允许用户的主动调用和主动退出，挂起当前的例程然后返回值或去执行其他任务，接着返回原来停下的点继续执行。
 
-- 从句法上看,协程与生成器类似,都是定义体中包含 yield 关键字的函数。可是,在协程中,yield 通常出现在表达式的右边(例
-如,datum = yield),可以产出值,也可以不产出——如果 yield关键字后面没有表达式,那么生成器产出 None。协程可能会从调用方
-接收数据,不过调用方把数据提供给协程使用的是 .send(datum) 方法,通常,调用方会把值推送给协程。
+- 从句法上看,协程与生成器类似,都是定义体中包含 yield 关键字的函数。可是,在协程中,yield 通常出现在表达式的右边(例如,data = yield),可以产出值,也可以不产出——如果 yield关键字后面没有表达式,那么生成器产出 None。协程可能会从调用方接收数据,不过调用方把数据提供给协程使用的是 .send(data) 方法,通常,调用方会把值推送给协程。
+
 
 >16.1 生成器如何进化成协程
 ~~~
     生成器的调用方可以使用 .send(...) 方法发送数据,发送的数据会成为生成器函数中 yield 表达式的值。因此,生成器可以作为协程使用。协程是指一个过程,这个过程与调用方协作,产出由调用方提供的值。
+
+    区别：
+        generator总是生成值，一般是迭代的序列
+
+        coroutine关注的是消耗值，是数据(data)的消费者
+
+        coroutine不会与迭代操作关联，而generator会
+
+        coroutine强调协同控制程序流，generator强调保存状态和产生数据
+
+
 ~~~
 
 >16.2 用作协程的生成器的基本行为
@@ -253,7 +323,18 @@ def tcplink(sock, addr):
 
 #### **12. 强类型/弱类型和静态类型/动态类型**
 
-#### **13. 手写多线程买票代码**
+#### **13. Python中的多线程, 多进程**
+`https://zhuanlan.zhihu.com/p/20167077`
+- 再多线程编程中, 如果一个线程执行一个原子操作, 这意味着另一个线程无法看到该操作一半的结果, 系统只能处于操作之前或者是操作之后的状态, 而不能介于两者之间的状态;
+
+- concurrent.futures
+~~~
+    ProcessPoolExecutor 和 ThreadPoolExecutor 类都实现了通用的Executor 接口,因此使用 concurrent.futures 模块能特别轻松地把基于线程的方案转成基于进程的方案。
+
+    futures.ThreadPoolExecutor 类对某个作业来说不够灵活,可能要使用 threading 模块中的组件(如 Thread、Lock、Semaphore 等)自行制定方案; futures.ThreadPoolExecutor 类已经封装了这些组件
+
+    对 CPU 密集型工作来说,要启动多个进程,规避 GIL。创建多个进程最简单的方式是,使用futures.ProcessPoolExecutor 类。不过和前面一样,如果使用场景较复杂,需要更高级的工具。multiprocessing 模块的 API 与threading 模块相仿,不过作业交给多个进程处理。不过,multiprocessing 模块还能解决协作进程遇到的最大挑战:在进程之间传递数据;
+~~~
 
 #### **14. python最常见的解释器**
 
@@ -281,6 +362,7 @@ def tcplink(sock, addr):
 `Fluent Python 17.5.3 线程和多进程的替代方案`
 - Python解释器被一个锁保护着, 只允许一次执行一个线程, 即使存在多个可用的处理器, 在计算密集型的应用中,严重的限制了线程的作用; 对于计算密集型的任务来说, 最好使用C拓展或者是multiprocessing模块来代替, C拓展有释放解释器锁和并行运算的选项, 前提是释放锁时, 不与解释器进行交互, multiprocessing模块将工作分给不受限制的单独子进程;
 
+- GIL的释放逻辑是当前线程遇见IO操作或者计时器达到100（ticks可以看作是python自身的一个计数器，专门做用于GIL，每次释放后归零，这个计数可以通过 sys.setcheckinterval 来调整），进行释放。
 
 #### **17. python中dict的底层实现，以及与OrderDict的关系, dict和UserDict的关系，为什么有UserDict的存在**
 `Fluent Python 3.9--dict和set的背后`
@@ -304,8 +386,31 @@ def tcplink(sock, addr):
     (3). 键查询很快
 ~~~
 
+- 与OrderDict的关系：
+
+~~~
+    collections.OrderedDict
+    这个类型在添加键的时候会保持顺序,因此键的迭代次序总是一致的。OrderedDict 的 popitem 方法默认删除并返回的是字典里的最后一个元素,但是如果像 my_odict.popitem(last=False) 这样调用它,那么它删除并返回第一个被添加进去的元素
+
+    返回按key排序后的字典L:
+     OrderedDict(sorted(a.items(),key=lambda x: x[0]))
+~~~
+
+- 与UserDict关系
+`fluent python 3.1--3.6, 12.1`
+~~~
+    创造自定义映射类型来说,以 UserDict 为基类,总比以普通的dict 为基类要来得方便;
+    更倾向于从 UserDict 而不是从 dict 继承的主要原因是,后者有时会在某些方法的实现上走一些捷径,导致我们不得不在它的子类中重写这些方法,但是 UserDict 就不会带来这些问题;
+~~~
+
 #### **18. python多继承的查找规则（MRO）**
 `Fluent Python 第12章--继承的优缺点`
+`http://www.cnblogs.com/lovemo1314/archive/2011/05/03/2035005.html`
+
+- Python 会按照特定的顺序遍历继承图。这个顺序叫方法解析顺序(Method Resolution Order,MRO)。类都有一个名为 __mro__ 的属性,它的值是一个元组,按照方法解析顺序列出各个超类,从当前类一直向上,直到object 类。
+
+- 内置的 super() 函数会按照__mro__ 属性给出的顺序调用超类的方法; super 指的是 MRO 中的下一个类！
+
 
 #### **19. property的含义以及其描述器实现**
 `Fluent Python 19.2`
@@ -324,6 +429,36 @@ def tcplink(sock, addr):
 
 #### **21. 如何定义和使用元类，了解其使用场景**
 `http://blog.jobbole.com/21351/`
+- 在Python中，类也是对象，你可以动态的创建类。函数type实际上是一个元类。type就是Python在背后用来创建所有类的元类;
+~~~
+    1. type(类名, 父类的元组（针对继承的情况，可以为空），包含属性的字典（名称和值）)
+    MyShinyClass = type('MyShinyClass', (), {})  # 返回一个类对象
+~~~
+- 元类就是用来创建类的“东西”。你创建类就是为了创建类的实例对象，不是吗？但是我们已经学习到了Python中的类也是对象。好吧，元类就是用来创建这些类（对象）的，元类就是类的类;
+
+~~~
+    __metaclass__属性
+
+    你可以在写一个类的时候为其添加__metaclass__属性。如果你这么做了，Python就会用元类来创建类Foo。小心点，这里面有些技巧。你首先写下class Foo(object)，但是类对象Foo还没有在内存中创建。Python会在类的定义中寻找__metaclass__属性，如果找到了，Python就会用它来创建类Foo，如果没有找到，就会用内建的type来创建这个类。
+
+    2. 当写下如下代码时:
+    class Foo(Bar):
+        pass
+    Python做了如下的操作：
+
+    Foo中有__metaclass__这个属性吗？如果是，Python会在内存中通过__metaclass__创建一个名字为Foo的类对象（我说的是类对象，请紧跟我的思路）。它就会在模块层次中去寻找__metaclass__，并尝试做同样的操作。如果还是找不到__metaclass__,Python就会用内置的type来创建这个类对象。
+    现在的问题就是，你可以在__metaclass__中放置些什么代码呢？答案就是：可以创建一个类的东西。那么什么可以用来创建一个类呢？type，或者任何使用到type或者子类化type的东东都可以。
+~~~
+
+- 但就元类本身而言，它们其实是很简单的：
+~~~
+    1)   拦截类的创建
+
+    2)   修改类
+
+    3)   返回修改之后的类
+~~~
+
 
 #### **22. python中type和object之间的关系**
 
@@ -395,10 +530,15 @@ def tcplink(sock, addr):
 
 #### **25. 鸭子类型（duck typing）的含义与其在python中的表现形式**
 `Fluent Python 10.3 协议和鸭子类型`
+- “鸭子类型”，它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子;
+
+- 对象的类型无关紧要, 只要实现了特定的协议即可(协议是非正式的接口), 例如,Python 的序列协议只需要 __len__ 和 __getitem__ 两
+个方法。任何类(如 Spam),只要使用标准的签名和语义实现了这两个方法,就能用在任何期待序列的地方。
+
 
 #### **26. Python dict的顺序**
 
-#### **27. WSGI协议是什么**
+#### **27. **
 
 #### **28. 如何利用collections，itertools，operator等模块来高效地操作容器对象。**
 `问题太大, pass`
@@ -416,8 +556,19 @@ def tcplink(sock, addr):
 
 #### **31. 单下划线开头、双下划线开头和双下划线包围的变量分别代表着什么含义**
 `Fluent Python 9.7 Python的私有属性和“受保护的”属性`
+~~~
+    a. Python内置的“魔法”方法或属性, 你也可以自己定义，但一般不推荐:
+        __name__：一种约定，Python内部的名字，用来与用户自定义的名字区分开，防止冲突
+    
+    b. 内部使用的变量、属性、方法、函数、类或模块（约定）, from foo import * 不会导入以下划线开头的对象
+        _name：一种约定，用来指定变量私有, 不会阻止外部的访问
+    
+    c. 类外部无法直接使用原名称访问, 需要通过instance._ClassName__var的形式访问
+        __name：解释器用_classname__name来代替这个名字用以区别和其他类相同的命名
+~~~
 
 #### **32. __init__和__new__方法在class和type中分别的作用是什么**
+`https://zhuanlan.zhihu.com/p/35943253`
 ~~~
     __new__() 用于创建实例, 注意方法的第一个参数是cls(类本身)
     __init__() 用于初始化对象的属性, 再创建对象后马上调用;
@@ -428,16 +579,43 @@ def tcplink(sock, addr):
 #### **34. __dict__在类中的含义，以及类属性和方法与__dict__的关系**
 `Fluent Python 5.6 函数内省`
 - __dict__属性用于存储与一个实例相关的所有数据
+~~~
+__dict__与dir()的区别：
+
+dir()是一个函数，返回的是list；
+__dict__是一个字典，键为属性名，值为属性值；
+dir()用来寻找一个对象的所有属性，包括__dict__中的属性，__dict__是dir()的子集；
+​ 并不是所有对象都拥有__dict__属性。许多内建类型就没有__dict__属性，如list，此时就需要用dir()来列出对象的所有属性。
+~~~
 
 #### **35. python的模块间循环引用的问题，如何避免它**
 
 #### **36. python中抽象类的实现方式，以及其抽象基类模块，如何用python类实现一个抽象容器类型。**
 `Fluent Python 第 11 章`
+- collections.abc 模块中定义了 16 个抽象基类(Python 标准库的numbers 模块中还有一些);
+~~~
+    1. 想实现子类,我们可以覆盖从抽象基类中继承的方法;
+        a. 抽象容器类, 需要实现 -- __contains__、__iter__、__len__, Container
+        b. Iterable 通过 __iter__ 方法支持迭代,Container 通过__contains__ 方法支持 in 运算符,Sized 通过 __len__ 方法支持len() 函数
+~~~
+
+`Fluent Python 11.7 定义并使用一个抽象基类`
+- to be finished
 
 #### **37. classmethod和staticmethod的区别**
 `Fluent Python 9.4 classmethod与staticmethod`
+- classmethod
+~~~
+    用法:定义操作类,而不是操作实例的方法。classmethod 改变了调用方法的方式,因此类方法的第一个参数是类本身,而不是实例。classmethod 最常见的用途是定义备选构造方法
+~~~
+
+- staticmethod 
+~~~
+    静态方法就是普通的函数,只是碰巧在类的定义体中,而不是在模块层定义
+~~~
 
 #### **38. 装饰器中添加functools.wraps的含义与作用**
+- functools.wraps 则可以将原函数对象的属性复制给包装函数, 默认有 __module__、__name__、__doc__
 
 #### **39. __getattr__和__getattribute__的作用以及其顺序关系**
 `Fluent Python 10.5--动态存取属性, 第19章--动态属性和特性, 19.6.3--处理属性的特殊方法`
@@ -456,14 +634,26 @@ def tcplink(sock, addr):
 
 #### **41. python中自省的使用方式，知道inspect库的常见用法**
 `Fluent Python 5.8 获取关于参数的信息`
+- 自省就是面向对象的语言所写的程序在运行时，所能知道对象的类型。简单一句话就是运行时能够获得对象的类型, Python 附带一些内置函数和模块来帮助我们检查这些对象, 比如：type()、dir()、getattr()、hasattr()、isinstance()；
+~~~
+    一.
+    1. dir 是内省最重要的函数之一，它返回一个对象的属性和方法列表;
+    2. type 函数返回一个对象的类型;
+    3. id 函数返回各种对象的唯一 id
+    二. 
+    1. inspect模块
+~~~
 
 #### **42. sys.settrace和sys.setprofile在python中的用途和使用方式**
 
 #### **43. python中的模块定义，以及导入模块的各种姿势**
-`Python 参考手册`
+`https://juejin.im/entry/570c6b6771cfe40067310370`
 
-#### **44. global和local关键字在python中的含义和其使用场景**\
+#### **44. global和nonlocal关键字在python中的含义和其使用场景**\
 `Fluent Python 7.4 变量作用域规则`
+~~~
+    nonlocal 声明。它的作用是把变量标记为自由变量,即使在函数中为变量赋予新值了,也会变成自由变量。
+~~~
 
 #### **45. for-else，try-else的含义和用途**
 `Python参考手册`
@@ -483,18 +673,51 @@ def tcplink(sock, addr):
 - python最大递归层数为1000层,通过setrecursionlimit函数来设置最大递归数, 以通过getrecursionlimit函数获取当前的递归层数
 
 #### **51. *arg和**kwarg作用**
+- 如果我们不确定往一个函数中传入多少参数，或者我们希望以元组（tuple）或者列表（list）的形式传参数的时候，我们可以使用*args（单星号）。如果我们不知道往函数中传递多少个关键词参数或者想传入字典的值作为关键词参数的时候我们可以使用**kwargs（双星号）
 
 #### **52. 参数的延迟绑定**
+`https://www.zhihu.com/question/29483144`
 
 #### **53. 正则的贪婪匹配**
 `廖雪峰`
 
 #### **54. 你对闭包的理解**
 `Fluent Python 7.5 闭包`
-- 简单来讲，一个闭包就是一个函数， 只不过在函数内部带上了一个额外的变量环境。闭包关键特点就是它会记住自己被定义时的环境。
+- 简单来讲，一个闭包就是一个函数, 一个绑定了自由变量的函数， 只不过在函数内部带上了一个额外的变量环境。闭包关键特点就是它会记住自己被定义时的环境。
+
+- 自由变量(free variable): 指未在本地作用域中绑定的变量
+
+- 我们发现 Python 在 __code__ 属性(表示编译后的函数定义体)中保存局部变量和自由变量的名称, 实际值 绑定在返回函数 的 __closure__ 属性中
+~~~
+    示例：
+    flist = []
+    for i in range(3):
+        def afunc(x):
+            return x*i
+    for f in flist:
+        print(f(2))
+
+    闭包最重要的使用价值在于：封存函数执行的上下文环境；
+    闭包在其捕捉的执行环境(def语句块所在上下文)中，也遵循LEGB规则逐层查找，直至找到符合要求的变量，或者抛出异常
+
+    当代码执行到show_filename中的return "filename: %s" % filename语句时，解析器按照下面的顺序查找filename变量：
+
+    Local - 本地函数(show_filename)内部，通过任何方式赋值的，而且没有被global关键字声明为全局变量的filename变量；
+    Enclosing - 直接外围空间(上层函数wrapper)的本地作用域，查找filename变量(如果有多层嵌套，则由内而外逐层查找，直至最外层的函数)；
+    Global - 全局空间(模块enclosed.py)，在模块顶层赋值的filename变量；
+    Builtin - 内置模块(__builtin__)中预定义的变量名中查找filename变量；
+    在任何一层先找到了符合要求的filename变量，则不再向更外层查找。如果直到Builtin层仍然没有找到符合要求的变量，则抛出NameError异常。这就是变量名解析的：LEGB法则
+
+~~~
+
 
 #### **55. os和sys模块的作用**
 `Python 参考手册`
+- 官方文档：
+~~~
+    os模板提供了一种方便的使用操作系统函数的方法
+    sys模板可供访问由解释器使用或维护的变量和与解释器交互的函数
+~~~
 
 #### **56. 如何判断是函数还是方法**
 - 函数是任何调用方传参进去直接用就好了
@@ -505,19 +728,39 @@ def tcplink(sock, addr):
 
 #### **58. Python中如何使用线程池和进程池**
 `Python 参考手册`
+
 #### **59. threadlocal的作用**
 `廖雪峰 + Python参考手册`
+-  Thread Local 对象，就能够让同一个对象在多个线程下做到状态隔离。
+
 #### **60. 简述 asynio模块的作用和应用场景**
 `Fluent Python第 18 章 使用 asyncio 包处理并发`
+`https://zhuanlan.zhihu.com/p/25228075`
+- 根据官方说明， asyncio模块主要包括：
+~~~
+    1. 具有特定系统实现的事件循环（event loop）;
+
+    2. 数据通讯和协议抽象（类似Twisted中的部分);
+
+    3. TCP，UDP,SSL，子进程管道，延迟调用和其他;
+
+    4. Future类;
+
+    5. yield from的支持;
+
+    6. 同步的支持;
+
+    7. 提供向线程池转移作业的接口;
+~~~
+
 #### **61. 33简述 gevent模块的作用和应用场景**
 #### **62. twisted框架的使用和应用**
 #### **63. range()函数**
 - python2：range 数字列表
     xrange 可迭代对象
-- python3 ：可选迭代对象
+- python3 ：可迭代对象
 
-#### **64. 函数的内省**
-`Fluent Python 5.6`
+#### **64. **
 
 
 #### **65. 解释一下python的and-or语法**
@@ -542,9 +785,12 @@ def tcplink(sock, addr):
 ~~~
 
 #### **67. 线程安全是什么意思？新线程什么情况下会影响原有线程？**
+`https://zhuanlan.zhihu.com/p/37620890`
+
 #### **68. Python里面match()和search()的区别？**
 - re模块中match(pattern,string[,flags]),检查string的开头是否与pattern匹配。re模块中research(pattern,string[,flags]),在string搜索pattern的第一个匹配值
-#### **69. 59.不能被继承的类**
+#### **69. 不能被继承的类**
+
 #### **70. tuple和set的区别，set的底层实现**
 - set 和 frozenset 的实现也依赖散列表,但在它们的散列表里存放的只有元素的引用(就像在字典里只存放键而没有相应的值)。
 ~~~
@@ -571,24 +817,141 @@ def tcplink(sock, addr):
 ~~~
     Mixin是为了给一个类扩充功能用的，它也没法被实例化。我们可以在Mixin类里实现一些方法给类扩充功能，合理使用mixin也能避免复杂的继承关系。你可能会问了，那为啥不直接写在类里头，比如用@staticmethod方法(我就有这个疑问)？我的理解是这样的，为了『高内聚』。如果你用过pylint检测代码，你会发现你在写类的一个方法时，如果在写一个method时没有使用到任何self里的东西，pylint会给提示『R0201 Method could be a function [pylint]』，意思是这个方法可以可以单独写成一个函数，不必要写在类里。也就是说，只有一个类里实现的方法都是使用了self里的数据时才能成为高内聚的（我不知道我这样理解对不对）。例子：flask_login插件有个UserMixin给定义的用户类实现登录功能。关于多重继承和 mixin 在 Ruby 之父的书《松本行弘的程序世界》中有不错的科普。
 ~~~
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
-#### **. **
+#### **73. Python的队列**
+`https://zhuanlan.zhihu.com/p/37093602`
+- Python标准库中包含了四种队列，分别是
+~~~
+    queue.Queue / asyncio.Queue / multiprocessing.Queue / collections.deque
+~~~
+#### **74. Python中的deque是线程安全的吗？**
+- 通过查看collections.deque中的append()、pop()等方法的源码可以知道，他们都是原子操作，所以是GIL保护下的线程安全方法(通过dis方法可以看到，append是原子操作（一行字节码）)。
+
+- 首先第一个问题， deque源码里没有用锁保护critical section，是如何实现线程安全的？
+~~~
+    (1). 看上去没有锁，但实际上是有的，没错就是GIL。
+        a. 只有获取了GIL锁的线程才能操作Python对象或调用Python/C API
+        b. 什么时候会当前线程会释放GIL呢？一个是python解释器每执行若干条python指令（阈值100）后会尝试做线程切换，让其他线程有机会执行。另一个是进行IO操作时，会释放掉GIL，当前线程进入睡眠
+    (2). 那么deque的C语言实现中，以pop为例, 在通过Python/C API调用这个函数时，当前线程肯定是先拿到了GIL的，而在这个函数内部，没有主动释放GIL, 所以整个函数可以看作被GIL保护的critical section
+~~~
+#### **75. linux 文本文件, 一列姓名, 一列分数, 多行, 如何排序**
+- sort -t -k -n -r
+~~~
+    sort -k 2n test.txt
+    以第二行排序
+~~~
+
+- Python 实现, 如何能比
+~~~
+    def sort_by_name():
+    with open("test.txt", 'r') as fp:
+        rec = []
+        content = fp.readlines()
+        for c in content:
+            remain = c.split()
+            rec.append(remain)
+        res = sorted(rec, key=lambda x: int(x[-1]))
+
+    with open("test_after_sort", 'w', encoding="utf-8") as fp:
+        for r in res:
+            s = ''
+            for item in r:
+                s = s + ' ' + str(item)
+            s += '\n'
+            fp.write(s)
+~~~
+#### **76. Python的锁**
+#### **77. yield from**
+- yield from 是全新的语言结构。它的作用比 yield 多很多,因此人们认为继续使用那个关键字多少会引起误解。在其他语言中,类似的结构使用 await 关键字,这个名称好多了,因为它传达了至关重要的一点:在生成器 gen 中使用 yield from subgen()时,subgen 会获得控制权,把产出的值传给 gen 的调用方,即调用方可以直接控制 subgen。与此同时,gen 会阻塞,等待 subgen 终止。
+
+- yield from x 表达式对 x 对象所做的第一件事是,调用 iter(x),从中获取迭代器。因此,x 可以是任何可迭代的对象;
+
+- yield from 的主要功能是打开双向通道,把最外层的调用方与最内层的子生成器连接起来,这样二者可以直接发送和产出值,还可以直接传入异常
+
+#### **78. concurrent.futures and Asyncio Future**
+- concurrent.futures 模块的主要特色是 ThreadPoolExecutor 和ProcessPoolExecutor 类,这两个类实现的接口能分别在不同的线程或进程中执行可调用的对象。这两个类在内部维护着一个工作线程或进程池,以及要执行的任务队列
+
+- a,标准库中有两个名为 Future 的类:concurrent.futures.Future 和 asyncio.Future。这两个类的作用相同:两个 Future 类的实例都表示可能已经完成或者尚未完成的延迟计算。这与 Twisted 引擎中的 Deferred 类、Tornado 框架中的
+Future 类,以及多个 JavaScript 库中的 Promise 对象类似。
+
+- 期物封装待完成的操作,并放入队列,完成的状态可以查询,得到结果(或抛出异常)后可以获取结果(或异常)
+~~~
+    P746  的示例17-4 非常值得一看
+    0. .submit() 方法的参数是一个可调用的对象,调用这个方法后会为传入的可调用对象排期,并返回一个期物
+    1. concurrent.futures.as_completed, 这个函数的参数是一个期物列表,返回值是一个迭代器,在期物运行结束后产出期物。
+    1. 两个 Future 类都有`.add_done_callback()` 方法:这个方法只有一个参数,类型是可调用的对象,期物运行结束后会调用指定的可调用对象;
+    2. 这两种期物都有 `.done()` 方法,这个方法不阻塞,返回值是布尔值, 指明期物链接的可调用对象是否已经执行;
+    3. `.result()` 方法。在期物运行结束后调用的话,这个方法在两个 Future 类中的作用相同:返回可调用对象的结果,或者重新抛出执行可调用的对象时抛出的异常;
+~~~
+#### **79. 猴子补丁**
+`fluent python 11.3`
+- 猴子补丁: 在运行时修改类或模块,而不改动源码。
+
+#### **80. namedtuple**
+~~~
+Card = collections.namedtuple('Card', ['rank', 'suit'])
+~~~
+
+#### **81. 介绍下multiprocessing**
+`Python 参考手册P336`
+
+#### **82. Python 日志实践**
+`http://python.jobbole.com/81666/`
+#### **83. 协程是否是协程安全的**
+`https://zhuanlan.zhihu.com/p/40279108`
+
+#### **84. 子内化内置类型**
+- 直接子类化内置类型(如 dict、list 或 str)容易出错,因为内置类型的方法通常会忽略用户覆盖的方法。不要子类化内置类型,用户自己定义的类应该继承 collections 模块中的类,例如UserDict、UserList 和 UserString,这些类做了特殊设计,因此易于扩展;
+
+#### **85. Python setdefault的用法**
+#### **86.  AVL tree**
+`python 数据结构`
+#### **87. 红黑树**
+`python 数据结构`
+`https://blog.csdn.net/xiaxzhou/article/details/74999335`
+
+#### **88. python 垃圾回收**
+- python采用的是`引用计数`机制为主，`标记-清除`和`分代收集`两种机制为辅的策略
+>1. 引用记数机制
+~~~
+    Python GC主要使用引用计数（reference counting）来跟踪和回收垃圾。在引用计数的基础上，通过“标记-清除”（mark and sweep）解决容器对象可能产生的循环引用问题，通过“分代回收”（generation collection）以空间换时间的方法提高垃圾回收效率。
+
+    1 引用计数
+    PyObject是每个对象必有的内容，其中ob_refcnt就是做为引用计数。当一个对象有新的引用时，它的ob_refcnt就会增加，当引用它的对象被删除，它的ob_refcnt就会减少.引用计数为0时，该对象生命就结束了。
+
+    优点:
+
+    简单
+    实时性
+    缺点:
+
+    维护引用计数消耗资源
+    循环引用
+    2 标记-清除机制
+    基本思路是先按需分配，等到没有空闲内存的时候从寄存器和程序栈上的引用出发，遍历以对象为节点、以引用为边构成的图，把所有可以访问到的对象打上标记，然后清扫一遍内存空间，把所有没标记的对象释放。
+
+    3 分代技术
+    分代回收的整体思想是：将系统中的所有内存块根据其存活时间划分为不同的集合，每个集合就成为一个“代”，垃圾收集频率随着“代”的存活时间的增大而减小，存活时间通常利用经过几次垃圾回收来度量。
+
+    Python默认定义了三代对象集合，索引数越大，对象存活时间越长。
+
+    举例： 当某些内存块M经过了3次垃圾收集的清洗之后还存活时，我们就将内存块M划到一个集合A中去，而新分配的内存都划分到集合B中去。当垃圾收集开始工作时，大多数情况都只对集合B进行垃圾回收，而对集合A进行垃圾回收要隔相当长一段时间后才进行，这就使得垃圾收集机制需要处理的内存少了，效率自然就提高了。在这个过程中，集合B中的某些内存块由于存活时间长而会被转移到集合A中，当然，集合A中实际上也存在一些垃圾，这些垃圾的回收会因为这种分代的机制而被延迟。
+~~~
+
+#### **89. Python实现tail -f功能**
+`https://zhuanlan.zhihu.com/p/20771481`
 
 
+#### **90. python中重载**
+~~~
+    函数重载主要是为了解决两个问题。
 
+    可变参数类型。
+    可变参数个数。
+    另外，一个基本的设计原则是，仅仅当两个函数除了参数类型和参数个数不同以外，其功能是完全相同的，此时才使用函数重载，如果两个函数的功能其实不同，那么不应当使用重载，而应当使用一个名字不同的函数。
 
+    好吧，那么对于情况 1 ，函数功能相同，但是参数类型不同，python 如何处理？答案是根本不需要处理，因为 python 可以接受任何类型的参数，如果函数的功能相同，那么不同的参数类型在 python 中很可能是相同的代码，没有必要做成两个不同函数。
 
+    那么对于情况 2 ，函数功能相同，但参数个数不同，python 如何处理？大家知道，答案就是缺省参数。对那些缺少的参数设定为缺省参数即可解决问题。因为你假设函数功能相同，那么那些缺少的参数终归是需要用的。
+
+    好了，鉴于情况 1 跟 情况 2 都有了解决方案，python 自然就不需要函数重载了。
+~~~
