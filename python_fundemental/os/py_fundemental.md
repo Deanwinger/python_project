@@ -325,6 +325,9 @@ def tcplink(sock, addr):
 
 #### **13. Python中的多线程, 多进程**
 `https://zhuanlan.zhihu.com/p/20167077`
+`http://www.dongwm.com/archives/%E4%BD%BF%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-asyncio%E7%AF%87/`
+`http://www.dongwm.com/archives/%E4%BD%BF%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-asyncio%E7%AF%87-%E4%BA%8C/`
+`http://www.dongwm.com/archives/%E4%BD%BF%E7%94%A8Python%E8%BF%9B%E8%A1%8C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-asyncio%E7%AF%87-%E4%B8%89/`
 - 再多线程编程中, 如果一个线程执行一个原子操作, 这意味着另一个线程无法看到该操作一半的结果, 系统只能处于操作之前或者是操作之后的状态, 而不能介于两者之间的状态;
 
 - concurrent.futures
@@ -675,12 +678,40 @@ dir()用来寻找一个对象的所有属性，包括__dict__中的属性，__di
 
 #### **47. python中格式化字符串的方式以及其常见格式语法**
 `印象笔记的收藏`
+>1. %-格式化
+
+>2. str.format()
+~~~
+    >>> name = "hoxis"
+    >>> age = 18
+
+    (1).
+    >>> "hello, {}. you are {}?".format(name,age)
+    'hello, hoxis. you are 18?'
+
+    (2). 可以通过索引来以其他顺序引用变量：
+    >>> "hello, {1}. you are {0}?".format(age,name)
+    'hello, hoxis. you are 18?'
+
+    (3).
+    >>> "hello, {name}. you are {age1}?".format(age1=age,name=name)
+    'hello, hoxis. you are 18?'
+~~~
+>3. f-Strings
+~~~
+    (1).
+    >>> f"hi, {name}, are you {age}"
+    'hi, hoxis, are you 18'
+    >>> F"hi, {name}, are you {age}"
+    'hi, hoxis, are you 18'
+~~~
 
 #### **48. python中常见的魔术方法和其使用方式**
 `Fluent Python 第一章 1.2`
 
 #### **49. 描述符**
 `Fluent Python 第二十章`
+`http://www.dongwm.com/archives/%E6%B7%B1%E5%85%A5%E5%B1%9E%E6%80%A7%E6%8F%8F%E8%BF%B0%E7%AC%A6/`
 
 #### **50. python递归的最大层数**
 - python最大递归层数为1000层,通过setrecursionlimit函数来设置最大递归数, 以通过getrecursionlimit函数获取当前的递归层数
