@@ -1,15 +1,100 @@
-    sa_uid = Column(Integer)                            #standard_agreement_uid
-    user_uid = Column(Integer)
-    order_num = Column(CHAR(20))
-    subject = Column(String)                            #记录产品title
-    amount = Column(Integer)
-    client_ip = Column(String)
-    status = Column(Integer, default=0)                 #0未完成, 1成功, 2失效
-    pay_channel = Column(Integer, default=None)         #余额支付3
-    time_create = Column(DateTime)
-    time_pay = Column(DateTime, default=None)           #月
-    cancel_reason = Column(Text, default="")
-    dividend = Column(Integer, default=0)               #1个user可能对应多个买家, 记录总分红
-    user_name = Column(String, default=None)
-    discount_uid = Column(Integer, default=None)        #红包uid
-    discount_money = Column(Integer, default=0)         #红包金额
+尹桂珍 28
+于宇 37
+丘静 21
+单军 39
+俞秀珍 49
+容丽华 12
+濮凤兰 96
+车丽华 54
+卞浩 60
+常丽娟 7
+凤娜 8
+宣颖 65
+康霞 40
+弓成 65
+温志强 5
+乐丹丹 99
+叶飞 5
+花凤兰 18
+能瑜 100
+崔明 90
+单娟 5
+阚桂珍 90
+卓洋 29
+仲秀华 73
+范冬梅 4
+段淑英 9
+能鑫 5
+农秀荣 60
+寿文 79
+梅莹 82
+佟桂香 26
+狄洁 84
+戚琴 27
+龙桂英 100
+曹志强 54
+储淑兰 7
+禄桂珍 38
+裴雷 25
+萧艳 44
+钦秀华 7
+终红霞 9
+西丽娟 47
+关雷 62
+黎桂香 26
+公红梅 25
+慕阳 65
+佴婷 53
+轩红霞 80
+唐婷 16
+经娟 72
+廉亮 31
+孙萍 16
+竺琳 91
+龙帆 18
+阴瑞 49
+容金凤 85
+嵇倩 96
+任倩 67
+阳淑兰 3
+钦琳 88
+干颖 38
+赏岩 70
+马娜 15
+禹华 82
+呼超 98
+敖岩 60
+贡颖 85
+诸坤 44
+殷桂珍 10
+濮玲 17
+金浩 44
+蔺秀珍 37
+惠林 31
+朱帆 7
+许阳 66
+戈金凤 32
+颜楠 11
+伯琴 84
+法宁 66
+商丽 46
+后燕 53
+裴淑兰 8
+段兰英 89
+壤小红 11
+易强 65
+糜娜 83
+谷畅 32
+程博 98
+费东 29
+文秀云 99
+潘杰 51
+蒯龙 44
+葛涛 95
+翟慧 100
+万峰 56
+汝雷 99
+平琳 58
+晋雷 32
+孙慧 73
+濮凤英 20
