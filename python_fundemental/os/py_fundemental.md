@@ -129,6 +129,7 @@
 `Fluent Python 第七章`
 `https://www.zhihu.com/question/25950466`
 `https://stackoverflow.com/questions/739654/how-to-make-a-chain-of-function-decorators`
+`https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/README.md` -- 系列文章
 >1. 装饰器的一大特性是,能把被装饰的函数替换成其他函数。第二个特性是,装饰器在加载模块时立即执行
 >2. 多数装饰器会修改被装饰的函数。通常,它们会定义一个内部函数,然后将其返回,替换被装饰的函数。使用内部函数的代码几乎都要靠闭包才能正确运作。
 >3. 为了理解闭包,我们要退后一步,先了解 Python中的变量作用域--LEGB,同时`参考54题`
