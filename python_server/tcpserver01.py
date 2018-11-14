@@ -1,17 +1,27 @@
 import socket
-
+import logging
+import signal
+from ./si
 
 HOST = "127.0.0.1"
 PORT = 6666
+
+LOGGER = logging.getLogger('Server01')
+
+# Is it right?
+signal.signal(signal.SIGCHLD, sig_chld)
 
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((HOST, PORT))
     s.listen(3) # listen()方法开始监听端口，传入的参数指定等待连接的最大数量
     while True:
-        conn, addr = s.accept()
-        str_echo(conn, addr)
-
+        try:
+            conn, addr = s.accept()
+            str_echo(conn, addr)
+        except InterruptedError as err:
+            logging.error("Received error %s"%err.errno)
+            continue
 
 def str_echo(sock, addr):
     print("Accept connection from %s:%s..."%addr)
