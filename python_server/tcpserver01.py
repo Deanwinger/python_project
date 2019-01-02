@@ -8,7 +8,7 @@ PORT = 6666
 
 LOGGER = logging.getLogger('Server01')
 
-# Is it right?
+# Is it right to put it here?
 signal.signal(signal.SIGCHLD, sig_chld)
 
 def main():
