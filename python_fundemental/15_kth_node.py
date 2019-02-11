@@ -98,6 +98,9 @@ class Solution(object):
             ahead.next = None
         return dummy
 
+# 9.4号复习, 需要重做
+
+
 
 if __name__=='__main__':
     pass

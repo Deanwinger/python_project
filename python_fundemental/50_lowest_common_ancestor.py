@@ -50,7 +50,8 @@ class Solut(object):
         self.find_path(root, p, rec1)        
         self.find_path(root, q, rec2)
         return [r for r in rec1 if r in rec2][-1]
-        
+
+    # 9.4突然发现, 这个函数才是真正面向对象的递归写法, 要好好研究    
     def find_path(self, root, node, rec):
         if not root:
             return False
@@ -69,3 +70,21 @@ class Solut(object):
             rec.pop()
             
         return found
+
+    def find_path(self, root, node, rec, g):
+        if not root:
+            return
+        rec.append(node)
+
+        node_found = root is node
+        if node_found:
+            g = list(rec)
+            return
+        if root.left:
+            self.find_path(root.left, node, rec, g)
+        
+        if root.right:
+            self.find_path(root.right, node, rec, g)
+        return 
+
+

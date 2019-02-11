@@ -74,7 +74,10 @@ class SolutionOfInOrder:
 
     def inorderTraversal_nonrec(self, root):
         """
-        二 中序遍历的非递归实现
+        二 中序遍历的非递归实现， 中序的关键是：先把左节点弹出，再弹中（根）节点，然后压右节点；
+        左
+            中  右,
+        左在循环的上一轮pop
         :type root: TreeNode
         :rtype: List[int]
         """
