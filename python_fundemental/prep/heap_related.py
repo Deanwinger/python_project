@@ -1,6 +1,6 @@
 # heap Python实现
 
-# 今天就把堆这个数据结构玩残
+# 今天就把堆这个数据结构玩残, 已残
 """
 通常使用binary heap
     1. heap的结构性质:
@@ -21,7 +21,7 @@
 class PrioQueueError(ValueError):
     pass
 
-# 基于（小顶）堆的优先序列
+# 基于（小顶）堆的优先序列 剑指offer的第30题有大顶堆的实现
 class PrioQueue:
     """ Implementing priority queues using heaps
     """
