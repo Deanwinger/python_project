@@ -5,6 +5,7 @@
 '''
 # leetcode 105
 #关键在于递归遍历， 关键点就在于找到根节点， 然后对于每个子树，都用找根节点确定左右子树的方式递归的进行下去
+# 2019.2.13 
 
 # 题 6
 
@@ -28,7 +29,7 @@ class Solution:
         root.right = reConstructBinaryTree(pre[i+1:], tin[i+1:])
         return root
         
-# 8.9 re_do, 千万注意index, [1: i+1], [:i], 两者才包含同样多的数
+#2018.8.9 re_do, 千万注意index, [1: i+1], [:i], 两者才包含同样多的数
 class Solution:
     def reConstructBinaryTree(self, pre, tin):
         if not pre and not tin:
