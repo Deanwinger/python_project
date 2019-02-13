@@ -5,6 +5,7 @@
 
 # 题16
 # leetcode 206 和 92
+# 2019.2.13 redo
 
 class ListNode:
     def __init__(self, x):
