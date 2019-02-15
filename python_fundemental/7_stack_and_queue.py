@@ -3,8 +3,11 @@
 '''
 # leetcode 232
 #关键在于在stack2, pop操作时, 当stack2为空时, 需将stac1所有的数据一次性放入stack2
-# 拓展题 225. 用队列实现栈
 
+# 拓展题 225. 用队列实现栈
+# 队列实现栈的关键是， 只能一个队列里保存数据，当需要pop操作时， 先将队列里的数据放入另一个队列留最后一个， 然后将最后一个pop出去
+
+# 2019.2.15
 # 题7
 
 class queue_by_stack(object):
@@ -80,14 +83,84 @@ class MyQueue:
                 self.mystack2.append(self.mystack1.pop())
             return  self.mystack2[-1] if self.mystack2 else None
 
-        
-
     def empty(self):
         """
         Returns whether the queue is empty.
         :rtype: bool
         """
         return not self.mystack1 and not self.mystack2
+
+
+# 题225
+class MyStack:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.que_one = []
+        self.que_two = []
+        
+
+    def push(self, x: 'int') -> 'None':
+        """
+        Push element x onto stack.
+        """
+        if self.empty():
+            self.que_one.append(x)
+            return
+        
+        if self.que_one:
+            self.que_one.append(x)
+        
+        if self.que_two:
+            self.que_two.append(x)
+            
+    def pop(self) -> 'int':
+        """
+        Removes the element on top of the stack and returns that element.
+        """
+        if self.empty():
+            return 
+        if self.que_one:
+            while len(self.que_one) > 1:
+                self.que_two.append(self.que_one.pop(0))
+            return self.que_one.pop()
+        
+        if self.que_two:
+            while len(self.que_two) > 1:
+                self.que_one.append(self.que_two.pop(0))
+            return self.que_two.pop()
+
+    def top(self) -> 'int':
+        """
+        Get the top element.
+        """
+        if self.empty():
+            return
+        
+        # top = None
+        while self.que_one:
+            if len(self.que_one) == 1:
+                top = self.que_one[0]
+            self.que_two.append(self.que_one.pop(0))
+
+        
+        while self.que_two:
+            if len(self.que_two) == 1:
+                top = self.que_two[0]
+            self.que_one.append(self.que_two.pop(0))
+        return top        
+
+    def empty(self) -> 'bool':
+        """
+        Returns whether the stack is empty.
+        """
+        # print(self.que_one)
+        # print(self.que_two)
+        if not self.que_one and not self.que_two:
+            return True
+        return False
 
 
 if __name__ == '__main__':
