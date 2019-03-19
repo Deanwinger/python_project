@@ -119,8 +119,6 @@
 - sunion 并集
 
 
-
-
 #### **5. 常见hash操作**
 `kv模式不变, 但v是一个键值对`
 - hset/hget/hmset/hmget/hgetall/hdel
@@ -195,7 +193,6 @@
 
 - zrevrangebyscore zset 80 60 -- 逆序获取范围
 
-## Part II
 #### **7. redis 的持久化**
 - RDB
 
@@ -383,7 +380,7 @@
 
 
 
-## Part III Question
+## Part II Question
 
 - redis, kafka, rabbitMQ, celery
 
