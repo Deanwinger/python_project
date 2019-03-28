@@ -385,6 +385,7 @@
 - redis, kafka, rabbitMQ, celery
 ### redis 面试相关问题
 `https://zhuanlan.zhihu.com/p/50392209`
+`https://zhuanlan.zhihu.com/p/58536781`
 
 
 #### **1. redis LRU策略**
