@@ -378,11 +378,14 @@
         info republication
 ~~~
 
-
+==========================================================================================================================================
 
 ## Part II Question
 
 - redis, kafka, rabbitMQ, celery
+### redis 面试相关问题
+`https://zhuanlan.zhihu.com/p/50392209`
+
 
 #### **1. redis LRU策略**
 `http://blog.jobbole.com/107084/`
