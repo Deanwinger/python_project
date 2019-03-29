@@ -382,11 +382,15 @@
 
 ## Part II Question
 
-- redis, kafka, rabbitMQ, celery
 ### redis 面试相关问题
 `https://zhuanlan.zhihu.com/p/50392209`
 `https://zhuanlan.zhihu.com/p/58536781`
 
+### redis 实践
+`https://zhuanlan.zhihu.com/p/44441938`
+
+### 源码分析
+`http://www.cnblogs.com/kismetv/p/8654978.html`
 
 #### **1. redis LRU策略**
 `http://blog.jobbole.com/107084/`
@@ -624,3 +628,6 @@ AOF持久化方式记录每次对服务器写的操作,当服务器重启的时�
 #### **49. Redis有哪些数据结构？底层的编码有哪些？有序链表采用了哪些不同的编码**
 
 #### **50. redis的hash数据结构最多能存储多少个元素**
+
+#### **51. redis的时间驱动设计**
+`https://github.com/guodongxiaren/Blog/issues/26`
