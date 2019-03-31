@@ -1048,7 +1048,49 @@
 - 嵌套循环关联
 #### **66. 乐观锁与悲观锁的使用场景**
 #### **67. 分布式全局唯一ID怎样来实现**
-`参考mongo ObjectId的实现？？`
+`to be finished -- 参考mongo ObjectId的实现`
+`http://cenalulu.github.io/mysql/guid-generate/`
+
+- GUID的基本需求
+    - 毫秒级的快速响应
+    - 可用性强
+    - prefix有连续性方便DB顺序存储
+    - 体积小，8字节为佳
+
+- 业界成熟方案列举
+    - UUID 16字节
+    - Twitter的Snowflake 8字节
+    - Flikr的数据库自增 4/8字节
+    - Instagram的存储过程 8字节
+    - 基于MySQL UUID的变种 16字节
+
+- 各个方案优劣的对比
+    - UUID：
+    ~~~
+        优：java自带，好用。
+        劣：占用空间大
+    ~~~
+    - Snowflake： timestamp + work number + seq number
+    ~~~
+        优：可用性强，速度快
+        劣：需要引入zookeeper 和独立的snowflake专用服务器
+    ~~~
+    - Flikr：基于int/bigint的自增
+    ~~~
+        优：开发成本低
+        劣：如果需要高性能，需要专门一套MySQL集群只用于生成自增ID。可用性也不强
+    ~~~
+    - Instagram：41b ts + 13b shard id + 10b increment seq
+    ~~~
+        优： 开发成本低
+        劣： 基于postgreSQL的存储过程，通用性差
+    ~~~
+    - UUID变种：timestamp + machine number + random (具体见：变种介绍
+    ~~~
+        优： 开发成本低
+        劣： 基于MySQL的存储过程，性能较差
+    ~~~
+
 #### **68. 分布式session如何实现的**
 #### **69. 数据库主从同步数据一致性如何解决？技术方案的优劣势比较**
 #### **70. **
