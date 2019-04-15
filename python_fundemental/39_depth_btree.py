@@ -83,3 +83,13 @@ class Solu(object):
         left = self.maxDepth(root.left)
         right = self.maxDepth(root.right)
         return 1+max(left, right)
+
+# 2014-4-15
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        
+        left_depth = self.maxDepth(root.left) + 1
+        right_depth = self.maxDepth(root.right) + 1
+        return max(left_depth, right_depth)
