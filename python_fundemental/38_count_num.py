@@ -98,6 +98,86 @@ class Solu(object):
             end = mid
         return self.find_last(nums, start, end, target)
 
+# 2019-4-15 更加不堪
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
+
+        start = 0
+        end = len(nums)-1
+        first = self.get_first(nums, start, end, target)
+        last = self.get_last(nums, start, end, target)
+        return [first, last]
+    
+    def get_first(self, nums, start, end, target):
+        if not nums:
+            return -1
+
+        # 指向同一个数
+        if start == end:
+            if nums[start] == target:
+                return start
+            else:
+                return -1
+        
+        # 两数相邻
+        if end-start == 1:
+            if nums[start] == target:
+                return start
+            if nums[end] == target:
+                return end
+            else:
+                return -1
+            
+        # 保证有三个以上元素
+        mid = (start+end) // 2
+        if nums[mid] == target and nums[mid-1] != target:
+            return mid
+        
+        if nums[mid] == target and nums[mid-1] == target:
+            start = self.get_first(nums, start, mid, target)
+        elif nums[mid] > target:
+            start = self.get_first(nums, start, mid, target)
+        else:
+            start = self.get_first(nums, mid, end, target)
+        return start
+        
+            
+    def get_last(self, nums, start,end, target):
+        if not nums:
+            return -1
+
+        # 指向同一个数
+        if start == end:
+            if nums[end] == target:
+                return end
+            else:
+                return -1
+        
+        # 两数相邻
+        if end-start == 1:
+            if nums[end] == target:
+                return end
+            if nums[start] == target:
+                return start
+            else:
+                return -1
+        
+        # 保证有三个以上元素
+        mid = (start+end) // 2
+        print(mid)
+        if nums[mid] == target and nums[mid+1] != target:
+            return mid
+        
+        if nums[mid] == target and nums[mid+1] == target:
+            end = self.get_last(nums, mid, end, target)
+        elif nums[mid] > target:
+            end = self.get_last(nums, start, mid, target)
+        else:
+            end = self.get_last(nums, mid, end, target)
+        return end
+
 if __name__=='__main__':
     alist = [1, 8, 8]
     # alist = [5,7,7,8,8,10]
