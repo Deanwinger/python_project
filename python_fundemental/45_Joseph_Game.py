@@ -92,24 +92,55 @@ def last_remaining_v1(n, m):
             count = 1
     return node.val
 
+class ListNode(object):
+    def __init__(self, val=None):
+        self.val = val
+        self.next = None
+
+# 2019-4-16 continue 是关键, 因为c=1的时候,相当于重新开始了一轮喊取, 所有要continue
+class Solution:
+    def LastRemaining_Solution(self, n, m):
+        if n < 1 or m < 1:
+            return -1
+
+        dum = head = ListNode(0)
+        for i in range(1, n):
+            head.next = ListNode(i)
+            head = head.next
+        head.next = dum
+        head = head.next
+        
+        c = 1 
+        while head.next is not head:
+            if c == m:
+                head.val = head.next.val
+                head.next = head.next.next
+                c = 1
+                continue
+            c += 1
+            head = head.next
+        return head.val
+
 
 if __name__=="__main__":
     s = Solution()
-    from random import randint
+    # from random import randint
 
-    n = 1
-    while n:
-        a = randint(1, 100)
-        b = randint(1, a)
-        print("cur is: ", n)
-        ans1 = s.LastRemaining(a, b)
-        ans2 = last_remaining_v1(a, b)
-        print("="*20, ans1)
-        print("="*20, ans2)
-        if n == 50:
-            break
-        if ans1 != ans2:
-            print("cur a is: ", a)
-            print("cur b is: ", b)
-            break
-        n += 1
+    # n = 1
+    # while n:
+    #     a = randint(1, 100)
+    #     b = randint(1, a)
+    #     print("cur is: ", n)
+    #     ans1 = s.LastRemaining(a, b)
+    #     ans2 = last_remaining_v1(a, b)
+    #     print("="*20, ans1)
+    #     print("="*20, ans2)
+    #     if n == 50:
+    #         break
+    #     if ans1 != ans2:
+    #         print("cur a is: ", a)
+    #         print("cur b is: ", b)
+    #         break
+    #     n += 1
+    a = s.LastRemaining_Solution(8, 1)
+    print(a)
