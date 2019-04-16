@@ -73,6 +73,26 @@ class Solution:
                     return True
         return False
 
+# 2019-4-16, 剑指offer 的解答有语言的针对性, 对python 来说, 没有太对的意义
+class Solution:
+    def rotateString(self, A: str, B: str) -> bool:
+        if not A and not B:
+            return True
+        
+        if not A or not B:
+            return False
+        
+        rec = []
+        for i in range(len(B)):
+            if B[i] == A[0]:
+                rec.append(i)
+                
+        for i in rec:
+            t = B[i:] + B[:i]
+            if t == A:
+                return True
+        return False
+        
 
 if __name__ == "__main__":
     test = "the sky is blue"
