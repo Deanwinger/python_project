@@ -65,6 +65,40 @@ class Solution:
                 cur.append(cur[-1]+1)
         return rec +1
 
+# 2019-4-16
+# leetcode 829. Consecutive Numbers Sum
+class Solution:
+    def consecutiveNumbersSum(self, N: int) -> int:
+        # 自己写的, 超出时间限制
+        if N<=2:
+            return 1
+        if N == 3:
+            return 2
+        
+        counter = 0
+        small = 1
+        big = 2
+        middle = (1+N)//2
+        cur = small + big
+        while True:
+            if cur == N:
+                counter += 1
+                big += 1
+                cur += big
+            elif cur > N:
+                if small == big:
+                    break
+                else:
+                    cur -= small
+                    small += 1
+            else:
+                if big>middle:
+                    break
+                else:
+                    big += 1
+                    cur += big
+        return counter+1
+
 
 if __name__ == "__main__":
     # test = [1,2,4,7,11,15]
