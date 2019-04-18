@@ -1,6 +1,8 @@
 # leetcode 236. Lowest Common Ancestor of a Binary Tree
-
+# leetcode 235 简易版, 二叉搜索树
 # 题50
+
+
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
         """
@@ -87,4 +89,31 @@ class Solut(object):
             self.find_path(root.right, node, rec, g)
         return 
 
+
+
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        rec = []
+        g = []
+        self.find_path(root, p, rec, g)
+        self.find_path(root, q, rec, g)
+        g1, g2 = g[0], g[1]
+        same_elems = [r for r in g1 and r in g2]
+        return same_elems[-1]
+
+    def find_path(self, root, node, rec, g):
+        if not root:
+            return
+        
+        rec.append(root.val)
+        if root is node:
+            g.append(list(rec))
+
+        if root.left:
+            self.find_path(root.left)
+
+        if root.right:
+            self.find_path(root.right)
+        rec.pop()
+        return
 
