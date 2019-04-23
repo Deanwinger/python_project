@@ -35,7 +35,7 @@ def merge(left, right):
 
 # 8.28 参考普林斯顿算法课程, 不管是快排, 还是此merge sort, 都比python自带的慢一个数量级
 def merge(array, aux, lo, mid, hi):
-    # 首先复制, 产生一个相同的辅助列表aux, 两指针在这个辅助列表上
+    # 首先`复制`, 产生一个相同的辅助列表aux, 两指针在这个辅助列表上
     k = lo
     while k<=hi:
         aux[k] = array[k]
@@ -81,36 +81,97 @@ def merge_s(alist):
     aux = [None]*n
     msort(alist, aux, 0, n-1)
 
+# 2019-4-20 为毛要在这里写quick sort, 哦, 是为了下面的测试
+# def quick_sort(nums, lo, hi): 
+#     if lo >= hi:if len(alist) == 1:
+        return alist
+#         return nums
+#     j = partition(nums, lo, hi)
+#     quick_sort(nums, lo, j-1)
+#     quick_sort(nums, j+1, hi)
+#     return
 
-def quick_sort(nums, lo, hi): 
-    if lo >= hi:
-        return nums
-    j = partition(nums, lo, hi)
-    quick_sort(nums, lo, j-1)
-    quick_sort(nums, j+1, hi)
-    return
+# def partition(nums, lo: int, hi: int):
 
-def partition(nums, lo: int, hi: int):
+#     i = lo+1
+#     j = hi
+#     while True:
+#         while  nums[i] < nums[lo]:
+#             if i == hi:
+#                 break
+#             i += 1
 
-    i = lo+1
-    j = hi
-    while True:
-        while  nums[i] < nums[lo]:
-            if i == hi:
-                break
-            i += 1
+#         while nums[j] > nums[lo]:
+#             if j == lo:
+#                 break
+#             j -= 1
+#         if i >= j:
+#             break
+#         nums[i], nums[j] = nums[j], nums[i]
+#         i += 1
+#         j -= 1
+#     nums[lo], nums[j] = nums[j], nums[lo]
+#     return j
 
-        while nums[j] > nums[lo]:
-            if j == lo:
-                break
-            j -= 1
-        if i >= j:
-            break
-        nums[i], nums[j] = nums[j], nums[i]
+# =====================================================================
+# 2019-4-20
+
+def msort(alist, aux, left, right):
+    if left < right:
+        mid = (left + right) // 2
+        msort(alist, aux, left, mid)
+        msort(alist, aux, mid+1, right)
+        return merge(alist, aux, left, mid+1, right)
+
+def merge(alist, aux, left, right, right_end):
+    # print("**"*10)
+    # print(left)
+    # print(right)
+    # print(right_end)
+    i = pos = left
+    j = right_end
+    pos = left
+    left_end = right-1
+    while left <= left_end and right <= right_end:
+        if alist[left] <= alist[right]:
+            aux[pos] = alist[left]
+            left += 1
+        else:
+            aux[pos] = alist[right]
+            right += 1            
+        pos += 1
+
+    while left <= left_end:
+        aux[pos] = alist[left]
+        left += 1
+        pos += 1
+
+    while right <= right_end:
+        aux[pos] = alist[right]
+        right += 1
+        pos += 1
+    
+    while i <= j:
+        alist[i] = aux[i]
         i += 1
-        j -= 1
-    nums[lo], nums[j] = nums[j], nums[lo]
-    return j
+    # return
+    # print(alist)
+    # print(aux)
+    # print("=="*10)    
+    return      
+
+def merge_sort(alist):
+    n  = len(alist)
+    if n <= 1:
+        return alist
+    
+    left = 0
+    right = n-1
+    aux = [None]*n
+    msort(alist, aux, left, right)
+    # print("The aux is: ", aux)
+    return aux
+
 
 if __name__ == "__main__":
     # a = [1,4,7,6,9,2,5,8]
