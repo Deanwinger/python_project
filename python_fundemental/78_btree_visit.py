@@ -33,6 +33,22 @@ class SolutionOfPreOrder:
         self.pre_order(root.right, rec)
         return
 
+    # 2019-4-24 leetcode 144
+    # 这里其实有疑问是没有解决的, 当我加上if root.right时, stack.pop()会报错, 空数组pop()
+    # 也就是说, 这个地方的循环层级有些需要注意的地方;
+    '''
+        def preorderTraversal_nonrec(self, root):
+            stack = []
+            rec = []
+            while root or stack:
+                while root:
+                    rec.append(root.val)
+                    if root.right:
+                    stack.append(root.right)
+                    root = root.left
+                root = stack.pop()
+            return rec
+    '''
     def preorderTraversal_nonrec(self, root):
         """
         二 先序遍历的非递归实现
