@@ -36,6 +36,7 @@ class SolutionOfPreOrder:
     # 2019-4-24 leetcode 144
     # 这里其实有疑问是没有解决的, 当我加上if root.right时, stack.pop()会报错, 空数组pop()
     # 也就是说, 这个地方的循环层级有些需要注意的地方;
+    # 裘宗燕的书里有写具体步骤,但是似乎还是没有解释为什么会出现上面这个问题, 中间的细节还是需要细细把玩;
     '''
         def preorderTraversal_nonrec(self, root):
             stack = []
@@ -44,7 +45,7 @@ class SolutionOfPreOrder:
                 while root:
                     rec.append(root.val)
                     if root.right:
-                    stack.append(root.right)
+                        stack.append(root.right)
                     root = root.left
                 root = stack.pop()
             return rec
