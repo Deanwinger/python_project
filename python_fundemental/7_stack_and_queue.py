@@ -6,7 +6,10 @@
 
 # 拓展题 225. 用队列实现栈
 # 队列实现栈的关键是， 只能一个队列里保存数据，当需要pop操作时， 先将队列里的数据放入另一个队列留最后一个， 然后将最后一个pop出去
-
+# 具体实现:
+    # 实例有两个队列, self.que, self.tem_que, 所有的数据保存在self.que, 
+    # 当需要pop的适合, 先将所有的数据(除最后一个外), 导入self.tem_que,
+    # pop出来最后一个数据, 然后将self.tem_que的数据导回self.que
 # 2019.2.15
 # 题7
 
@@ -162,6 +165,60 @@ class MyStack:
             return True
         return False
 
+
+# 2019-5-3
+# 此版更合理
+class MyStack:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.que = []
+        self.tem_que = []
+        
+
+    def push(self, x: int) -> None:
+        """
+        Push element x onto stack.
+        """
+        self.que.append(x)
+        
+
+    def pop(self) -> int:
+        """
+        Removes the element on top of the stack and returns that element.
+        """
+        if self.empty():
+            raise ValueError("empty stack")
+        while len(self.que) != 1:
+            self.tem_que.append(self.que.pop(0))
+        ret = self.que.pop()
+        while len(self.tem_que) > 0:
+            self.que.append(self.tem_que.pop(0))
+        return ret
+        
+
+    def top(self) -> int:
+        """
+        Get the top element.
+        """
+        if self.empty():
+            raise ValueError("empty stack")
+        while len(self.que) != 1:
+            self.tem_que.append(self.que.pop(0))
+        ret = self.que.pop()
+        self.tem_que.append(ret)
+        while len(self.tem_que) > 0:
+            self.que.append(self.tem_que.pop(0))
+        return ret
+        
+
+    def empty(self) -> bool:
+        """
+        Returns whether the stack is empty.
+        """
+        return self.que == []
 
 if __name__ == '__main__':
     P = queue_by_stack()
