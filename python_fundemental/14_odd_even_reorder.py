@@ -62,7 +62,36 @@ class Solution:
     def is_odd(self, x):
         return x%2 == 1
 
+# 2019-5-3 非常elegant的解法
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution:
+    def oddEvenList(self, head: ListNode) -> ListNode:
+        dum1 = dummy_odd = ListNode(0)
+        dum2 = dummy_even = ListNode(0)
+        
+        n = 1
+        
+        while head:
+            # 奇数
+            if n%2 == 1:
+                dummy_odd.next = head
+                dummy_odd = dummy_odd.next
+                head = head.next
+                dummy_odd.next = None
+            else:
+                dummy_even.next = head
+                dummy_even = dummy_even.next
+                head = head.next
+                dummy_even.next = None
+                
+            n += 1
+        dummy_odd.next = dum2.next
+        return dum1.next
 
 if __name__=='__main__':
     n = 2        
