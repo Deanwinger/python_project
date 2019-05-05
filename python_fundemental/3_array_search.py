@@ -14,6 +14,7 @@
 '''
 
 # 题3 leetcode 74. Search a 2D Matrix
+# leetcode 240. 搜索二维矩阵 II(同此题)
 # 2019.2.12
 
 def find_exact_one(matrix, target):
