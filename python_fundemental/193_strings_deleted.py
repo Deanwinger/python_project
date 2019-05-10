@@ -16,3 +16,4 @@ class Solution:
                     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
         total = dp[n1][n2]
         return n1+n2-2*total
+    
