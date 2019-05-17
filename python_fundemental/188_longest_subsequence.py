@@ -1,6 +1,6 @@
 # leetcode 718. 最长重复子数组
 
-# 类似题, 程序员代码面试指南P213, 思路完全一致, to be finished(可以进行空间优化)
+# 类似题(最长公共子串问题), 程序员代码面试指南P213, 思路完全一致, to be finished(可以进行空间优化)
 
 class Solution:
     def findLength(self, A: List[int], B: List[int]) -> int:
