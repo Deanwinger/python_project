@@ -1,7 +1,7 @@
 # leetcode 121. 买卖股票的最佳时机
+# leetcode 122. 买卖股票的最佳时机 II
 
-
-# 暴力破解, 报超时
+# 121 暴力破解, 报超时
 class Solution:
     def maxProfit(self, prices) -> int:
         n = len(prices)
@@ -15,7 +15,7 @@ class Solution:
         return ret
         
 
-# pass, 主要是波峰和波谷的考量
+# 121 pass, 主要是波峰和波谷的考量
 class Solution2:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
@@ -32,6 +32,10 @@ class Solution2:
                     dif = prices[i]-bottom
         return dif
 
+# 122
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        return sum([max(prices[i]-prices[i-1],0) for i in range(1,len(prices))])
 
 if __name__=='__main__':
     s = [7,1,5,3,6,4]
