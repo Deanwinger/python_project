@@ -45,6 +45,21 @@ class Solution:
 
         return j 
         
+# 2019-5-28 搞这么复杂干什么, pass
+class Solution1:
+    def majorityElement(self, nums: List[int]) -> int:
+        d = {}
+        max_num  = 0
+        ret = 0
+        for item in nums:
+            if not d.get(item):
+                d[item] = 1
+            else:
+                d[item] += 1
+            if d[item] > max_num:
+                max_num = d[item]
+                ret = item
+        return ret
 
 if __name__ == "__main__":
     s = Solution()
