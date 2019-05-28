@@ -1,5 +1,5 @@
 # leetcode 51. N-Queens, 52. N-Queens II
-
+import time
 
 '''
 三个要素:
@@ -12,6 +12,7 @@ goal: 目标, 退出标志
 
 # 2019-5-28 程序员代码面试指南 P239, 这里虽然用到了递归, 但是貌似没有很多人都提到的回溯法, 
 # 回溯法 to be finished
+# 位运算 加速 to be finished
 class Solution:
     def totalNQueens(self, n: int) -> int:
         if n < 1:
@@ -39,6 +40,9 @@ class Solution:
         return True
         
 if __name__ == "__main__":
-    n = 8
+    n = 12
+    t0 = time.time()
     s = Solution()
     print(s.totalNQueens(n))
+    t1 = time.time()
+    print("time cost: ", t1-t0)
