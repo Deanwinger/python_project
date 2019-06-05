@@ -70,16 +70,6 @@ class Solution(object):
         node.next = prev
         return self._reverse(n, node)
 
-    # leetcode 92 to be finished
-    def reverseBetween(self, head, m, n):
-        """
-        :type head: ListNode
-        :type m: int
-        :type n: int
-        :rtype: ListNode
-        """
-        pass
-
 
 
 if __name__=='__main__':
