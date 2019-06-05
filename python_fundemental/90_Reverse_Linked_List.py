@@ -93,3 +93,52 @@ class Solu:
             slow.next = head
             tail.next = node
             return dummy
+
+
+# 2019-6-6 这个题目其实还是很给力的, 很多小细节
+class Solution:
+    def reverseBetween(self, head, m, n):
+        """
+        :type head: ListNode
+        :type m: int
+        :type n: int
+        :rtype: ListNode
+        """
+        if m==n:
+            return head
+        
+        if m > 1:
+            diff =  n-m
+            pre = t = head
+            while m-1:
+                pre = t
+                t = t.next
+                m -= 1
+            
+            start = t
+            s = t.next
+            
+            while diff:
+                tem = s.next
+                s.next = t
+                t = s
+                s = tem
+                diff -= 1
+                
+            pre.next = t
+            start.next = s
+            return head
+            
+            
+        else:
+            pre = head
+            s = head.next
+            while n-1:
+                tem = s.next
+                s.next = pre
+                pre = s
+                s = tem
+                n -= 1
+            head.next = s
+            return pre
+                
