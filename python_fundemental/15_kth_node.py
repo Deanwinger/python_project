@@ -11,7 +11,7 @@
 推广: 寻找中间节点, 两个指针一起, 第一个指针每次走两步, 第二个指针每次走一步,  快指针指到尾部, 慢指针正好指到中间
 '''
 
-#leetcode 19. Remove Nth Node From End of List
+#leetcode 19. Remove Nth Node From End of List 此题算是13题和15题的综合版
 #题15
 
 class ListNode:
@@ -98,7 +98,24 @@ class Solution(object):
             ahead.next = None
         return dummy
 
-# 9.4号复习, 需要重做
+# 2019.6.7重做, 可以尝试用递归的方法坐下, to be finished
+# int num;//定义num值
+# ListNode* findKthTail(ListNode* pHead, int k) {
+#         num = k;
+#         if(pHead == NULL)
+#             return NULL;
+#         //递归调用
+#         ListNode* pCur = findKthTail(pHead->next, k);
+#         if(pCur != NULL)
+#             return pCur;
+#         else{
+#             num--;// 递归返回一次，num值减1
+#             if(num == 0)
+#                 return pHead;//返回倒数第K个节点
+#             return NULL;
+#         }
+# }
+
 
 
 
