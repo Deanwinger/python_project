@@ -66,6 +66,33 @@ class Solution:
         node.next = node.next.next
         return dummy
 
+# leetcode 203. 移除链表元素
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def removeElements(self, head, val):
+        """
+        :type head: ListNode
+        :type val: int
+        :rtype: ListNode
+        """
+        # 聪明一点的处理是先建立一个临时节点, 明显优雅多了
+        pre = dum = ListNode(0)
+        dum.next = head
+        
+        while head:
+            if head.val == val:
+                tem = head.next
+                pre.next = head.next
+                head = tem
+                continue
+            pre = pre.next
+            head = head.next
+        return dum.next
 
 if __name__=='__main__':
     # 测试集1
