@@ -24,12 +24,25 @@ def fibonacci_by_rec(n):
         temp[i%2] = temp[0] + temp[1]
     return temp[n%2]
 
-    
+def main(n):
+    if n <= 2:
+        return 1
 
+    rec = [1,1]
+    starter = 3
+    for i in range(3, n+1):
+        rec[i%2-1] = rec[0]+rec[1]
+    return rec[n%2-1]
 
 if __name__ == '__main__':
     start_time = datetime.now().timestamp()
-    a = fibonacci_by_rec(8)
+    a = main(40)
+    end_time = datetime.now().timestamp()
+    print(a)
+    print(end_time-start_time)
+
+    start_time = datetime.now().timestamp()
+    a = fibonacci(40)
     end_time = datetime.now().timestamp()
     print(a)
     print(end_time-start_time)
