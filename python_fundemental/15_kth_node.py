@@ -117,7 +117,31 @@ class Solution(object):
 # }
 
 
+# 2019-6-17, 引入dum节点, 实现更简单, again, 对于涉及到头结点的变动的, 引入dum节点, 效果不错
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        dum = ListNode(0)
+        dum.next = head
+        
+        if n == 1:
+            pre = dum
+            while head.next:
+                pre = head
+                head = head.next
+            pre.next = None
+            return dum.next
+        else:
+            fast = head
+            while n:
+                fast = fast.next
+                n -= 1
 
+            while fast:
+                fast = fast.next
+                head = head.next
+            head.val = head.next.val
+            head.next = head.next.next
+            return dum.next
 
 if __name__=='__main__':
     pass
