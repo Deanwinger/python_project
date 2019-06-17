@@ -5,6 +5,7 @@
 #题14
 # leetcode 328. Odd Even Linked List, 使用的是linked_list, 这题有点tricky, 参考下面的注释
 
+# 这是剑指offer上的原题解答, 但是牛客网上加了一个条件, 需要保证相对顺序, 这才是难点
 class Solution(object):
     def reorder_odd_even(self, array):
         if len(array) <= 1:
