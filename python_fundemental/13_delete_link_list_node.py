@@ -80,7 +80,7 @@ class Solution(object):
         :type val: int
         :rtype: ListNode
         """
-        # 聪明一点的处理是先建立一个临时节点, 明显优雅多了
+        # 聪明一点的处理是先建立一个临时节点, 明显优雅多了, 之所以要创建一个临时节点, 是因为, 可能涉及到第一个节点的修改, 所有, 这是一个有用的技巧
         pre = dum = ListNode(0)
         dum.next = head
         
