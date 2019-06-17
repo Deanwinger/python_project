@@ -2,6 +2,7 @@
 
 
 # 这题综合性很高, 可以反复多做几遍
+# 思路: 先找到中点, 链表分为前后两段, 后半段逆转, 然后合并两个链表
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -54,7 +55,8 @@ class Solution:
             head = node
             node = tem
         return head
-            
+
+    # 这种代码说实在的, 辣眼睛        
     def merge(self, left, right, mid=None):
         s = t = ListNode(0)
         while left and right:
