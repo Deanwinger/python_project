@@ -17,7 +17,7 @@
 优化代码速度
 '''
 #leetcode 题50
-#题11, 非常精妙的解法
+#题11, 非常精妙的解法, 值得反复手写
 
 class Solution(object):
     def Power(self, base, exponential):
