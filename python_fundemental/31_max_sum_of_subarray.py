@@ -128,7 +128,6 @@ class Solution3:
                 dp[i] = nums[i]
             if dp[i] > m:
                 m = dp[i]
-        print(dp)
         return m
             
 
