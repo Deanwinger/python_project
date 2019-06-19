@@ -52,3 +52,58 @@ class Solution:
                 times -= 1
         return result
     
+# 2019-6-19 当单独使用partition时, 是需要考虑lo, hi的边界条件的, 即lo>=hi:return hi, 其实就是只有两个元素的时候; 这也是为什么函数主体中需要先判断空和一个元素的case
+# 反复体会partition
+class Solution2:
+    def majorityElement(self, nums: List[int]) -> int:
+        n = len(nums)
+        if not n:
+            return 
+        if n== 1:
+            return nums[0]
+        
+        mid = n//2
+        start = 0
+        end = n-1
+        index = self.partition(nums, start, end)
+        while index != mid:
+            if index < mid:
+                start = index+1 
+                index = self.partition(nums, start, end)
+            else:
+                end = index - 1
+                index = self.partition(nums, start, end)
+        return nums[index]
+            
+    def partition(self, nums, lo, hi):
+        if lo>= hi:
+            return hi
+        i = lo+1
+        j = hi
+
+        pivot = lo
+        while True:
+            while nums[i] < nums[pivot]:
+                if i == hi:
+                    break
+                i += 1
+
+            while nums[j] > nums[pivot]:
+                if j == lo:
+                    break
+                j -= 1
+
+            if i>=j:
+                break
+            else:
+                nums[i],nums[j] = nums[j], nums[i]
+                i += 1
+                j -= 1
+        nums[lo], nums[j] = nums[j], nums[lo]
+        return j
+            
+    
+if __name__ == "__main__":
+    nums = [3,2,3]
+    s = Solution2()
+    s.majorityElement(nums)
