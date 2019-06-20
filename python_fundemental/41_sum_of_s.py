@@ -100,8 +100,38 @@ class Solution:
         return counter+1
 
 
+# 2019-6-20 參照剑指offer 写的, 没什么差别, 仍然超时
+class Solution2:
+    def consecutiveNumbersSum(self, N: int) -> int:
+        # 自己写的, 超出时间限制
+        if N<3:
+            return 1
+        
+        sml = 1
+        big = 2
+        stop = (N+1)//2
+        
+        cur_sum = sml + big
+        counter = 0
+        while sml < stop:
+            if cur_sum == N:
+                counter += 1
+
+            while cur_sum > N and sml < stop:
+                cur_sum -= sml
+                sml += 1
+            
+                if cur_sum == N:
+                    counter += 1
+            big += 1
+            cur_sum += big
+        return counter+1
+
+
 if __name__ == "__main__":
     # test = [1,2,4,7,11,15]
-    s = Solution()
+    s = Solution2()
     # print(s.FindNumbersWithSum(test, 15))
-    print(s.consecutiveNumbersSum(158796543564))
+    # print(s.consecutiveNumbersSum(158796543564))
+    # print(s.consecutiveNumbersSum(697972))
+    print(s.consecutiveNumbersSum(8504986))
