@@ -73,6 +73,16 @@ class Solution:
                     return True
         return False
 
+# leetcode796 2019-6-20
+class Solution:
+    def rotateString(self, A: str, B: str) -> bool:
+        if len(A) == len(B):
+            a = A+A
+            return B in a
+        else:
+            return False
+                
+
 # 2019-4-16, 剑指offer 的解答有语言的针对性, 对python 来说, 没有太对的意义
 class Solution:
     def rotateString(self, A: str, B: str) -> bool:
@@ -93,6 +103,12 @@ class Solution:
                 return True
         return False
         
+# leetcode 151 2019-6-20 效率很高
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        s = s[::-1]
+        ret = ' '.join([r[::-1] for r in s.split()])
+        return ret
 
 if __name__ == "__main__":
     test = "the sky is blue"
