@@ -121,9 +121,38 @@ class Solution:
             head = head.next
         return head.val
 
+# 2019-6-20 这个题目每次复习的时候都可以再做一遍
+class LinkNode(object):
+    def __init__(self, val=None):
+        self.val = val
+        self.next = None
+
+class Solution:
+    def LastRemaining_Solution(self, n, m):
+        if n < 1 or m < 1:
+            return -1
+        
+        # 构建链表
+        node = head = LinkNode(0)
+        for i in range(1, n):
+            head.next = LinkNode(i)
+            head = head.next
+        head.next = node
+        
+        starter = node
+        
+        while starter.next is not starter:
+            t = m-1
+            while t:
+                t -= 1
+                starter = starter.next
+            starter.val = starter.next.val
+            starter.next = starter.next.next
+        return starter.val
+
 
 if __name__=="__main__":
-    s = Solution()
+    s = Solution4()
     # from random import randint
 
     # n = 1
@@ -142,5 +171,5 @@ if __name__=="__main__":
     #         print("cur b is: ", b)
     #         break
     #     n += 1
-    a = s.LastRemaining_Solution(8, 1)
+    a = s.LastRemaining_Solution(5, 3)
     print(a)
