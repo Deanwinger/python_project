@@ -84,6 +84,39 @@ class SolutionOfEighteen:
 
         return self.is_included(s.left, t.left) and self.is_included(s.right, t.right)
 
+# 2019-6-21 独立写的, 很elegant, 对递归的理解又进了一步...
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        if not s and not t:
+            return True
+        
+        if not s or not t:
+            return False
+            
+        if s.val == t.val:
+            if self.s_include_t(s, t):
+                return True
+
+        return self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
+
+    def s_include_t(self, s, t):
+        if not s and not t:
+            return True
+        
+        if not s or not t:
+            return False
+        
+        if s.val != t.val:
+            return False
+        
+        return self.s_include_t(s.left, t.left) and self.s_include_t(s.right, t.right)
 
 if __name__ == '__main__':
     pRoot1 = TreeNode(8)
