@@ -6,7 +6,7 @@
 '''
 
 #题24
-#LeetCode 类似题98， 145
+#LeetCode 类似题98
 
 class Solution(object):
     # 解法1
