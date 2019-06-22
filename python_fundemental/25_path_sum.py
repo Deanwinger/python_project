@@ -73,5 +73,30 @@ class Solution:
         cur -= root.val
         rec.pop()
 
+
+# 2019-6-22 leetcode 113, 这题是非常经典的回溯, 多做几遍
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> List[List[int]]:
+        if not root:
+            return []
+        g = []
+        rec = []
+        self.get_path_all(root, sum, g, rec=rec)
+        return g
+    
+    def get_path_all(self, root, sum, g, rec=[]):
+        if not root:
+            return
+        rec.append(root.val)
+        sum -= root.val
+        if root.right is None and root.left is None and sum == 0:
+            g.append(list(rec))
+            
+        self.get_path_all(root.left, sum, g, rec=rec)
+    
+        self.get_path_all(root.right, sum, g, rec=rec)
+        rec.pop()
+        return
+
 if __name__=='__main__':
     pass
