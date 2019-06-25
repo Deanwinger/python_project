@@ -178,6 +178,53 @@ class Solution:
             end = self.get_last(nums, mid, end, target)
         return end
 
+
+# 2019-6-25 leetcode 34, 这种题目就是常做常新,多做几遍, 很多细节
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
+
+        start = 0
+        end = len(nums)-1
+        first = self.get_first(nums, start, end, target)
+        last = self.get_last(nums, start, end, target)
+        return [first, last]
+    
+    def get_first(self, nums, start, end, target):
+        if start > end:
+            return -1
+        
+        mid = (start+end)//2
+        if nums[mid] == target:
+            if (mid>0 and nums[mid-1] != target) or mid ==0:
+                return mid
+            else:
+                end = mid-1
+        elif nums[mid] < target:
+                start = mid+1
+        else:
+            end = mid-1
+        return self.get_first(nums, start, end, target)
+                
+                
+            
+    def get_last(self, nums, start,end, target):
+        if start > end:
+            return -1
+        
+        mid = (start+end)//2
+        if nums[mid] == target:
+            if (mid<end and nums[mid+1] != target) or mid ==end:
+                return mid
+            else:
+                start = mid+1
+        elif nums[mid] < target:
+                start = mid+1
+        else:
+            end = mid-1
+        return self.get_last(nums, start, end, target)
+
 if __name__=='__main__':
     alist = [1, 8, 8]
     # alist = [5,7,7,8,8,10]
