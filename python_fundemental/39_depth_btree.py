@@ -85,12 +85,34 @@ class Solu(object):
         right = self.maxDepth(root.right)
         return 1+max(left, right)
 
-# 2014-4-15
+# 2019-4-15
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
+        # 方法一: 迭代实现
         if not root:
             return 0
         
         left_depth = self.maxDepth(root.left) + 1
         right_depth = self.maxDepth(root.right) + 1
         return max(left_depth, right_depth)
+
+
+# 2019-6-26 非递归, 一层一层的数, ring a bell?
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        # 方法二 迭代实现
+        que = []
+        que.append((root, 1))
+        c = 1
+        while que:
+            node, count = que.pop(0)
+            if node.left or node.right:
+                c = count+1
+            if node.left:
+                que.append((node.left, count+1))
+            if node.right:
+                que.append((node.right, count+1))
+        return c
+
