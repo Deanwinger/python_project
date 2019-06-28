@@ -24,17 +24,26 @@ def insert_sort(alist):
         alist[j] = elem
     return 
 
+# 2019-6-28 前段一直有序
+def insrt_sort(alist):
+    n = len(alist)
+    for i in range(1, n):
+        j = i
+        while j > 0 and alist[j] < alist[j-1]:
+            alist[j], alist[j-1] = alist[j-1], alist[j]
+            j -= 1
+    return
 
 if __name__ == "__main__":
     n = 10
     while n:
         rec = []
-        for i in range(10000):
-            rec.append(randint(0, 10000))
+        for i in range(1000):
+            rec.append(randint(0, 1000))
         res = list(rec)
             
         t0 = time.time()
-        insert_sort(rec)
+        insrt_sort(rec)
         t1 = time.time()
         print("my_insertion_sort runs: %.8f"%(t1-t0))
 
