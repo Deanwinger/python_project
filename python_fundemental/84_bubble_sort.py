@@ -23,17 +23,32 @@ def bubble_sort(alist):
             break
     return
 
+# 2019-6-28 冒泡排序的动图, 每次选出最大的放到最后(未排序的部分), j指针一直指向最大, 如果有比他打的, 交换
+# https://visualgo.net/zh/sorting
+
+def bsort(alist):
+    n = len(alist)
+    for i in range(n):
+        found = False
+        for j in range(1, n-i):
+            if alist[j] < alist[j-1]:
+                alist[j], alist[j-1] = alist[j-1], alist[j]
+                found = True
+        if not found:
+            return
+    return
+
 
 if __name__ == "__main__":
     n = 30
     while n:
         rec = []
-        for i in range(10000):
-            rec.append(randint(0, 10000))
+        for i in range(1000):
+            rec.append(randint(0, 1000))
         res = list(rec)
             
         t0 = time.time()
-        bubble_sort(rec)
+        bsort(rec)
         t1 = time.time()
         print("my_insertion_sort runs: %.8f"%(t1-t0))
 
