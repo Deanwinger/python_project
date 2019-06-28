@@ -4,7 +4,7 @@
 '''
 
 #leetcode 113. Path Sum II, 类似还有112. Path Sum 和 437. Path Sum III
-#题25
+#题25 这题用的就是非常经典的回溯法
 
 # Definition for a binary tree node.
 class TreeNode:
