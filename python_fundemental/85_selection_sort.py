@@ -21,6 +21,17 @@ def select_sort(alist):
         alist[i], alist[cur] = alist[cur], alist[i]
     return 
 
+# 2019-6-28 选择排序, 同样保证前面是有序的, 一次选出第一个位置, 第二个位置的元素...
+def ssort(alist):
+    n = len(alist)
+    for i in range(n):
+        cur = i
+        for j in range(i+1, n):
+            if alist[j]<alist[cur]:
+                cur = j
+        alist[i], alist[cur] = alist[cur], alist[i]
+    return
+                
 
 if __name__ == "__main__":
     # a = [1,4,7,6,9,2,5,8]
@@ -33,12 +44,12 @@ if __name__ == "__main__":
     n = 30
     while n:
         ori = rec = []
-        for i in range(10000):
-            rec.append(randint(0, 10000))
+        for i in range(1000):
+            rec.append(randint(0, 1000))
         res = list(rec)
             
         t0 = time.time()
-        select_sort(rec)
+        ssort(rec)
         t1 = time.time()
         print("my_insertion_sort runs: %.8f"%(t1-t0))
 
