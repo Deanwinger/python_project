@@ -98,3 +98,36 @@ class PrioQueue:
     def __len__(self):
         return len(self._elems)
     
+
+# 2019-7-1, 这题需要注意的是, 当堆的元素少于k时, 直接返回堆顶元素
+
+import heapq
+class KthLargest:
+
+    def __init__(self, k: int, nums: List[int]):
+        self._k = k
+        self._heap = self.get_heap(nums, k)
+
+    def add(self, val: int) -> int:
+        n = len(self._heap)
+        k = self._k
+        if n < k:
+            heapq.heappush(self._heap, val)
+        else:
+            top = self._heap[0]
+            if val > top:
+                heapq.heappush(self._heap, val)
+                heapq.heappop(self._heap)
+        return self._heap[0]
+    
+    def get_heap(self, nums, k):
+        n = len(nums)
+        h = list(nums)
+        t = h[:k]
+        heapq.heapify(t)
+        for i in range(k, n):
+            top = t[0]
+            if h[i] > top:
+                heapq.heappush(t, h[i])
+                heapq.heappop(t)
+        return t
