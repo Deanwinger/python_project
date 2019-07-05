@@ -28,3 +28,34 @@ class Solution:
                 if matrix[i][j] > maxs:
                     maxs = matrix[i][j]
         return maxs
+
+# 2019-7-6 O(1)空间优化完成
+class Solution:
+    def findLength(self, A: List[int], B: List[int]) -> int:
+        n1 = len(A)
+        n2 = len(B)
+        
+        row = 0
+        col = n2-1
+        
+        cur = 0
+        while row < n1:
+            i = row
+            j = col
+            res = 0
+            while i < n1 and j < n2:
+                if A[i] == B[j]:
+                    res += 1
+                else:
+                    res = 0
+                    
+                if res > cur:
+                    cur = res
+                i += 1
+                j += 1
+
+            if col > 0:
+                col -= 1
+            else:
+                row += 1
+        return cur
