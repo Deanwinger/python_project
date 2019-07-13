@@ -2,10 +2,12 @@
 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。
 '''
 
-# leetcode 260. Single Number III, 类似题136. Single Number 及　137. Single Number II
+# leetcode 260. Single Number III -- 剑指offer 题40
+# leetcode 136. Single Number
+# leetcode 137. Single Number II -- 剑指offer(2) 题56.2
 
-# 题40
 
+# 题40 leetcode 260
 class Solution:
     def singleNumber(self, nums):
         """
