@@ -32,6 +32,8 @@ class Solution:
         return 
 
 
+# 2019-7-1 两个月之后再回看, 这是很经典的回溯法啊
+
 
 if __name__ == "__main__":
     s = Solution()
