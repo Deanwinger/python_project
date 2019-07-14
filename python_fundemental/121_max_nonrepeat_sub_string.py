@@ -1,4 +1,5 @@
 # leetcode 3. 无重复字符的最长子串
+# 剑指offer(2) 题 48 最长不包含重复字符的子串
 
 '''
 题目解析
@@ -25,27 +26,31 @@ res 和 left ，其中 res 用来记录最长无重复子串的长度，left 指
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        # n = len(s)
+        if not s:
+            return 0
         
-        # if n <= 1:
-        #     return n
-        
-        # i = 0
-        # j = 1
-        # cmax = cur = 1
-        # while j<n:
-        #     print(cur)
-        #     if s[j] == s[i]:
-        #         i += 1
-        #     else:
-        #         cur += 1
-        #     j += 1
-        #     if cmax < cur:
-        #         cmax = cur
-        # return cmax
+        rec = {}
+        n = len(s)
+        dp = [0]*n
+        cur = 0
+        for i in range(n):
+            if rec.get(s[i]) is None:
+                rec[s[i]] = i
+                dp[i] = dp[i-1] + 1
+            else:
+                pre = rec[s[i]]
+                distance = i-pre
+                if distance > dp[i-1]:
+                    dp[i] = dp[i-1] + 1
+                else:
+                    dp[i] = distance
+                rec[s[i]] = i
+            if dp[i] > cur:
+                cur = dp[i]
+        return cur
 
 
 if __name__=='__main__':
-    s = "tmmzuxt"
+    s = "abba"
     solu = Solution()
     print(solu.lengthOfLongestSubstring(s))
