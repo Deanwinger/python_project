@@ -10,8 +10,9 @@ goal: 目标, 退出标志
 
 '''
 
-# 2019-5-28 程序员代码面试指南 P239, 这里虽然用到了递归, 但是貌似没有很多人都提到的回溯法, 
-# 回溯法 to be finished
+# 回溯法心得 https://zhuanlan.zhihu.com/p/51882471
+
+# 2019-5-28 程序员代码面试指南 P239
 # 位运算 加速 to be finished
 class Solution:
     def totalNQueens(self, n: int) -> int:
@@ -39,6 +40,18 @@ class Solution:
                 return False
         return True
         
+
+# 笔记: 3 key
+# 1. choice: recursion expresses decision
+# 2. constraints
+# 3. goal: when to stop
+#
+#
+#
+#
+#
+
+
 if __name__ == "__main__":
     n = 12
     t0 = time.time()
