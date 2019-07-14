@@ -8,7 +8,7 @@ import heapq
 
 # 题30， 最小的K个数
 
-# 215. 数组中的第K个最大元素
+# leetcode 215. 数组中的第K个最大元素
 
 # 类似题 leetcode 230. Kth Smallest Element in a BST -- 此题用中序遍历就好
 
@@ -20,7 +20,44 @@ class Solution:
         :type k: int
         :rtype: int
         """
-        pass
+        start = 0
+        end = len(nums)-1
+        n = len(nums)
+        index = self.partition(nums, start, end)
+        while index != n-k:
+            if index > n-k:
+                end = index-1
+                index = self.partition(nums, start, end)
+            else:
+                start = index+1
+                index = self.partition(nums, start, end)
+        return nums[index]
+    
+    def partition(self, nums, lo, hi):
+        if lo>= hi:
+            return hi
+        pivot = lo
+        i = lo+1
+        j = hi
+        while True:
+            while nums[i] < nums[pivot]:
+                if i == hi:
+                    break
+                i += 1
+                    
+            while nums[j] > nums[pivot]:
+                if j == lo:
+                    break
+                j -=1
+                    
+            if i >= j:
+                break
+                    
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            j -= 1
+        nums[lo], nums[j] = nums[j], nums[lo]
+        return j
 
     def k_smallest(self, nums, k):
         """
@@ -189,8 +226,55 @@ class SStack:
         
 
 
+# 2019-6-19
+class Solution3:
+    def GetLeastNumbers_Solution(self, nums, k):
+        # write code here
+        n = len(nums)
+        if not n:
+            return
+        if n == 1:
+            return nums[0]
+        
+        start = 0
+        end = n-1
+        target = k-1
+        ind = self.partition(nums, start, end)
+        while ind != target:
+            if ind < target:
+                start = ind + 1
+            else:
+                end = ind - 1
+            ind = self.partition(nums, start, end)
+        return nums[:k]
+    
+    def partition(self, nums, lo, hi):
+        # 非常关键, corner case [2, 3], 没有该条件就直接报错, 其实这里改为== 更合理, 注意, partition之前, 肯定是保证有两个元素以上, 当不停的partition时, 范围不断缩小, 当只剩下两个时, 非此即彼
+        if lo == hi:
+            return hi
+        i = lo+1
+        j = hi
 
+        pivot = lo
+        while True:
+            while nums[i] < nums[pivot]:
+                if i == hi:
+                    break
+                i += 1
 
+            while nums[j] > nums[pivot]:
+                if j == lo:
+                    break
+                j -= 1
+
+            if i>=j:
+                break
+            else:
+                nums[i],nums[j] = nums[j], nums[i]
+                i += 1
+                j -= 1
+        nums[lo], nums[j] = nums[j], nums[lo]
+        return j
 
 
 
@@ -205,12 +289,9 @@ class SStack:
 
 
 if __name__ == "__main__":
-    print("Test class PrioQueue:")
-    pq = PrioQueue([1, 2, 3])
-    for i in range(12):
-        pq.enqueue(randint(0, 30))
-    print(pq)
-
+    a = [4,5,1,6,2,7,3,8]
+    s = Solution3()
+    print(s.GetLeastNumbers_Solution(a, 4))
 
 
 

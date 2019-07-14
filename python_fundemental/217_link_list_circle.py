@@ -1,5 +1,5 @@
 # leetcode 141
-# leetcode 142
+# leetcode 142. 环形链表 II == 剑指offer(2) 题 23
 
 
 # 142

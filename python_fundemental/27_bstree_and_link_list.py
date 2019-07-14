@@ -48,36 +48,8 @@ class Solution:
         while root.left:
             root = root.left
         return root
-    # def Convert(self, pRootOfTree):
-    #     if pRootOfTree == None:
-    #         return None
-    #     if not pRootOfTree.left and not pRootOfTree.right:
-    #         return pRootOfTree
 
-    #     # 处理左子树
-    #     self.Convert(pRootOfTree.left)
-    #     left = pRootOfTree.left
 
-    #     # 连接根与左子树最大结点
-    #     if left:
-    #         while left.right:
-    #             left = left.right
-    #         pRootOfTree.left, left.right = left, pRootOfTree
-
-    #     # 处理右子树
-    #     self.Convert(pRootOfTree.right)
-    #     right = pRootOfTree.right
-
-    #     # 连接根与右子树最小结点
-    #     if right:
-    #         while right.left:
-    #             right = right.left
-    #         pRootOfTree.right, right.left = right, pRootOfTree
-
-    #     while pRootOfTree.left:
-    #         pRootOfTree = pRootOfTree.left
-
-    #     return pRootOfTree
 
 if __name__=="__main__":
     pNode1 = TreeNode(8)

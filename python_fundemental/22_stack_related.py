@@ -5,6 +5,7 @@
 但4,3,5,1,2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）
 '''
 
+# leetcode 946
 # 题22
 
 class Solution(object):
@@ -48,29 +49,59 @@ class StackSquence(object):
 
 # 8.19 重写        
 def stack_sequence(s, t):
-    if len(s) != len(t):
-        return False
+    # if len(s) != len(t):
+    #     return False
 
+    # if not s or not t:
+    #     return False
+
+    # stack = []
+    # for e in s:
+    #     stack.append(e)        
+    #     while stack[-1] == t[0]:
+    #         stack.pop()
+    #         t.pop(0)
+            
+    #         if not stack:
+    #             break
+
+    # if not stack and not t:
+    #     return True
+    # return False
     if not s or not t:
         return False
-
+    
     stack = []
-    for e in s:
-        stack.append(e)        
+    # t 代表弹出序列, s 代表压入
+    for num in s:
+        stack.append(num)
         while stack[-1] == t[0]:
             stack.pop()
             t.pop(0)
-            
             if not stack:
                 break
+    if len(stack) !=0:
+        return False
+    return True
 
-    if not stack and not t:
-        return True
-    return False
 
 
+        # if not s or not t:
+        #     return False
+        
+        # stack = []
+        # for e in s:
+        #     stack.append(e)
+        #     while stack[-1] == t[0]:
+        #         stack.pop()
+        #         t.pop(0)
+        #         if not stack:
+        #             break
+        # if not stack and not t:
+        #     return True
+        # return False
     
-    
+
 
 if __name__ == '__main__':
     a = [1]

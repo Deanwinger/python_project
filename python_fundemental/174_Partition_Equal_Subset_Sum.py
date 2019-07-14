@@ -1,4 +1,5 @@
 # leetcode 416. Partition Equal Subset Sum (Medium)
+# 0-1 背包问题
 
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:

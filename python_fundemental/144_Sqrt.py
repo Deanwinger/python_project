@@ -1,0 +1,1 @@
+# leetcode 69. Sqrt(x) (Easy)

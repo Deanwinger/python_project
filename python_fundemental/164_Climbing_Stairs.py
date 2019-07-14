@@ -1,5 +1,5 @@
 # leetcode 70. Climbing Stairs (Easy)
-
+# 动态规划的题目基本上从此题开始
 
 class Solution:
     def climbStairs(self, n: int) -> int:

@@ -21,7 +21,7 @@
 class PrioQueueError(ValueError):
     pass
 
-# 基于（小顶）堆的优先序列 剑指offer的第30题有大顶堆的实现
+# 基于（小顶）堆的优先队列, 剑指offer的第30题有大顶堆的实现
 class PrioQueue:
     """ Implementing priority queues using heaps
     """

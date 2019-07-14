@@ -1,5 +1,5 @@
 # leetcode 234. Palindrome Linked List
-
+# 程序员代码面试指南 48页
 
 # Definition for singly-linked list.
 # class ListNode(object):

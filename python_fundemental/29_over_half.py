@@ -53,10 +53,10 @@ class Solution:
         return result
     
 # 2019-6-19 当单独使用partition时, 是需要考虑lo, hi的边界条件的, 即lo>=hi:return hi, 其实就是只有两个元素的时候; 这也是为什么函数主体中需要先判断空和一个元素的case
-# 貌似又不需要考虑上面的边界, 因为单边选择的时候, 基础case是2个元素, to be finished...
+# 貌似又不需要考虑上面的边界, 因为单边选择的时候, 基础case是2个元素, 此处有误, 应该是==更合理;
 # 反复体会partition
 class Solution2:
-    def majorityElement(self, nums: List[int]) -> int:
+    def majorityElement(self, nums) -> int:
         n = len(nums)
         if not n:
             return 
@@ -77,8 +77,8 @@ class Solution2:
         return nums[index]
             
     def partition(self, nums, lo, hi):
-        # 非常关键, 当外层函数不进行边界判断时, 非常重要
-        if lo>= hi:
+        # 非常关键, corner case [2, 3], 没有该条件就直接报错
+        if lo== hi:
             return hi
         i = lo+1
         j = hi
@@ -106,6 +106,6 @@ class Solution2:
             
     
 if __name__ == "__main__":
-    nums = [3,2,3]
+    nums = [2,3]
     s = Solution2()
-    s.majorityElement(nums)
+    print(s.majorityElement(nums))

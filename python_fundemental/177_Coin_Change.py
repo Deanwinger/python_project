@@ -1,5 +1,7 @@
 # leetcode 322. Coin Change (Medium)
 # leetcode 518. Coin Change 2 (Medium)
+# 0-1 背包问题
+
 
 # 动态规划 资源
 # https://www.geeksforgeeks.org/category/dynamic-programming/

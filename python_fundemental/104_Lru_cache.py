@@ -1,14 +1,21 @@
 """
-    基于dict和循环双链表实现
-    1. 如果只用循环双链表, 则无法再O(1)时间get所有键
-    2. 因为限制内存空间, 如果只用dict, 需要额外的参数记录dict的大小, 以及数据的加入的先后顺序
+    hashtable 保证get操作O(1)
+    double_link_list 保证order
 
-    控制循环双链表的长度的逻辑设在哪里呢? 目前暂时采取的是Cache控制, 想过在链表中设定,但是感觉很丑
+    hashtable, 很显然, 用dict 实现, 此处需要注意的是{key: DLLNode}, 为什么value值要存node, 
+    一开始我觉的只需要存Node.value就好, 但是当需要remove最后的Node的时候, 你需要相应的回hashtable删除对应的记录, 所以key是必要的
 """
 
 # leetcode 146. LRU Cache
 
 # 题51
+
+class DLListNode:
+    def __init__(self, key, value, prev=None, next=None):
+        self.key = key
+        self.val = value
+        self.prev = prev
+        self.next = next
 
 class LRUCache:
 
@@ -72,12 +79,7 @@ class LRUCache:
             self._cdllist.append(node)
             self._cdllist.backwards()
 
-class DLListNode:
-    def __init__(self, key, value, prev=None, next=None):
-        self.key = key
-        self.val = value
-        self.prev = prev
-        self.next = next
+
         
 
 # 循环双链表类

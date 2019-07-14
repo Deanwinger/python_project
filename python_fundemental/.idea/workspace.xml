@@ -2,8 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9258f493-2595-4cc4-a30c-df5221e4bf2e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/114_kmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/114_kmp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/22_stack_related.py" beforeDir="false" afterPath="$PROJECT_DIR$/22_stack_related.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/27_bstree_and_link_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/27_bstree_and_link_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/29_over_half.py" beforeDir="false" afterPath="$PROJECT_DIR$/29_over_half.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/30_kth_num.py" beforeDir="false" afterPath="$PROJECT_DIR$/30_kth_num.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/37_union_node.py" beforeDir="false" afterPath="$PROJECT_DIR$/37_union_node.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/48_longest_palindrome.py" beforeDir="false" afterPath="$PROJECT_DIR$/48_longest_palindrome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/55_parenthess.py" beforeDir="false" afterPath="$PROJECT_DIR$/55_parenthess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/69_N_queens.py" beforeDir="false" afterPath="$PROJECT_DIR$/69_N_queens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/6_btree_rebuild.py" beforeDir="false" afterPath="$PROJECT_DIR$/6_btree_rebuild.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/86_merge_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/86_merge_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/89_Sliding_Window_Maximum.py" beforeDir="false" afterPath="$PROJECT_DIR$/89_Sliding_Window_Maximum.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/8_minimum_in_array.py" beforeDir="false" afterPath="$PROJECT_DIR$/8_minimum_in_array.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/92_Palindrome_Linked_List.py" beforeDir="false" afterPath="$PROJECT_DIR$/92_Palindrome_Linked_List.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/93_heap_related.py" beforeDir="false" afterPath="$PROJECT_DIR$/93_heap_related.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/os/Linux.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/Linux.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os/es.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/es.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/os/mysql.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/mysql.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os/network.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/network.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os/py_fundemental.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/py_fundemental.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os/redis.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/redis.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/os/sys_design.md" beforeDir="false" afterPath="$PROJECT_DIR$/os/sys_design.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prep/heap_related.py" beforeDir="false" afterPath="$PROJECT_DIR$/prep/heap_related.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../python_server/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../python_server/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,33 +37,13 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/python_fundemental$82_quick_sorts_related.coverage" NAME="82_quick_sorts_related Coverage Results" MODIFIED="1533319135328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-979046239">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/82_quick_sorts_related.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="530">
-              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
             </state>
           </provider>
         </entry>
@@ -57,12 +60,6 @@
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="65" />
     <option name="y" value="-6" />
@@ -76,22 +73,13 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="python_fundemental" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_fundemental" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Codes/acqui-server" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -147,21 +135,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533318609804</updated>
+      <workItem from="1562000808427" duration="38000" />
     </task>
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="38000" />
+  </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="2497" height="1452" extended-state="6" />
+    <frame x="65" y="-6" width="2495" height="1446" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16754994" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16918676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329296" />
@@ -169,18 +155,21 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="SciView" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -197,7 +186,7 @@
     <entry file="file://$PROJECT_DIR$/82_quick_sorts_related.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="530">
-          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>

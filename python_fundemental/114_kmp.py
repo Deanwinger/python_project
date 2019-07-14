@@ -54,7 +54,7 @@ def KMP(t, p, p_next):
 
     while i < t_length and j < p_length:
         if j == -1 or t[i] == p[j]:
-            i += 1
+            i += 1                                                                                                                              
             j += 1
         else:
             j = pnext[j]
@@ -94,8 +94,11 @@ if __name__ == "__main__":
     s = 'ababababca'
     l =   'abababca'
 
-    print(len(t1))
-    pnext = gen_pnext(t1)
+    t2 = "ab"
+    p2 = "ab"
+
+    print(len(t2))
+    pnext = gen_pnext(t2)
     print(pnext)
 
-    print(KMP(t1, p1, pnext))
+    print(KMP(t2, p2, pnext))

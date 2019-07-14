@@ -271,17 +271,8 @@
 
 
 
-#### **21. mysql的引擎,区别与适用场景。Innodb 和 MyISAM 的区别**
-`技术内幕P76`
-- 区别
-~~~
-    1. 索引相关:
-        a. MyISAM使用前缀压缩技术使用索引更小, InnoDB则按照原数据格式进行存储;
-        b. MyISAM索引通过数据的物理位置引用被索引的行, 而InnoDB则根据主键引用;
-~~~
-- 优劣
+#### **21.**
 
-- 使用场景
 
 #### **22. primary key 和 unique key 的区别**
 
@@ -1295,7 +1286,15 @@
     一个InnoDb引擎存储在一个文件空间（共享表空间，表大小不受操作系统控制，一个表可能分布在多个文件里），也有可能为多个（设置为独立表空，表大小受操作系统文件大小限制，一般为2G），受操作系统文件大小的限制；
 
     主键索引采用聚集索引（索引的数据域存储数据文件本身），辅索引的数据域存储主键的值；因此从辅索引查找数据，需要先通过辅索引找到主键值，再访问辅索引；最好使用自增主键，防止插入数据时，为维持B+树结构，文件的大调整。
+
+    总结 -- 五点区别:
+        1>.InnoDB支持事务，而MyISAM不支持事务
+        2>.InnoDB支持行级锁，而MyISAM支持表级锁
+        3>.InnoDB支持MVCC, 而MyISAM不支持
+        4>.InnoDB支持外键，而MyISAM不支持
+        5>.InnoDB不支持全文索引，而MyISAM支持。
 ~~~
+
 
 
 #### **82. mysql里记录货币用什么字段类型好**
@@ -1371,15 +1370,75 @@ SQL语言包括数据定义(DDL)、数据操纵(DML),数据控制(DCL)和数据�
 ~~~
 
 #### **89. 分库分表后如何部署上线**
-#### **.**
-#### **.**
-#### **.**
 
-#### **.**
-#### **.**
-#### **.**
-#### **.**
-#### **.**
+#### **90. innodb的优势**
+
+#### **91. MySQL 三种关联查询的方式: ON vs USING vs 传统风格**
+~~~
+    看看下面三个关联查询的 SQL 语句有何区别？
+
+        SELECT * FROM film JOIN film_actor ON (film.film_id = film_actor.film_id)
+        SELECT * FROM film JOIN film_actor USING (film_id)
+        SELECT * FROM film, film_actor WHERE film.film_id = film_actor.film_id
+        
+    最大的不同更多是语法糖，但有一些有意思的东西值得关注。
+
+    为了方便区别，我们将前两种写法称作是 ANSI 风格，第三种称为 Theta 风格。
+
+    1.Theta 风格
+        在 FROM 短语中列出了关联的表名，而 WHERE 短语则指定如何关联。
+
+        这种写法被认为是古老的方式，有些时候比较难以理解，请看下面查询：
+
+        SELECT * FROM film, film_actor WHERE film.film_id = film_actor.film_id AND actor_id = 17 AND film.length > 120
+        上述查询列出片长超过 120 分钟的电影，其中包括演员编号是 17 的条件。别在意查询结果，查询本身如何呢？WHERE 表达式中包含三个条件，要看出哪个条件是关联，哪个条件是过滤还是稍费点事的。不过还是相对简单的，但如果是 5 个表，20 多个条件呢？
+
+    2. ANSI 风格: ON
+        使用 JOIN ... ON 可以将表关联的条件和记录过滤条件分开，将上面的语句重写后的结果如下：
+
+        SELECT * FROM film JOIN film_actor ON (film.film_id = film_actor.film_id) WHERE actor_id = 17 AND film.length > 120
+        看起来清晰许多。
+
+    
+    3.ANSI 风格: USING
+        有一种特殊情况，当两个要关联表的字段名是一样的，我们可以使用  USING ，可减少 SQL 语句的长度:
+
+        SELECT * FROM film JOIN film_actor USING (film_id) WHERE actor_id = 17 AND film.length > 120
+        这个时候括号就是必须的了。这种写法很好，输入更少的单词，查询的性能也非常棒，但还需要注意一些差异。
+
+    就是说这三种方式除了写法不同外，没什么区别
+~~~
+
+#### **92. 一致性哈希**
+`程序员代码面试指南`--P313
+
+#### **93. 事务的二段提交**
+`DDIA`--第九章?
+#### **94. 讲讲es**
+`https://zhuanlan.zhihu.com/p/62892586`
+#### **95.用个通俗的例子讲一讲死锁**
+`https://zhuanlan.zhihu.com/p/26945588`
+#### **96. mysql中limit offset**
+~~~
+    ① selete * from testtable limit 2,1;
+
+    ② selete * from testtable limit 2 offset 1;
+
+    注意：
+
+    1.数据库数据计算是从0开始的
+
+    2.offset X是跳过X个数据，limit Y是选取Y个数据
+
+    3.limit  X,Y  中X表示跳过X个数据，读取Y个数据
+
+    这两个都是能完成需要，但是他们之间是有区别的：
+
+    ①是从数据库中第三条开始查询，取一条数据，即第三条数据读取，一二条跳过
+
+    ②是从数据库中的第二条数据开始查询两条数据，即第二条和第三条
+~~~
+
 #### **.**
 #### **.**
 #### **.**
