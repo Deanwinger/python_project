@@ -81,40 +81,40 @@ def merge_s(alist):
     aux = [None]*n
     msort(alist, aux, 0, n-1)
 
-# 2019-4-20 为毛要在这里写quick sort, 哦, 是为了下面的测试
-# def quick_sort(nums, lo, hi): 
-#     if lo >= hi:if len(alist) == 1:
+2019-4-20 为毛要在这里写quick sort, 哦, 是为了下面的测试
+def quick_sort(nums, lo, hi): 
+    if lo >= hi:if len(alist) == 1:
         return alist
-#         return nums
-#     j = partition(nums, lo, hi)
-#     quick_sort(nums, lo, j-1)
-#     quick_sort(nums, j+1, hi)
-#     return
+        return nums
+    j = partition(nums, lo, hi)
+    quick_sort(nums, lo, j-1)
+    quick_sort(nums, j+1, hi)
+    return
 
-# def partition(nums, lo: int, hi: int):
+def partition(nums, lo: int, hi: int):
 
-#     i = lo+1
-#     j = hi
-#     while True:
-#         while  nums[i] < nums[lo]:
-#             if i == hi:
-#                 break
-#             i += 1
+    i = lo+1
+    j = hi
+    while True:
+        while  nums[i] < nums[lo]:
+            if i == hi:
+                break
+            i += 1
 
-#         while nums[j] > nums[lo]:
-#             if j == lo:
-#                 break
-#             j -= 1
-#         if i >= j:
-#             break
-#         nums[i], nums[j] = nums[j], nums[i]
-#         i += 1
-#         j -= 1
-#     nums[lo], nums[j] = nums[j], nums[lo]
-#     return j
+        while nums[j] > nums[lo]:
+            if j == lo:
+                break
+            j -= 1
+        if i >= j:
+            break
+        nums[i], nums[j] = nums[j], nums[i]
+        i += 1
+        j -= 1
+    nums[lo], nums[j] = nums[j], nums[lo]
+    return j
 
-# =====================================================================
-# 2019-4-20
+=====================================================================
+2019-4-20
 
 def msort(alist, aux, left, right):
     if left < right:
@@ -172,23 +172,67 @@ def merge_sort(alist):
     # print("The aux is: ", aux)
     return aux
 
+# =============================================================================================
+# 201-5-30
+def merge_sort(array):
+    n = len(array)
+    aux = [None]*n
+    m_sort(array, aux, 0, n-1)
+    return 
+
+def m_sort(array, aux, start, end):
+    mid = (start+end) // 2
+
+    if start<end:
+        m_sort(array, aux, start, mid)
+        m_sort(array, aux, mid+1, end)
+        merge(array, aux, start, mid+1, end)
+
+def merge(array, aux, left_start, right_start, end):
+    i = k = left_start
+    j = right_start
+
+    while i<right_start and j<=end:
+        if array[i] <= array[j]:
+            aux[k] = array[i]
+            i += 1
+        else:
+            aux[k] = array[j]
+            j += 1
+        k += 1
+
+    while i<right_start:
+        aux[k] = array[i]
+        k += 1
+        i += 1
+
+    while j<=end:
+        aux[k] = array[j]
+        k += 1
+        j += 1
+
+    while left_start <= end:
+        array[left_start] = aux[left_start]
+        left_start += 1
+    return
+    
 
 if __name__ == "__main__":
     # a = [1,4,7,6,9,2,5,8]
     # b = list(a)
-    # merge_s(a)
+    # merge_sort(a)
     # print(a)
 
     # print(sorted(b))
     n = 10
     while n:
         ori = rec = []
-        for i in range(1000000):
+        for i in range(100000):
             rec.append(randint(0, 1000000))
         res = list(rec)
         # print("Input rec is: ", rec)
         t0 = time.time()
-        merge_s(rec)
+        merge_sort(rec)
         t1 = time.time()
         # print("Sorted rec is: ", rec)
         print("my_merge_s runs: %.8f"%(t1-t0))
@@ -200,7 +244,8 @@ if __name__ == "__main__":
         # # print("Python sort is: ", ret)
         print("Is my_merge_s return the same value as pythons sorted: ", rec == res)
         if rec != res:
-            raise Exception("Whoops, you got it wrong: ", ori)
+            # raise Exception("Whoops, you got it wrong: ", ori)
+            raise Exception("Whoops, you got it wrong: ")
         n -= 1
         print("="*30)
         
