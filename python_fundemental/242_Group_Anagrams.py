@@ -9,10 +9,11 @@ class Solution:
             r = [ord(i) for i in s]
             r.sort()
             r= tuple(r)
-            if rec.get(r) is None:
-                rec[r] = [s]
-            else:
-                rec[r].append(s)
+            rec.setdefault(r, []).append(s)
+            # if rec.get(r) is None:
+            #     rec[r] = [s]
+            # else:
+            #     rec[r].append(s)
             
         res = [r for r in rec.values()]
         return res
@@ -21,4 +22,4 @@ class Solution:
 if __name__ =='__main__':
     t = ["eat","tea","tan","ate","nat","bat","eat"]
     s = Solution()
-    s.groupAnagrams(t)
+    print(s.groupAnagrams(t))
