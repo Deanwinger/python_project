@@ -2,6 +2,7 @@
 # 程序员代码面试指南 P242
 
 
+# 2019-7-15
 class Solution:
     def groupAnagrams(self, strs):
         rec = {}
