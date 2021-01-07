@@ -9,7 +9,7 @@ Flask-WTF==0.14.2
 imbox==0.9.6
 itsdangerous==1.1.0
 Jinja2==2.10
-lxml==4.2.5
+lxml==4.6.2
 MarkupSafe==1.1.0
 mongoengine==0.16.3
 pymongo==3.7.2
